@@ -1,0 +1,158 @@
+openapi: 3.0.3
+info:
+  title: User Auth API
+  version: 1.2.0
+servers:
+  - url: http://localhost:8080
+
+paths:
+  /persons:
+    post:
+      tags: [Person]
+      summary: Push person data (multipart with JSON + photo)
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PersonCreateMultipart'
+            encoding:
+              data:
+                contentType: application/json
+              photo:
+                contentType: image/*
+            examples:
+              formSample:
+                summary: Submit JSON in `data` and an image in `photo`
+                value:
+                  data: { "name": "test", "age": 10, "job": "student" }
+                  photo: (binary image file)
+      responses:
+        '200':
+          description: OK + UUID payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkUuidResponse'
+              examples:
+                sample:
+                  value: { "status": "OK", "payload": { "uuid": "uuid-response" } }
+        '400':
+          $ref: '#/components/responses/Error'
+        '413':
+          description: Payload too large
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                tooLarge:
+                  value: { "status": "ERROR", "payload": { "message": "File too large", "code": "PAYLOAD_TOO_LARGE" } }
+        '500':
+          $ref: '#/components/responses/Error'
+
+  /persons/{uuid}:
+    get:
+      tags: [Person]
+      summary: Retrieve person data by UUID
+      parameters:
+        - in: path
+          name: uuid
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: OK + person payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkPersonResponse'
+              examples:
+                sample:
+                  value: { "status": "OK", "payload": { "name": "test", "age": 10, "job": "student" } }
+        '404':
+          $ref: '#/components/responses/Error'
+        '500':
+          $ref: '#/components/responses/Error'
+
+components:
+  schemas:
+    PersonRequest:
+      type: object
+      required: [name, age, job]
+      properties:
+        name: { type: string, example: "test" }
+        age:  { type: integer, example: 10 }
+        job:  { type: string, example: "student" }
+
+    PersonCreateMultipart:
+      type: object
+      required: [data, photo]       # make photo optional? remove it from this list
+      properties:
+        data:
+          $ref: '#/components/schemas/PersonRequest'
+        photo:
+          type: string
+          format: binary
+          description: JPEG/PNG image file for the person
+
+    UuidPayload:
+      type: object
+      required: [uuid]
+      properties:
+        uuid: { type: string, example: "uuid-response" }
+
+    PersonPayload:
+      type: object
+      required: [name, age, job]
+      properties:
+        name: { type: string, example: "test" }
+        age:  { type: integer, example: 10 }
+        job:  { type: string, example: "student" }
+
+    ErrorPayload:
+      type: object
+      required: [message, code]
+      properties:
+        message: { type: string, example: "test error" }
+        code:    { type: string, example: "error code" }
+
+    OkUuidResponse:
+      type: object
+      required: [status, payload]
+      properties:
+        status:
+          type: string
+          enum: [OK]
+        payload:
+          $ref: '#/components/schemas/UuidPayload'
+
+    OkPersonResponse:
+      type: object
+      required: [status, payload]
+      properties:
+        status:
+          type: string
+          enum: [OK]
+        payload:
+          $ref: '#/components/schemas/PersonPayload'
+
+    ErrorResponse:
+      type: object
+      required: [status, payload]
+      properties:
+        status:
+          type: string
+          enum: [ERROR]
+        payload:
+          $ref: '#/components/schemas/ErrorPayload'
+
+  responses:
+    Error:
+      description: Error response
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/ErrorResponse' }
+          examples:
+            sample:
+              value: { "status": "ERROR", "payload": { "message": "test error", "code": "error code" } }

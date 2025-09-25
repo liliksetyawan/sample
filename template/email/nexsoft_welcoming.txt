@@ -1,0 +1,7 @@
+<html>
+<body>
+    <h1>Welcome {{.Name}} to Nexsoft!</h1>
+    <p>Your email: {{.Email}}</p>
+    <p>We're excited to have you join our {{.CompanyName}} family.</p>
+</body>
+</html>

@@ -1,0 +1,89 @@
+{
+    "valid_search": {
+        "wardes_profile": [
+            {
+                "functions": [
+                    "GetListWardesProfileNexcore"
+                ],
+                "attributes": [
+                    {
+                        "field": "code",
+                        "type": "number",
+                        "operator": "eq, in",
+                        "description": "The unique code for the wardes profile"
+                    },
+                    {
+                        "field": "name",
+                        "type": "char",
+                        "operator": "lk, eq, in",
+                        "description": "The name of the wardes profile"
+                    }
+                ]
+            }
+        ]
+    },
+    "repository": {
+        "wardes_profile": [
+            {
+                "name": "WardesProfileModel",
+                "description": "same as wardes_profile table in database"
+            }
+        ]
+    },
+    "dao": {
+        "wardes_profile": {
+            "db": "postgresql",
+            "functions": [
+                {
+                    "name": "InsertWardesProfile",
+                    "param": "context, tx, repository.WardesProfileModel",
+                    "table": "wardes_profile",
+                    "return": "repository.WardesProfileModel, error",
+                    "attribute": [
+                        "created_at",
+                        "created_by",
+                        "created_client",
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "This function will insert a new wardes_profile entry into the database."
+                },
+                {
+                    "name": "GetListWardesProfileNexcore",
+                    "param": "context, in.GetListRequest, []model.SearchParam",
+                    "table": "wardes_profile wp, nexchief_account na, user u",
+                    "return": "[]interface{}, error",
+                    "attribute": [
+                        "na.id",
+                        "na.code",
+                        "wp.id",
+                        "wp.code",
+                        "wp.name",
+                        "wp.username",
+                        "wp.phone",
+                        "wp.emial",
+                        "u.id",
+                        "u.name"
+                    ],
+                    "description": "This function retrieves a list of wardes profiles."
+                },
+                {
+                    "name": "GetWardesProfile",
+                    "param": "context, string",
+                    "table": "wardes_profile",
+                    "return": "repository.WardesProfileModel, error",
+                    "attribute": [
+                        "created_at",
+                        "created_by",
+                        "created_client",
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "Get specific wardes profile by its ID."
+                }
+            ]
+        }
+    }
+}

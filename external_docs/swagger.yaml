@@ -1,0 +1,329 @@
+openapi: 3.0.3
+info:
+  title: User Auth API
+  version: 1.0.0
+  x-default-error: false
+
+servers:
+  - url: http://localhost:8080
+
+paths:
+  /internal/users:
+    post:
+      tags: [User Auth]
+      summary: Push user auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAuthRequest'
+            examples:
+              sample:
+                value: { "username": "test", "password": "test", "first_name": "name", "email": "test@gmail.com" }
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+            example: "token-external"
+        - in: header
+          name: X-Request-ID
+          schema:
+            type: string
+            example: "request id"
+
+      responses:
+        '200':
+          description: Success insert user to auth
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NexsoftResponse'
+              examples:
+                sample:
+                  value: { "status": "OK", "payload": { "uuid": "uuid-response" } }
+        '400':
+          $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/schemas/ErrorResponse'
+    get:
+      tags: [ User Auth ]
+      summary: Push user auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAuthRequest'
+            examples:
+              sample:
+                value: { "username": "test", "password": "test", "first_name": "name", "email": "test@gmail.com" }
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+            example: "token-external"
+        - in: header
+          name: X-Request-ID
+          schema:
+            type: string
+            example: "request id"
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            example: 1
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            example: 10
+
+      responses:
+        '200':
+          description: Success insert user to auth
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NexsoftResponse'
+              examples:
+                sample:
+                  value: { "status": "OK", "payload": { "uuid": "uuid-response" } }
+        '400':
+          $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/schemas/ErrorResponse'
+  /internal/users/{ID}:
+    get:
+      tags: [ User Auth ]
+      summary: Push user auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAuthRequest'
+            examples:
+              sample:
+                value: { "username": "test", "password": "test", "first_name": "name", "email": "test@gmail.com" }
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+            example: "token-external"
+        - in: header
+          name: X-Request-ID
+          schema:
+            type: string
+            example: "request id"
+        - name: ID
+          in: path
+          required: true
+          schema:
+            type: string
+            example: "1"
+
+      responses:
+        '200':
+          description: Success insert user to auth
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NexsoftResponse'
+              examples:
+                sample:
+                  value: { "status": "OK", "payload": { "uuid": "uuid-response" } }
+        '400':
+          $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/schemas/ErrorResponse'
+  /internal/users/upload:
+    post:
+      tags: [User Auth]
+      summary: Upload user auth
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                data:
+                  type: string
+                  example: { "username": "test", "password": "test", "first_name": "name", "email": "test@gmail.com" }
+
+      parameters:
+        - in: header
+          name: Authorization
+          schema:
+            type: string
+            example: "token-external"
+        - in: header
+          name: X-Request-ID
+          schema:
+            type: string
+            example: "request id"
+
+      responses:
+        '200':
+          description: Success insert user to auth
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NexsoftResponse'
+              examples:
+                sample:
+                  value: { "status": "OK", "payload": { "uuid": "uuid-response" } }
+        '400':
+          $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          $ref: '#/components/schemas/ErrorResponse'
+
+
+components:
+  schemas:
+    # ---- Requests ----
+    UserAuthRequest:
+      type: object
+      required: [ username, password, first_name, email, country_code, resource_id, email_message ]
+      properties:
+        username: { type: string, example: "test" }
+        password: { type: string, example: "test" }
+        first_name: { type: string, example: "name" }
+        last_name: { type: string, example: "name" }
+        email: { type: string, example: "test@gmail.com" }
+        phone: { type: string, example: "8643626324" }
+        country_code: { type: string, example: "+62" }
+        resource_id: { type: string, example: "chat" }
+        scope: { type: string, example: "read" }
+        locale: { type: string, example: "id-ID" }
+        additional_information:
+          type: array
+          items:
+            type: string
+          example:
+            - "chat"
+            - "email"
+        email_message: { type: string, example: "email message" }
+        email_link_message: { type: string, example: "chat" }
+        phone_message: { type: string, example: "UserID : {{.USER_ID}}, PhoneNumber : +62-82244594444, Email : '-', OTP Code : {{.OTP_CODE}}" }
+
+    # ---- Response payloads ----
+    ErrorPayload:
+      type: object
+      required: [message, code]
+      properties:
+        message: { type: string, example: "test error" }
+        code:    { type: string, example: "error code" }
+
+    NexsoftResponse:
+      type: object
+      properties:
+        nexsoft:
+          $ref: '#/components/schemas/Nexsoft'
+
+    Nexsoft:
+      type: object
+      properties:
+        header:
+          $ref: '#/components/schemas/Header'
+        payload:
+          $ref: '#/components/schemas/Payload'
+
+    Header:
+      type: object
+      properties:
+        request_id: { type: string, example: "request-id" }
+        version: { type: string, example: "1.0.0" }
+        timestamp: { format: date-time, example: "2020-01-01T00:00:00Z" }
+
+    Payload:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/Status'
+        data:
+          $ref: '#/components/schemas/Data'
+        other:
+          type: object
+          nullable: true
+          example: null
+
+    Status:
+      type: object
+      properties:
+        success: { type: boolean, example: true }
+        code: { type: string, example: "OK" }
+        message: { type: string, example: "User's Data successfully inserted" }
+        details: { type: string, nullable: true, example: null }
+
+    Data:
+      type: object
+      properties:
+        meta: { type: object, nullable: true, example: null }
+        content:
+          $ref: '#/components/schemas/Content'
+
+    Content:
+      type: object
+      properties:
+        user_id:
+          type: integer
+          example: 23
+        client_id:
+          type: string
+          example: "3a825646902b454084f7136c53dc5eb4"
+        notify_status:
+          $ref: '#/components/schemas/NotifyStatus'
+
+    NotifyStatus:
+      type: object
+      properties:
+        email_status:
+          $ref: '#/components/schemas/EmailStatus'
+        phone_status:
+          $ref: '#/components/schemas/PhoneStatus'
+
+    EmailStatus:
+      type: object
+      properties:
+        email_notify:
+          type: boolean
+          example: true
+        email_notify_status:
+          type: boolean
+          example: true
+        email_notify_message:
+          type: string
+          example: ""
+
+    PhoneStatus:
+      type: object
+      properties:
+        phone_notify:
+          type: boolean
+          example: true
+        phone_notify_status:
+          type: boolean
+          example: true
+        phone_notify_message:
+          type: string
+          example: ""
+    # ---- Full response bodies (no generic envelope) ----
+    ErrorResponse:
+      type: object
+      required: [status, payload]
+      properties:
+        status:
+          type: string
+          enum: [ERROR]
+        payload:
+          $ref: '#/components/schemas/ErrorPayload'

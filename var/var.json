@@ -1,0 +1,33 @@
+{
+    "table_to_schema": {
+        "user": "nexchief",
+        "wardes_profile": "nexchief",
+        "wardes_profile_image": "nexchief",
+        "person_profile": "nexchief",
+        "parameter": "nexchief"
+    },
+    "schema_to_table": {
+        "user": "nexchief",
+        "wardes_profile": "nexchief",
+        "wardes_profile_image": "nexchief",
+        "person_profile": "nexchief",
+        "parameter": "nexchief"
+    },
+    "valid_search": {
+        "wardes_profile": [
+            {
+                "functions": [
+                    "GetWardesProfile"
+                ],
+                "attributes": [
+                    {
+                        "field": "id",
+                        "type": "number",
+                        "operator": "eq",
+                        "description": "The unique identifier of the wardes profile"
+                    }
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,200 @@
+@startuml
+
+package "nexchief" {
+
+    entity "user" {
+        id                : bigint <<PK>>
+        uuid_key          : uuid <<DEFAULT uuid_generate_v4()>>
+        auth_user_id      : bigint <<FK>>
+        person_profile_id : bigint <<FK>>
+        client_id         : varchar(256)
+        user_code         : varchar(23)
+        username          : varchar(256)
+        last_token        : date
+        signature_key     : varchar(256)
+        ip_whitelist      : varchar(256)
+        device            : varchar(256)
+        level             : smallint
+        locale            : varchar(50)
+        additional_info   : text
+        alias             : varchar(256)
+        is_user_nex_acc   : boolean
+        mobile_access     : boolean
+        website_access    : boolean
+        wdi_portal_access : boolean
+        domain_nd6        : varchar(255)
+        username_nd6      : varchar(255)
+        password_nd6      : varchar(255)
+        domain_nexvin     : varchar(255)
+        username_nexvin   : varchar(255)
+        password_nexvin   : varchar(255)
+        created_by : int8
+        created_client : varchar(256)
+        created_at : timestamp <<DEFAULT CURRENT_TIMESTAMP>>
+        updated_by : int8
+        updated_at : timestamp <<DEFAULT CURRENT_TIMESTAMP>>
+        updated_client : varchar(256)
+        deleted : bool <<DEFAULT false>>
+        UNIQUE(nexchief_account_id, mapping_nexseller_id, code)
+    }
+
+    entity "wardes_profile" {
+        id                           : bigint <<PK, DEFAULT nextval('wardes_profile_pkey_seq')>>
+        uuid_key                     : uuid <<DEFAULT uuid_generate_v4()>>
+        nexchief_account_id          : bigint <<FK>>
+        user_id                      : bigint <<FK>>
+        username                     : varchar(256) <<UNIQUE>>
+        personal_name                : varchar(256)
+        gender                       : char(1)
+        phone                        : varchar(35)
+        email                        : varchar(100)
+        province_id                  : bigint
+        district_id                  : bigint
+        sub_district_id              : bigint
+        urban_village_id             : bigint
+        nik                          : varchar(20) <<UNIQUE>>
+        age                          : varchar(3)
+        hamlet                       : varchar(3)
+        neighbour                    : varchar(3)
+        village_family               : varchar(20)
+        village_population           : varchar(20)
+        building_location            : text
+        building_ownership           : varchar(256)
+        building_type                : varchar(256)
+        building_form                : varchar(256)
+        building_width_first_floor   : float8
+        building_length_first_floor  : float8
+        building_height_first_floor  : float8
+        building_width_second_floor  : float8
+        building_length_second_floor : float8
+        building_height_second_floor : float8
+        parking_lot_width            : float8
+        parking_lot_length           : float8
+        village_internet_connection  : varchar(256)
+        investment_capital           : text
+        investment_capital_source    : varchar(256)
+        ownership_status             : varchar(256)
+        ownership_fixed_asset        : varchar(256)
+        permission_cover             : varchar(256)
+        profile_completion_status    : bpchar(1) <<DEFAULT 'N'>>
+        company_profile_id           : bigint <<FK>>
+        code                         : varchar(38)
+        schema                       : varchar(256)
+        status                       : record_status <<DEFAULT 'A'>>
+        active_date                  : date
+        resign_date                  : date
+        is_nexwise                   : boolean <<DEFAULT FALSE>>
+        deadline_date                : date
+        created_by                   : bigint <<NOT NULL>>
+        created_client               : varchar(256) <<NOT NULL>>
+        created_at                   : timestamp <<NOT NULL>>
+        updated_by                   : bigint <<NOT NULL>>
+        updated_at                   : timestamp <<NOT NULL>>
+        updated_client               : varchar(256) <<NOT NULL>>
+        deleted                      : boolean <<NOT NULL, DEFAULT FALSE>>
+        new_profile_approval_status  : varchar(30)
+        UNIQUE(nik, username)
+
+    }
+
+    entity "wardes_profile_image" {
+
+            id                  : bigint <<PK>>
+            uuid_key            : uuid <<DEFAULT uuid_generate_v4()>>
+            nexchief_account_id : bigint <<FK>>
+            wardes_profile_id   : bigint <<FK>>
+            type                : char(1)
+            path_image          : varchar(256)
+            created_by          : bigint <<NOT NULL>>
+            created_client      : varchar(256) <<NOT NULL>>
+            created_at          : timestamp <<NOT NULL>>
+            updated_by          : bigint <<NOT NULL>>
+            updated_at          : timestamp <<NOT NULL>>
+            updated_client      : varchar(256) <<NOT NULL>>
+            deleted             : boolean <<NOT NULL, DEFAULT FALSE>>
+    }
+
+     entity "person_profile" {
+            id                  : bigint <<PK>>
+            uuid_key            : uuid <<DEFAULT uuid_generate_v4()>>
+            person_profile_id   : bigint
+            title_id            : bigint <<FK>>
+            title_name          : varchar(25)
+            first_name          : varchar(100)
+            last_name           : varchar(35)
+            sex                 : char(1)
+            nik                 : varchar(20)
+            address_1           : varchar(100)
+            address_2           : varchar(100)
+            address_3           : varchar(100)
+            hamlet              : varchar(3)
+            neighbour           : varchar(3)
+            country_id          : bigint <<FK>>
+            country_name        : varchar(100)
+            province_id         : bigint <<FK>>
+            province_name       : varchar(256)
+            district_id         : bigint <<FK>>
+            district_name       : varchar(50)
+            sub_district_id     : bigint <<FK>>
+            sub_district_name   : varchar(50)
+            urban_village_id    : bigint <<FK>>
+            urban_village_name  : varchar(50)
+            island_id           : bigint <<FK>>
+            island_name         : varchar(100)
+            postal_code_id      : bigint <<FK>>
+            postal_code_name    : varchar(30)
+            phone               : varchar(35)
+            email               : varchar(100)
+            photo               : text
+            last_sync           : timestamp
+            created_client      : varchar(256)
+            updated_client      : varchar(256)
+            created_at          : timestamp <<DEFAULT CURRENT_TIMESTAMP>>
+            created_by          : bigint
+            updated_at          : timestamp <<DEFAULT CURRENT_TIMESTAMP>>
+            updated_by          : bigint
+            deleted             : boolean <<DEFAULT false>>
+        }
+
+    entity "parameter" {
+            id                 : bigint <<PK, DEFAULT nextval('nexchief.parameter_pkey_seq')>>
+            uuid_key           : uuid <<DEFAULT uuid_generate_v4()>>
+            parameter_group_id : bigint <<FK>>
+            name               : varchar(200)
+            name_en            : varchar(200)
+            code               : varchar(50)
+            sequence           : int4
+            level              : int2
+            type               : char(1)
+            length             : int2
+            min_val            : int4
+            max_val            : int4
+            default_val        : text
+            select_list_value  : varchar(256)
+            select_list_name   : varchar(255)
+            description        : varchar(200)
+            parameter_id       : bigint
+            created_client     : varchar(256)
+            updated_client     : varchar(256)
+            created_at         : timestamp <<DEFAULT CURRENT_TIMESTAMP>>
+            created_by         : bigint
+            updated_at         : timestamp <<DEFAULT CURRENT_TIMESTAMP>>
+            updated_by         : bigint
+            deleted            : boolean <<DEFAULT false>>
+            UNIQUE(code)
+        }
+}
+
+' Relationships
+wardes_profile }o--|| "user" : "user_id : id"
+wardes_profile_image }o--|| wardes_profile : "nexchief_account_id, wardes_profile_id : nexchief_account_id, id"
+person_profile }o--|| "title" : "title_id : id"
+person_profile }o--|| "country" : "country_id : id"
+person_profile }o--|| "province" : "province_id : id"
+person_profile }o--|| "district" : "district_id : id"
+person_profile }o--|| "sub_district" : "sub_district_id : id"
+person_profile }o--|| "urban_village" : "urban_village_id : id"
+person_profile }o--|| "island" : "island_id : id"
+person_profile }o--|| "postal_code" : "postal_code_id : id"
+
+@enduml

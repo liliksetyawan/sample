@@ -1,0 +1,126 @@
+<!-- Subject: [Nama Perusahaan] - Informasi Penting untuk {{name}} -->
+<!-- Preheader text: Ringkasan singkat yang muncul di inbox (ganti sesuai kebutuhan) -->
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Pesan dari [Nama Perusahaan]</title>
+
+<!-- Gaya inline penting untuk email; tetap seminimal mungkin -->
+<style>
+  /* Beberapa klien email mengabaikan <style>, namun ini membantu ketika didukung */
+  body { margin:0; padding:0; -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
+  table { border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; }
+  img { border:0; height:auto; line-height:100%; outline:none; text-decoration:none; display:block; }
+  a { color:#1a82e2; text-decoration:none; }
+  @media only screen and (max-width:600px){
+    .container { width:100% !important; }
+    .stack { display:block !important; width:100% !important; }
+    .pad { padding:16px !important; }
+  }
+</style>
+</head>
+<body style="background-color:#f4f4f5; margin:0; padding:0;">
+  <!-- Preheader (hidden) -->
+  <div style="display:none; max-height:0px; overflow:hidden; font-size:1px; line-height:1px; color:#fff; opacity:0;">
+    Ringkasan singkat pesan — ganti dengan preheader yang relevan.
+  </div>
+
+  <!-- Wrapper -->
+  <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+    <tr>
+      <td align="center" style="padding:24px;">
+        <!-- Main container -->
+        <table class="container" width="600" cellpadding="0" cellspacing="0" role="presentation" style="width:600px; background:#ffffff; border-radius:8px; overflow:hidden;">
+          <!-- Header -->
+          <tr>
+            <td style="padding:24px; text-align:left; background:linear-gradient(90deg,#1a82e2,#0366d6); color:#ffffff;">
+              <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                <tr>
+                  <td style="font-family:Arial, Helvetica, sans-serif; font-size:20px; font-weight:700;">
+                    [Nama Perusahaan]
+                  </td>
+                  <td align="right" style="font-family:Arial, Helvetica, sans-serif; font-size:14px;">
+                    <a href="#" style="color:#ffffff; text-decoration:underline;">Lihat di browser</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Body -->
+          <tr>
+            <td class="pad" style="padding:24px; font-family:Arial, Helvetica, sans-serif; color:#333333; font-size:16px; line-height:1.5;">
+              <p style="margin:0 0 16px 0;">Halo <strong>{{name}}</strong>,</p>
+
+              <p style="margin:0 0 16px 0;">
+                {{content}}
+              </p>
+
+              <!-- Card / Highlight -->
+              <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="margin:16px 0; border-radius:6px; border:1px solid #e6e9ee;">
+                <tr>
+                  <td style="padding:16px; background:#fbfdff;">
+                    <p style="margin:0; font-size:15px; color:#0b2545;">
+                      <strong>Ringkasan:</strong><br>
+                      {{summary}}
+                    </p>
+                  </td>
+                </tr>
+              </table>
+
+              <!-- CTA Button -->
+              <p style="margin:20px 0 0 0;">
+                <a href="{{cta_url}}" target="_blank" style="display:inline-block; padding:12px 20px; border-radius:6px; background:#1a82e2; color:#ffffff; font-weight:600; font-family:Arial, Helvetica, sans-serif;">
+                  {{cta_text}}
+                </a>
+              </p>
+
+              <!-- Small note -->
+              <p style="margin:20px 0 0 0; font-size:13px; color:#6b7280;">
+                Jika tombol tidak berfungsi, salin-tempel URL ini ke browser: <br>
+                <a href="{{cta_url}}" style="word-break:break-all;">{{cta_url}}</a>
+              </p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding:16px; background:#f8fafc; font-family:Arial, Helvetica, sans-serif; font-size:13px; color:#6b7280;">
+              <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                <tr>
+                  <td>
+                    <strong>[Nama Perusahaan]</strong><br>
+                    Jl. Contoh No. 123, Jakarta • Telp: (021) 0000 0000
+                  </td>
+                  <td align="right" style="vertical-align:top;">
+                    <a href="#" style="color:#6b7280; text-decoration:underline; margin-right:8px;">Kebijakan Privasi</a>
+                    <a href="#" style="color:#6b7280; text-decoration:underline;">Bantuan</a>
+                  </td>
+                </tr>
+              </table>
+
+              <hr style="border:none; border-top:1px solid #e6e9ee; margin:12px 0;">
+
+              <p style="margin:0; color:#9aa0ad;">
+                Kamu menerima email ini karena terdaftar di [Nama Perusahaan]. Jika kamu tidak ingin menerima email seperti ini, kamu bisa <a href="{{unsubscribe_url}}" style="color:#1a82e2; text-decoration:underline;">berhenti berlangganan</a>.
+              </p>
+            </td>
+          </tr>
+        </table>
+
+        <!-- Plain-text fallback (visible when HTML disabled) -->
+        <table width="600" cellpadding="0" cellspacing="0" role="presentation" style="width:600px; margin-top:12px;">
+          <tr>
+            <td style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#6b7280;">
+              Versi teks: Halo {{name}} — {{summary}}. Akses lebih lanjut: {{cta_url}}.
+            </td>
+          </tr>
+        </table>
+
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

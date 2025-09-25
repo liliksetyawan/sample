@@ -1,0 +1,4 @@
+Welcome {{.UserName}} to Grolog!
+
+Thanks for joining us. Your account is ready to use.
+Your user ID: {{.UserID}}
