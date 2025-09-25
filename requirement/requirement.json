@@ -1,0 +1,133 @@
+{
+    "valid_search": {
+        "wardes_profile": [
+            {
+                "functions": [
+                    "GetListWardesProfile"
+                ],
+                "attributes": [
+                    {
+                        "field": "code",
+                        "type": "char",
+                        "operator": "lk, eq, in",
+                        "description": "The code of the wardes profile"
+                    },
+                    {
+                        "field": "name",
+                        "type": "char",
+                        "operator": "lk, eq, in",
+                        "description": "The name of the wardes profile"
+                    }
+                ]
+            }
+        ]
+    },
+    "repository": {
+        "wardes_profile": [
+            {
+                "name": "WardesProfileModel",
+                "description": "same as wardes_profile table in database"
+            }
+        ]
+    },
+    "dao": {
+        "wardes_profile": {
+            "db": "postgresql",
+            "functions": [
+                {
+                    "name": "InsertWardesProfile",
+                    "param": "context, tx, repository.WardesProfileModel",
+                    "table": "wardes_profile",
+                    "return": "repository.WardesProfileModel, error",
+                    "attribute": [
+                        "created_at",
+                        "created_by",
+                        "created_client",
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "This function will insert a new record into the wardes_profile table."
+                },
+                {
+                    "name": "GetListWardesProfile",
+                    "param": "context, in.GetListRequest, []model.SearchParam",
+                    "table": "wardes_profile wp, nexchief_account na, user u",
+                    "return": "[]interface{}, error",
+                    "attribute": [
+                        "na.id",
+                        "na.code",
+                        "wp.id",
+                        "wp.code",
+                        "wp.username",
+                        "wp.phone",
+                        "wp.email",
+                        "u.id",
+                        "u.username"
+                    ],
+                    "description": "Retrieves a list of wardes profiles"
+                },
+                {
+                    "name": "GetWardesProfile",
+                    "param": "context, string",
+                    "table": "wardes_profile",
+                    "return": "repository.WardesProfileModel, error",
+                    "attribute": [
+                        "created_at",
+                        "created_by",
+                        "created_client",
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "This function will retrieve the details of a wardes_profile by its ID."
+                },
+                {
+                    "name": "UpdateWardesProfile",
+                    "param": "context, tx, repository.WardesProfileModel",
+                    "table": "wardes_profile",
+                    "return": "error",
+                    "attribute": [
+                        "name",
+                        "phone",
+                        "email"
+                    ],
+                    "description": "Update the details of a wardes_profile."
+                },
+                {
+                    "name": "CountWardesProfile",
+                    "param": "context, in.GetListRequest, []model.SearchParam",
+                    "table": "wardes_profile",
+                    "return": "int, error",
+                    "attribute": [],
+                    "description": "This function will count the total number of wardes_profile records."
+                },
+                {
+                    "name": "DeleteWardesProfile",
+                    "param": "context, tx, repository.WardesProfileModel",
+                    "table": "wardes_profile",
+                    "return": "error",
+                    "attribute": [
+                        "id"
+                    ],
+                    "description": "This function deletes a wardes profile by its ID."
+                },
+                {
+                    "name": "GetWardesProfileByCode",
+                    "param": "context, string",
+                    "table": "wardes_profile",
+                    "return": "repository.WardesProfileModel, error",
+                    "attribute": [
+                        "created_at",
+                        "created_by",
+                        "created_client",
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "Fetches a wardes profile by its unique code."
+                }
+            ]
+        }
+    }
+}
