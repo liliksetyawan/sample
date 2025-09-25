@@ -21,8 +21,8 @@ func (d *wardes_profilePostgresqlSQLDAO) GetListWardesProfile(
     query := fmt.Sprintf(`
         SELECT na.id, na.code, wp.id, wp.code, wp.username, wp.phone, wp.email, u.id, u.username
         FROM %s wp
-        JOIN %s na ON wp.nexchief_account_id = na.id
-        JOIN %s u ON wp.user_id = u.id
+        JOIN %s na ON wp.NexchiefAccountID = na.id
+        JOIN %s u ON wp.CreatedBy = u.id
     `, dao.GetDBTable(ctx, "wardes_profile"), dao.GetDBTable(ctx, "nexchief_account"), dao.GetDBTable(ctx, "user"))
 
     param := d.NewGetListDataParam(
@@ -31,11 +31,12 @@ func (d *wardes_profilePostgresqlSQLDAO) GetListWardesProfile(
         searchParams, func(rows *sql.Rows) (interface{}, error) {
             var temp repository.WardesProfileModel
             err := rows.Scan(
-                &temp.ID, &temp.NexchiefAccountID, &temp.Username, &temp.Phone, &temp.Email,
+                &temp.NexchiefAccountID, &temp.UUIDKey, &temp.ID, &temp.UUIDKey, 
+                &temp.Username, &temp.Phone, &temp.Email, &temp.CreatedBy, &temp.CreatedClient,
             )
             return temp, err
         },
-    ).CreatedBy(ctx.Limitation.UserID)
+    )
 
     return d.GetListDataWithDefaultMustCheck(param)
 }

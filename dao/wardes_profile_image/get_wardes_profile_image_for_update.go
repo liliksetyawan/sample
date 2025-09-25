@@ -1,4 +1,4 @@
-package wardes_profile
+package wardes_profile_image
 
 import (
     "fmt"
@@ -9,19 +9,19 @@ import (
 )
 
 // Descriptions: Get Data from database for optimistic lock
-func (d *wardes_profilePostgresqlSQLDAO) GetWardesProfileForUpdate(
+func (d *wardes_profile_imagePostgresqlSQLDAO) GetWardesProfileImageForUpdate(
     ctx *context.ContextModel,
     tx *sql.Tx,
     uuid_key string,
 ) (
-    repository.WardesProfileModel,
+    repository.WardesProfileImageModel,
     error,
 ) {
     query := fmt.Sprintf(`
         SELECT id, updated_at
         FROM %s
         WHERE uuid_key = $1
-    `, dao.GetDBTable(ctx, "wardes_profile"))
+    `, dao.GetDBTable(ctx, "wardes_profile_image"))
 
     param := []interface{}{uuid_key}
     if ctx.Limitation.UserID != 0 {
@@ -33,16 +33,11 @@ func (d *wardes_profilePostgresqlSQLDAO) GetWardesProfileForUpdate(
 
     stmt, err := tx.Prepare(query)
     if err != nil {
-        return repository.WardesProfileModel{}, err
+        return repository.WardesProfileImageModel{}, err
     }
 
-    var model repository.WardesProfileModel
+    var model repository.WardesProfileImageModel
     err = stmt.QueryRow(param...).Scan(&model.ID, &model.UpdatedAt)
 
     return model, err
 }
-
-
-+++ TASK OUTPUT
-
-go

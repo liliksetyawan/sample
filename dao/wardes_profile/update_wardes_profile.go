@@ -18,7 +18,7 @@ func (d *wardes_profilePostgresqlSQLDAO) UpdateWardesProfile(
 ) {
     query := fmt.Sprintf(`
         UPDATE %s SET
-            username = $1, phone = $2, email = $3,
+            name = $1, phone = $2, email = $3,
             updated_at = $4, updated_by = $5, updated_client = $6
         WHERE id = $7
     `, dao.GetDBTable(ctx, "wardes_profile"))

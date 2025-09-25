@@ -17,34 +17,41 @@ func (d *wardes_profilePostgresqlSQLDAO) GetDataByUniqueData(
     result repository.WardesProfileModel,
     err error,
 ){
-    var isUqWardesProfileNik bool
+    var isUqWardesProfileUsername, isUqWardesProfileNik bool
 
     query := fmt.Sprintf(`
     SELECT
         id, 
-        ( nik = $1 ) as unique_2 
+        ( username = $1 ) as unique_2,
+        ( nik = $2 ) as unique_3 
     FROM %s
     WHERE 
-        (nik = $1) 
+        (username = $1) 
+        OR 
+        (nik = $2) 
     `, dao.GetDBTable(ctx, "wardes_profile"))
 
     args := []interface{}{
-        dtoIn.Nik.String,
+        dtoIn.Username.String, dtoIn.NexchiefAccountID,
     }
 
     if ctx.Limitation.UserID != 0 {
-        query += " AND created_by = $2 "
+        query += " AND created_by = $3 "
         args = append(args, ctx.Limitation.UserID)
     }
 
     query += " LIMIT 1 "
 
-    if err = d.db.QueryRow(query, args...).Scan(&result.ID, &isUqWardesProfileNik); err != nil && err != sql.ErrNoRows {
+    if err = d.db.QueryRow(query, args...).Scan(&result.ID, &isUqWardesProfileUsername, &isUqWardesProfileNik); err != nil && err != sql.ErrNoRows {
         return
     }
 
     if result.ID.Int64 != 0 {
         var existValue []string
+        
+        if isUqWardesProfileUsername {
+            existValue = append(existValue, "[username]")
+        }
         
         if isUqWardesProfileNik {
             existValue = append(existValue, "[nik]")
@@ -54,5 +61,6 @@ func (d *wardes_profilePostgresqlSQLDAO) GetDataByUniqueData(
         return
     }
 
+    err = nil
     return
 }

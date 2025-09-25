@@ -18,12 +18,14 @@ func (d *wardes_profilePostgresqlSQLDAO) CountWardesProfile(
      int, 
      error, 
 ) {
-    query := fmt.Sprintf(`
-        SELECT COUNT(*)
-        FROM %s
-    `, dao.GetDBTable(ctx, "wardes_profile"))
+    table := fmt.Sprintf(`%s`, dao.GetDBTable(ctx, "wardes_profile"))
 
-    var count int
-    err := d.db.QueryRow(query).Scan(&count)
-    return count, err
+    getCountParam := d.NewGetListDataParam(
+        "",
+        dtoIn,
+        searchParams,
+        nil,
+    ).TableName(table)
+
+    return d.GetCountDataWithDefaultMustCheck(getCountParam)
 }

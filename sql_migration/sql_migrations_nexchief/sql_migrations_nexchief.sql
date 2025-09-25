@@ -33,6 +33,8 @@ CREATE TABLE nexchief.user (
     deleted BOOLEAN DEFAULT FALSE
 );
 
+ALTER TABLE nexchief.user ADD CONSTRAINT uq_user_username UNIQUE (username);
+
 CREATE SEQUENCE IF NOT EXISTS "wardes_profile_pkey_seq";
 CREATE TABLE nexchief.wardes_profile (
     id BIGINT DEFAULT nextval('wardes_profile_pkey_seq') PRIMARY KEY,
@@ -90,6 +92,9 @@ CREATE TABLE nexchief.wardes_profile (
     deleted BOOLEAN NOT NULL DEFAULT FALSE,
     new_profile_approval_status VARCHAR(30)
 );
+
+ALTER TABLE nexchief.wardes_profile ADD CONSTRAINT uq_wardes_profile_username UNIQUE (username);
+ALTER TABLE nexchief.wardes_profile ADD CONSTRAINT uq_wardes_profile_nik UNIQUE (nik);
 
 CREATE SEQUENCE IF NOT EXISTS "person_profile_pkey_seq";
 CREATE TABLE nexchief.person_profile (

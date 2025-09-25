@@ -20,13 +20,20 @@
                     }
                 ]
             }
-        ]
+        ],
+        "wardes_profile_image": []
     },
     "repository": {
         "wardes_profile": [
             {
                 "name": "WardesProfileModel",
                 "description": "same as wardes_profile table in database"
+            }
+        ],
+        "wardes_profile_image": [
+            {
+                "name": "WardesProfileImageModel",
+                "description": "same as wardes_profile_image table in database"
             }
         ]
     },
@@ -128,6 +135,19 @@
                     "description": "Fetches a wardes profile by its unique code."
                 }
             ]
+        },
+        "wardes_profile_image": {
+            "functions": [
+                {
+                    "name": "InsertWardesProfileImage",
+                    "param": "context, tx, repository.WardesProfileImageModel",
+                    "table": "wardes_profile_image",
+                    "return": "repository.WardesProfileImageModel, error",
+                    "attribute": [],
+                    "description": "This function will insert a new wardes profile image into the database."
+                }
+            ],
+            "db": "postgresql"
         }
     }
 }
