@@ -17,11 +17,14 @@ func (d *wardes_profile_imagePostgresqlSQLDAO) InsertWardesProfileImage(
      repository.WardesProfileImageModel, 
      error, 
 ) {
+    // @Affected Field: id, uuid_key
+    // @Affected Table: dao.GetDBTable(ctx, "wardes_profile_image")  
+
     query := fmt.Sprintf(`
         INSERT INTO %s (
             nexchief_account_id, wardes_profile_id, type, path_image,
-            created_at, created_by, created_client, 
-            updated_at, updated_by, updated_client
+            created_by, created_client, created_at, 
+            updated_by, updated_client, updated_at
         )
         VALUES (
             $1, $2, $3, $4,
@@ -39,8 +42,8 @@ func (d *wardes_profile_imagePostgresqlSQLDAO) InsertWardesProfileImage(
     var model repository.WardesProfileImageModel
     err = stmt.QueryRow(
         dtoIn.NexchiefAccountID.Int64, dtoIn.WardesProfileID.Int64, dtoIn.Type.String, dtoIn.PathImage.String,
-        dtoIn.CreatedAt.Time, ctx.Limitation.UserID, ctx.AuthAccessTokenModel.ClientID,
-        dtoIn.UpdatedAt.Time, ctx.Limitation.UserID, ctx.AuthAccessTokenModel.ClientID,
+        ctx.Limitation.UserID, ctx.AuthAccessTokenModel.ClientID, dtoIn.CreatedAt.Time,
+        ctx.Limitation.UserID, ctx.AuthAccessTokenModel.ClientID, dtoIn.UpdatedAt.Time,
     ).Scan(&model.ID, &model.UUIDKey)
     return model, err
 }

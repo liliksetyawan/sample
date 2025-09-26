@@ -145,6 +145,36 @@
                     "return": "repository.WardesProfileImageModel, error",
                     "attribute": [],
                     "description": "This function will insert a new wardes profile image into the database."
+                },
+                {
+                    "name": "GetWardesProfileImageByUserID",
+                    "param": "context, int64",
+                    "table": "wardes_profile_image",
+                    "return": "repository.WardesProfileImageModel, error",
+                    "attribute": [
+                        "created_at",
+                        "created_by",
+                        "created_client",
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "Retrieves the profile image details for a specific user ID."
+                },
+                {
+                    "name": "CountWardesProfileImage",
+                    "param": "context, in.GetListRequest, []model.SearchParam",
+                    "table": "wardes_profile_image",
+                    "return": "int, error",
+                    "attribute": [
+                        "created_at",
+                        "created_by",
+                        "created_client",
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "This function will count the records in the wardes_profile_image table."
                 }
             ],
             "db": "postgresql"

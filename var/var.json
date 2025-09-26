@@ -2,16 +2,38 @@
     "table_to_schema": {
         "user": "nexchief",
         "wardes_profile": "nexchief",
+        "wardes_profile_image": "nexchief",
         "person_profile": "nexchief",
-        "parameter": "nexchief",
-        "wardes_profile_image": "nexchief"
+        "parameter": "nexchief"
     },
     "schema_to_table": {
         "user": "nexchief",
         "wardes_profile": "nexchief",
+        "wardes_profile_image": "nexchief",
         "person_profile": "nexchief",
-        "parameter": "nexchief",
-        "wardes_profile_image": "nexchief"
+        "parameter": "nexchief"
     },
-    "valid_search": {}
+    "valid_search": {
+        "wardes_profile_image": [
+            {
+                "functions": [
+                    "CountWardesProfileImage"
+                ],
+                "attributes": [
+                    {
+                        "field": "code",
+                        "type": "char",
+                        "operator": "eq, in",
+                        "description": "The code associated with the profile image"
+                    },
+                    {
+                        "field": "name",
+                        "type": "char",
+                        "operator": "eq, in",
+                        "description": "The name associated with the profile image"
+                    }
+                ]
+            }
+        ]
+    }
 }

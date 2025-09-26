@@ -58,7 +58,3 @@ type WardesProfileModel struct {
 	Deleted                   sql.NullBool
 	NewProfileApprovalStatus  sql.NullString
 }
-
-
-
-go
