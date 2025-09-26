@@ -1,4 +1,4 @@
-package person_profile
+package user
 
 import (
 	"database/sql"
@@ -8,13 +8,13 @@ import (
 	"nexsoft.co.id/example/repository"
 )
 
-// Descriptions: This function will insert a new record into the person_profile table.
-func (d *person_profilePostgresqlSQLDAO) InsertPersonProfile(
+// Descriptions: This function will insert a new user into the database.
+func (d *userPostgresqlSQLDAO) InsertUser(
 	ctx *context.ContextModel,
 	tx *sql.Tx,
-	dtoIn repository.PersonProfileModel,
+	dtoIn repository.UserModel,
 ) (
-	repository.PersonProfileModel,
+	repository.UserModel,
 	error,
 ) {
 	query := fmt.Sprintf(`
@@ -27,18 +27,17 @@ func (d *person_profilePostgresqlSQLDAO) InsertPersonProfile(
             $4, $5, $6
         )
         RETURNING id, uuid_key;
-    `, dao.GetDBTable(ctx, "person_profile"))
+    `, dao.GetDBTable(ctx, "user"))
 
 	stmt, err := tx.Prepare(query)
 	if err != nil {
-		return repository.PersonProfileModel{}, err
+		return repository.UserModel{}, err
 	}
 
-	var model repository.PersonProfileModel
+	var model repository.UserModel
 	err = stmt.QueryRow(
-		dtoIn.CreatedAt.Time, dtoIn.CreatedBy, dtoIn.CreatedClient,
-		dtoIn.UpdatedAt.Time, dtoIn.UpdatedBy, dtoIn.UpdatedClient,
+		dtoIn.CreatedAt.Time, ctx.Limitation.UserID, ctx.AuthAccessTokenModel.ClientID,
+		dtoIn.UpdatedAt.Time, ctx.Limitation.UserID, ctx.AuthAccessTokenModel.ClientID,
 	).Scan(&model.ID, &model.UUIDKey)
-
 	return model, err
 }

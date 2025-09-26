@@ -14,35 +14,35 @@
         "parameter": "nexchief"
     },
     "valid_search": {
-        "person_profile": [
+        "user": [
             {
                 "functions": [
-                    "InsertPersonProfile"
+                    "GetListUser"
                 ],
                 "attributes": [
                     {
                         "field": "id",
                         "type": "number",
-                        "operator": "eq, rng, in",
-                        "description": "The unique identifier for the person profile"
+                        "operator": "eq, in",
+                        "description": "The unique identifier for the user"
                     },
                     {
-                        "field": "name",
+                        "field": "username",
                         "type": "char",
                         "operator": "lk, eq, in",
-                        "description": "The name of the person"
+                        "description": "The username of the user"
                     },
                     {
-                        "field": "age",
-                        "type": "number",
-                        "operator": "eq, rng, in",
-                        "description": "The age of the person"
+                        "field": "email",
+                        "type": "char",
+                        "operator": "lk, eq, in",
+                        "description": "The email address of the user"
                     },
                     {
-                        "field": "date_of_birth",
+                        "field": "created_at",
                         "type": "date",
                         "operator": "rng",
-                        "description": "The date of birth of the person"
+                        "description": "The date the user was created"
                     }
                 ]
             }

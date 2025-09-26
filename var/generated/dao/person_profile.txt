@@ -1,7 +1,7 @@
 ```go
 ***filename: person_profile/type.go
 package person_profile
-                                                                                                            
+                                                                                                                                                            
 
 import (
     "github.com/nexsoft-git/nexcommon/context"
@@ -10,6 +10,14 @@ import (
 )
 
 type PersonProfileDAO interface {
+    
+    GetPersonProfileByUserID(
+        ctx *context.ContextModel,
+        id int64,
+    ) (
+        repository.PersonProfileModel, 
+        error, 
+    )
     
     InsertPersonProfile(
         ctx *context.ContextModel,
@@ -63,6 +71,32 @@ func NewPersonProfilePostgresqlSQLDAO(
     }
 }
 
+***filename: person_profile/get_person_profile_by_user_i_d.go
+package person_profile
+
+import (
+    //you allowed to add new import and delete the unused import from this section for imported package on file get_person_profile_by_user_i_d.go every file will containing 1 function
+    "fmt"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: This function retrieves the details of a person profile by user id.
+func (d *person_profilePostgresqlSQLDAO) GetPersonProfileByUserID(
+     ctx *context.ContextModel,
+     id int64,
+) (
+     repository.PersonProfileModel, 
+     error, 
+) {
+    //TODO Implement the DAO function here
+    // @Affected Field: pp.id, pp.first_name, pp.last_name, wp.id, wp.name, wp.username, created_at, created_by, created_client, updated_at, updated_by, updated_client
+    // @Affected Table: dao.GetDBTable(ctx, "person_profile") pp , dao.GetDBTable(ctx, "wardes_profile") wp 
+    // @Valid Search:
+    // - user_id : The unique identifier for the user
+}
+
 ***filename: person_profile/insert_person_profile.go
 package person_profile
 
@@ -87,11 +121,6 @@ func (d *person_profilePostgresqlSQLDAO) InsertPersonProfile(
     //TODO Implement the DAO function here
     // @Affected Field: created_at, created_by, created_client, updated_at, updated_by, updated_client
     // @Affected Table: dao.GetDBTable(ctx, "person_profile")  
-    // @Valid Search:
-    // - id : The unique identifier for the person profile
-    // - name : The name of the person
-    // - age : The age of the person
-    // - date_of_birth : The date of birth of the person
 }
 
 ***filename: person_profile/get_data_by_unique_data.go

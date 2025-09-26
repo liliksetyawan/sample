@@ -1,35 +1,29 @@
 package person_profile
 
 import (
-    "database/sql"
-    "fmt"
-    "strings"
-    "github.com/nexsoft-git/nexcommon/context"
-    "github.com/nexsoft-git/nexcommon/dao"
-    "nexsoft.co.id/example/repository"
+	"fmt"
+	"github.com/nexsoft-git/nexcommon/context"
+	"github.com/nexsoft-git/nexcommon/dao"
+	"nexsoft.co.id/example/repository"
 )
 
 // Descriptions: Check is data is exist before inserting/updating
 func (d *person_profilePostgresqlSQLDAO) GetDataByUniqueData(
-    ctx *context.ContextModel,
-    dtoIn repository.PersonProfileModel,
+	ctx *context.ContextModel,
+	dtoIn repository.PersonProfileModel,
 ) (
-    result repository.PersonProfileModel,
-    err error,
+	result repository.PersonProfileModel,
+	err error,
 ) {
-    query := fmt.Sprintf(`
-        SELECT id, uuid_key, first_name, last_name
-        FROM %s
-        WHERE nik = $1 OR email = $2
+	query := fmt.Sprintf(`
+        SELECT id, first_name, last_name 
+        FROM %s 
+        WHERE nik = $1
     `, dao.GetDBTable(ctx, "person_profile"))
 
-    stmt, err := d.db.Prepare(query)
-    if err != nil {
-        return repository.PersonProfileModel{}, err
-    }
+	err = d.db.QueryRow(query, dtoIn.NIK.String).Scan(
+		&result.ID, &result.FirstName, &result.LastName,
+	)
 
-    err = stmt.QueryRow(dtoIn.Nik.String, dtoIn.Email.String).Scan(
-        &result.ID, &result.UuidKey, &result.FirstName, &result.LastName,
-    )
-    return result, err
+	return result, err
 }

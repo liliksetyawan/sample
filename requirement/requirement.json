@@ -22,7 +22,40 @@
             }
         ],
         "wardes_profile_image": [],
-        "person_profile": []
+        "person_profile": [],
+        "user": [
+            {
+                "functions": [
+                    "GetListUser"
+                ],
+                "attributes": [
+                    {
+                        "field": "id",
+                        "type": "number",
+                        "operator": "eq, in",
+                        "description": "The unique identifier for the user"
+                    },
+                    {
+                        "field": "username",
+                        "type": "char",
+                        "operator": "lk, eq, in",
+                        "description": "The username of the user"
+                    },
+                    {
+                        "field": "email",
+                        "type": "char",
+                        "operator": "lk, eq, in",
+                        "description": "The email address of the user"
+                    },
+                    {
+                        "field": "created_at",
+                        "type": "date",
+                        "operator": "rng",
+                        "description": "The date the user was created"
+                    }
+                ]
+            }
+        ]
     },
     "repository": {
         "wardes_profile": [
@@ -41,6 +74,12 @@
             {
                 "name": "PersonProfileModel",
                 "description": "same as person_profile table in database"
+            }
+        ],
+        "user": [
+            {
+                "name": "UserModel",
+                "description": "same as user table in database"
             }
         ]
     },
@@ -207,6 +246,111 @@
                         "updated_client"
                     ],
                     "description": "This function will insert a new record into the person_profile table."
+                },
+                {
+                    "name": "GetPersonProfileByUserID",
+                    "param": "context, int64",
+                    "table": "person_profile pp, wardes_profile wp",
+                    "return": "repository.PersonProfileModel, error",
+                    "attribute": [
+                        "pp.id",
+                        "pp.first_name",
+                        "pp.last_name",
+                        "wp.id",
+                        "wp.name",
+                        "wp.username",
+                        "created_at",
+                        "created_by",
+                        "created_client",
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "This function retrieves the details of a person profile by user id."
+                }
+            ],
+            "db": "postgresql"
+        },
+        "user": {
+            "functions": [
+                {
+                    "name": "InsertUser",
+                    "param": "context, tx, repository.UserModel",
+                    "table": "user",
+                    "return": "repository.UserModel, error",
+                    "attribute": [
+                        "created_at",
+                        "created_by",
+                        "created_client",
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "This function will insert a new user into the database."
+                },
+                {
+                    "name": "UpdateUser",
+                    "param": "context, tx, repository.UserModel",
+                    "table": "user",
+                    "return": "error",
+                    "attribute": [
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "This function will update an existing user in the database."
+                },
+                {
+                    "name": "DeleteUser",
+                    "param": "context, tx, repository.UserModel",
+                    "table": "user",
+                    "return": "error",
+                    "attribute": [
+                        "id"
+                    ],
+                    "description": "This function will delete a user from the database."
+                },
+                {
+                    "name": "GetUser",
+                    "param": "context, string",
+                    "table": "user",
+                    "return": "error",
+                    "attribute": [
+                        "uuid_key",
+                        "created_by",
+                        "created_client",
+                        "created_at",
+                        "updated_by",
+                        "updated_client",
+                        "updated_at"
+                    ],
+                    "description": "This function will retrieve a user from the database based on a given ID."
+                },
+                {
+                    "name": "GetListUser",
+                    "param": "context, in.GetListRequest, []model.SearchParam",
+                    "table": "user",
+                    "return": "[]interface{}, error",
+                    "attribute": [
+                        "uuid_key",
+                        "created_by",
+                        "created_client",
+                        "created_at",
+                        "updated_by",
+                        "updated_client",
+                        "updated_at"
+                    ],
+                    "description": "This function will retrieve a list of users from the database based on given parameters."
+                },
+                {
+                    "name": "CountListUser",
+                    "param": "context, in.GetListRequest, []model.SearchParam",
+                    "table": "user",
+                    "return": "int, error",
+                    "attribute": [
+                        "count(id)"
+                    ],
+                    "description": "This function will count the number of users in the database based on given parameters."
                 }
             ],
             "db": "postgresql"
