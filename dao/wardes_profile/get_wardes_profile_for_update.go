@@ -41,8 +41,3 @@ func (d *wardes_profilePostgresqlSQLDAO) GetWardesProfileForUpdate(
 
     return model, err
 }
-
-
-+++ TASK OUTPUT
-
-go

@@ -17,19 +17,14 @@ func (d *wardes_profile_imagePostgresqlSQLDAO) InsertWardesProfileImage(
      repository.WardesProfileImageModel, 
      error, 
 ) {
-    // @Affected Field: id, uuid_key
-    // @Affected Table: dao.GetDBTable(ctx, "wardes_profile_image")  
-
     query := fmt.Sprintf(`
         INSERT INTO %s (
             nexchief_account_id, wardes_profile_id, type, path_image,
-            created_by, created_client, created_at, 
-            updated_by, updated_client, updated_at
+            created_by, created_client, created_at, updated_by, updated_client, updated_at
         )
         VALUES (
             $1, $2, $3, $4,
-            $5, $6, $7, 
-            $8, $9, $10
+            $5, $6, $7, $8, $9, $10
         )
         RETURNING id, uuid_key;
     `, dao.GetDBTable(ctx, "wardes_profile_image"))

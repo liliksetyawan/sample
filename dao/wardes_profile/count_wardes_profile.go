@@ -9,7 +9,7 @@ import (
     "nexsoft.co.id/example/repository"
 )
 
-// Descriptions: This function will count the total number of wardes_profile records.
+// Descriptions: This function counts the total number of wardes_profile records.
 func (d *wardes_profilePostgresqlSQLDAO) CountWardesProfile(
      ctx *context.ContextModel,
      dtoIn in.GetListRequest,
@@ -18,14 +18,31 @@ func (d *wardes_profilePostgresqlSQLDAO) CountWardesProfile(
      int, 
      error, 
 ) {
-    table := fmt.Sprintf(`%s`, dao.GetDBTable(ctx, "wardes_profile"))
+    query := fmt.Sprintf(`
+        SELECT COUNT(*)
+        FROM %s wp
+        JOIN %s u ON wp.user_id = u.id
+    `, dao.GetDBTable(ctx, "wardes_profile"), dao.GetDBTable(ctx, "user"))
 
-    getCountParam := d.NewGetListDataParam(
-        "",
-        dtoIn,
-        searchParams,
-        nil,
-    ).TableName(table)
+    // Adding search conditions based on valid search parameters
+    var conditions []string
+    var args []interface{}
 
-    return d.GetCountDataWithDefaultMustCheck(getCountParam)
+    if dtoIn.Code.String != "" {
+        conditions = append(conditions, "wp.code = $1")
+        args = append(args, dtoIn.Code.String)
+    }
+
+    if dtoIn.Name.String != "" {
+        conditions = append(conditions, "wp.personal_name ILIKE '%' || $2 || '%'")
+        args = append(args, dtoIn.Name.String)
+    }
+
+    if len(conditions) > 0 {
+        query += " WHERE " + fmt.Sprintf("%s", conditions)
+    }
+
+    var count int
+    err := d.db.QueryRow(query, args...).Scan(&count)
+    return count, err
 }

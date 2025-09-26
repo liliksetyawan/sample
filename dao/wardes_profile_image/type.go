@@ -1,22 +1,21 @@
 package wardes_profile_image
-                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                            
 
 import (
     "github.com/nexsoft-git/nexcommon/context"
+    "database/sql"
     "github.com/nexsoft-git/nexcommon/dto/in"
     "github.com/nexsoft-git/nexcommon/model"
-    "database/sql"
     "nexsoft.co.id/example/repository"
 )
 
 type WardesProfileImageDAO interface {
     
-    CountWardesProfileImage(
+    UpdateWardesProfileImage(
         ctx *context.ContextModel,
-        dtoIn in.GetListRequest,
-        searchParams []model.SearchParam,
+        tx *sql.Tx,
+        dtoIn repository.WardesProfileImageModel,
     ) (
-        int, 
         error, 
     )
     
@@ -34,6 +33,15 @@ type WardesProfileImageDAO interface {
         id int64,
     ) (
         repository.WardesProfileImageModel, 
+        error, 
+    )
+    
+    CountWardesProfileImage(
+        ctx *context.ContextModel,
+        dtoIn in.GetListRequest,
+        searchParams []model.SearchParam,
+    ) (
+        int, 
         error, 
     )
     

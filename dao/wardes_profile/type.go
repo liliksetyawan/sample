@@ -3,13 +3,22 @@ package wardes_profile
 
 import (
     "github.com/nexsoft-git/nexcommon/context"
-    "database/sql"
     "github.com/nexsoft-git/nexcommon/dto/in"
     "github.com/nexsoft-git/nexcommon/model"
+    "database/sql"
     "nexsoft.co.id/example/repository"
 )
 
 type WardesProfileDAO interface {
+    
+    CountWardesProfile(
+        ctx *context.ContextModel,
+        dtoIn in.GetListRequest,
+        searchParams []model.SearchParam,
+    ) (
+        int, 
+        error, 
+    )
     
     InsertWardesProfile(
         ctx *context.ContextModel,
@@ -42,15 +51,6 @@ type WardesProfileDAO interface {
         tx *sql.Tx,
         dtoIn repository.WardesProfileModel,
     ) (
-        error, 
-    )
-    
-    CountWardesProfile(
-        ctx *context.ContextModel,
-        dtoIn in.GetListRequest,
-        searchParams []model.SearchParam,
-    ) (
-        int, 
         error, 
     )
     

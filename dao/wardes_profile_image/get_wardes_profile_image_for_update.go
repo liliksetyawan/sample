@@ -38,6 +38,5 @@ func (d *wardes_profile_imagePostgresqlSQLDAO) GetWardesProfileImageForUpdate(
 
     var model repository.WardesProfileImageModel
     err = stmt.QueryRow(param...).Scan(&model.ID, &model.UpdatedAt)
-
     return model, err
 }

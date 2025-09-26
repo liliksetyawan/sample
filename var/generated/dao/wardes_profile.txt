@@ -5,13 +5,22 @@ package wardes_profile
 
 import (
     "github.com/nexsoft-git/nexcommon/context"
-    "database/sql"
     "github.com/nexsoft-git/nexcommon/dto/in"
     "github.com/nexsoft-git/nexcommon/model"
+    "database/sql"
     "nexsoft.co.id/example/repository"
 )
 
 type WardesProfileDAO interface {
+    
+    CountWardesProfile(
+        ctx *context.ContextModel,
+        dtoIn in.GetListRequest,
+        searchParams []model.SearchParam,
+    ) (
+        int, 
+        error, 
+    )
     
     InsertWardesProfile(
         ctx *context.ContextModel,
@@ -44,15 +53,6 @@ type WardesProfileDAO interface {
         tx *sql.Tx,
         dtoIn repository.WardesProfileModel,
     ) (
-        error, 
-    )
-    
-    CountWardesProfile(
-        ctx *context.ContextModel,
-        dtoIn in.GetListRequest,
-        searchParams []model.SearchParam,
-    ) (
-        int, 
         error, 
     )
     
@@ -115,6 +115,36 @@ func NewWardesProfilePostgresqlSQLDAO(
     }
 }
 
+***filename: wardes_profile/count_wardes_profile.go
+package wardes_profile
+
+import (
+    //you allowed to add new import and delete the unused import from this section for imported package on file count_wardes_profile.go every file will containing 1 function
+    "fmt"
+    "github.com/nexsoft-git/nexcommon/model"
+    "github.com/nexsoft-git/nexcommon/dto/in"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+     "nexsoft.co.id/example/repository" 
+)
+
+// Descriptions: This function counts the total number of wardes_profile records.
+func (d *wardes_profilePostgresqlSQLDAO) CountWardesProfile(
+     ctx *context.ContextModel,
+     dtoIn in.GetListRequest,
+     searchParams []model.SearchParam,
+) (
+     int, 
+     error, 
+) {
+    //TODO Implement the DAO function here
+    // @Affected Field: 
+    // @Affected Table: dao.GetDBTable(ctx, "wardes_profile") wp , dao.GetDBTable(ctx, "user") u 
+    // @Valid Search:
+    // - code : Unique code associated with the wardes_profile
+    // - name : Name associated with the wardes_profile
+}
+
 ***filename: wardes_profile/insert_wardes_profile.go
 package wardes_profile
 
@@ -124,7 +154,7 @@ import (
     "database/sql"
     "github.com/nexsoft-git/nexcommon/context"
     "github.com/nexsoft-git/nexcommon/dao"
-    "nexsoft.co.id/example/repository"
+     "nexsoft.co.id/example/repository" 
 )
 
 // Descriptions: This function will insert a new record into the wardes_profile table.
@@ -151,7 +181,7 @@ import (
     "github.com/nexsoft-git/nexcommon/dto/in"
     "github.com/nexsoft-git/nexcommon/context"
     "github.com/nexsoft-git/nexcommon/dao"
-    "nexsoft.co.id/example/repository"
+     "nexsoft.co.id/example/repository" 
 )
 
 // Descriptions: Retrieves a list of wardes profiles
@@ -166,6 +196,9 @@ func (d *wardes_profilePostgresqlSQLDAO) GetListWardesProfile(
     //TODO Implement the DAO function here
     // @Affected Field: na.id, na.code, wp.id, wp.code, wp.username, wp.phone, wp.email, u.id, u.username
     // @Affected Table: dao.GetDBTable(ctx, "wardes_profile") wp , dao.GetDBTable(ctx, "nexchief_account") na , dao.GetDBTable(ctx, "user") u 
+    // @Valid Search:
+    // - code : The code of the wardes profile
+    // - name : The name of the wardes profile
 }
 
 ***filename: wardes_profile/get_wardes_profile.go
@@ -176,7 +209,7 @@ import (
     "fmt"
     "github.com/nexsoft-git/nexcommon/context"
     "github.com/nexsoft-git/nexcommon/dao"
-    "nexsoft.co.id/example/repository"
+     "nexsoft.co.id/example/repository" 
 )
 
 // Descriptions: This function will retrieve the details of a wardes_profile by its ID.
@@ -201,7 +234,7 @@ import (
     "database/sql"
     "github.com/nexsoft-git/nexcommon/context"
     "github.com/nexsoft-git/nexcommon/dao"
-    "nexsoft.co.id/example/repository"
+     "nexsoft.co.id/example/repository" 
 )
 
 // Descriptions: Update the details of a wardes_profile.
@@ -217,33 +250,6 @@ func (d *wardes_profilePostgresqlSQLDAO) UpdateWardesProfile(
     // @Affected Table: dao.GetDBTable(ctx, "wardes_profile")  
 }
 
-***filename: wardes_profile/count_wardes_profile.go
-package wardes_profile
-
-import (
-    //you allowed to add new import and delete the unused import from this section for imported package on file count_wardes_profile.go every file will containing 1 function
-    "fmt"
-    "github.com/nexsoft-git/nexcommon/model"
-    "github.com/nexsoft-git/nexcommon/dto/in"
-    "github.com/nexsoft-git/nexcommon/context"
-    "github.com/nexsoft-git/nexcommon/dao"
-    "nexsoft.co.id/example/repository"
-)
-
-// Descriptions: This function will count the total number of wardes_profile records.
-func (d *wardes_profilePostgresqlSQLDAO) CountWardesProfile(
-     ctx *context.ContextModel,
-     dtoIn in.GetListRequest,
-     searchParams []model.SearchParam,
-) (
-     int, 
-     error, 
-) {
-    //TODO Implement the DAO function here
-    // @Affected Field: 
-    // @Affected Table: dao.GetDBTable(ctx, "wardes_profile")  
-}
-
 ***filename: wardes_profile/delete_wardes_profile.go
 package wardes_profile
 
@@ -253,7 +259,7 @@ import (
     "database/sql"
     "github.com/nexsoft-git/nexcommon/context"
     "github.com/nexsoft-git/nexcommon/dao"
-    "nexsoft.co.id/example/repository"
+     "nexsoft.co.id/example/repository" 
 )
 
 // Descriptions: This function deletes a wardes profile by its ID.
@@ -277,7 +283,7 @@ import (
     "fmt"
     "github.com/nexsoft-git/nexcommon/context"
     "github.com/nexsoft-git/nexcommon/dao"
-    "nexsoft.co.id/example/repository"
+     "nexsoft.co.id/example/repository" 
 )
 
 // Descriptions: Fetches a wardes profile by its unique code.
@@ -313,18 +319,15 @@ func (d *wardes_profilePostgresqlSQLDAO) GetDataByUniqueData(
     result repository.WardesProfileModel,
     err error,
 ){
-    var isUqWardesProfileUsername, isUqWardesProfileNik bool
+    var isUqWardesProfileNik bool
 
     query := fmt.Sprintf(`
     SELECT
         id, 
-        ( username = $1 ) as unique_2,
-        ( nik = $2 ) as unique_3 
+        ( nik = $1 ) as unique_2 
     FROM %s
     WHERE 
-        (username = $1) 
-        OR 
-        (nik = $2) 
+        (nik = $1) 
     `, dao.GetDBTable(ctx, "wardes_profile"))
 
     args := []interface{}{
@@ -332,13 +335,13 @@ func (d *wardes_profilePostgresqlSQLDAO) GetDataByUniqueData(
     }
 
     if ctx.Limitation.UserID != 0 {
-        query += " AND created_by = $3 "
+        query += " AND created_by = $2 "
         args = args.append(ctx.Limitation.UserID)
     }
 
     query += " LIMIT 1 "
 
-    if err = d.db.QueryRow(query, args...).Scan(&result.ID, &isUqWardesProfileUsername, &isUqWardesProfileNik); err != nil && err != sql.ErrNoRows {
+    if err = d.db.QueryRow(query, args...).Scan(&result.ID, &isUqWardesProfileNik); err != nil && err != sql.ErrNoRows {
         log.Error().
             Err(err).
             Caller().
@@ -348,10 +351,6 @@ func (d *wardes_profilePostgresqlSQLDAO) GetDataByUniqueData(
 
     if result.ID.Int64 != 0 {
         var existValue []string
-        
-        if isUqWardesProfileUsername {
-            existValue = append(existValue, "[username]")
-        }
         
         if isUqWardesProfileNik {
             existValue = append(existValue, "[nik]")

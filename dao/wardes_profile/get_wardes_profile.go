@@ -16,7 +16,8 @@ func (d *wardes_profilePostgresqlSQLDAO) GetWardesProfile(
      error, 
 ) {
     query := fmt.Sprintf(`
-        SELECT created_at, created_by, created_client, updated_at, updated_by, updated_client
+        SELECT created_at, created_by, created_client, 
+               updated_at, updated_by, updated_client
         FROM %s
         WHERE uuid_key = $1
     `, dao.GetDBTable(ctx, "wardes_profile"))
@@ -26,6 +27,5 @@ func (d *wardes_profilePostgresqlSQLDAO) GetWardesProfile(
         &model.CreatedAt, &model.CreatedBy, &model.CreatedClient,
         &model.UpdatedAt, &model.UpdatedBy, &model.UpdatedClient,
     )
-
     return model, err
 }

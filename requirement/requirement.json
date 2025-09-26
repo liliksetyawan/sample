@@ -33,7 +33,7 @@
         "wardes_profile_image": [
             {
                 "name": "WardesProfileImageModel",
-                "description": "same as wardes_profile_image table in database"
+                "description": "same attribute with the wardes_profile_image table on database"
             }
         ]
     },
@@ -104,10 +104,10 @@
                 {
                     "name": "CountWardesProfile",
                     "param": "context, in.GetListRequest, []model.SearchParam",
-                    "table": "wardes_profile",
+                    "table": "wardes_profile wp, user u",
                     "return": "int, error",
                     "attribute": [],
-                    "description": "This function will count the total number of wardes_profile records."
+                    "description": "This function counts the total number of wardes_profile records."
                 },
                 {
                     "name": "DeleteWardesProfile",
@@ -164,17 +164,22 @@
                 {
                     "name": "CountWardesProfileImage",
                     "param": "context, in.GetListRequest, []model.SearchParam",
-                    "table": "wardes_profile_image",
+                    "table": "wardes_profile_image wpi, wardes_profile wp",
                     "return": "int, error",
                     "attribute": [
-                        "created_at",
-                        "created_by",
-                        "created_client",
-                        "updated_at",
-                        "updated_by",
-                        "updated_client"
+                        "not specified yet"
                     ],
-                    "description": "This function will count the records in the wardes_profile_image table."
+                    "description": "Counts the number of records in the wardes_profile_image table"
+                },
+                {
+                    "name": "UpdateWardesProfileImage",
+                    "param": "context, tx, repository.WardesProfileImageModel",
+                    "table": "wardes_profile_image",
+                    "return": "error",
+                    "attribute": [
+                        "path_image"
+                    ],
+                    "description": "Update the existing wardes profile image record."
                 }
             ],
             "db": "postgresql"

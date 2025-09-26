@@ -17,9 +17,8 @@ func (d *wardes_profilePostgresqlSQLDAO) DeleteWardesProfile(
      error, 
 ) {
     query := fmt.Sprintf(`
-        UPDATE %s SET
-            deleted = true, updated_by = $1, 
-            updated_client = $2, updated_at = $3
+        UPDATE %s
+        SET deleted = true, updated_at = $1, updated_by = $2, updated_client = $3
         WHERE id = $4
     `, dao.GetDBTable(ctx, "wardes_profile"))
 
@@ -29,9 +28,7 @@ func (d *wardes_profilePostgresqlSQLDAO) DeleteWardesProfile(
     }
 
     _, err = stmt.Exec(
-        ctx.Limitation.UserID, 
-        ctx.AuthAccessTokenModel.ClientID,
-        dtoIn.UpdatedAt.Time,
+        dtoIn.UpdatedAt.Time, ctx.Limitation.UserID, ctx.AuthAccessTokenModel.ClientID,
         dtoIn.ID.Int64,
     )
     return err
