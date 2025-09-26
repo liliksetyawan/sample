@@ -21,7 +21,8 @@
                 ]
             }
         ],
-        "wardes_profile_image": []
+        "wardes_profile_image": [],
+        "person_profile": []
     },
     "repository": {
         "wardes_profile": [
@@ -34,6 +35,12 @@
             {
                 "name": "WardesProfileImageModel",
                 "description": "same attribute with the wardes_profile_image table on database"
+            }
+        ],
+        "person_profile": [
+            {
+                "name": "PersonProfileModel",
+                "description": "same as person_profile table in database"
             }
         ]
     },
@@ -180,6 +187,26 @@
                         "path_image"
                     ],
                     "description": "Update the existing wardes profile image record."
+                }
+            ],
+            "db": "postgresql"
+        },
+        "person_profile": {
+            "functions": [
+                {
+                    "name": "InsertPersonProfile",
+                    "param": "context, tx, repository.PersonProfileModel",
+                    "table": "person_profile",
+                    "return": "repository.PersonProfileModel, error",
+                    "attribute": [
+                        "created_at",
+                        "created_by",
+                        "created_client",
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "This function will insert a new record into the person_profile table."
                 }
             ],
             "db": "postgresql"

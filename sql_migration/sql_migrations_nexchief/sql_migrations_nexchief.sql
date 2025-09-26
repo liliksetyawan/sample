@@ -162,8 +162,9 @@ CREATE TABLE nexchief.parameter (
     deleted BOOLEAN DEFAULT FALSE
 );
 
+CREATE SEQUENCE IF NOT EXISTS "wardes_profile_image_pkey_seq";
 CREATE TABLE nexchief.wardes_profile_image (
-    id BIGINT PRIMARY KEY,
+    id BIGINT DEFAULT nextval('wardes_profile_image_pkey_seq') PRIMARY KEY,
     uuid_key UUID DEFAULT uuid_generate_v4(),
     nexchief_account_id BIGINT,
     wardes_profile_id BIGINT,
