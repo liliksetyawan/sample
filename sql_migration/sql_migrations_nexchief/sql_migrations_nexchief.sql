@@ -166,7 +166,7 @@ CREATE TABLE nexchief.wardes_profile_image (
     id BIGINT PRIMARY KEY,
     uuid_key UUID DEFAULT uuid_generate_v4(),
     nexchief_account_id BIGINT,
-    wardes_profile_id BIGINT REFERENCES nexchief.wardes_profile(id),
+    wardes_profile_id BIGINT,
     type CHAR(1),
     path_image VARCHAR(256),
     created_by BIGINT NOT NULL,

@@ -1,10 +1,18 @@
 {
-    "valid_search": {},
+    "valid_search": {
+        "wardes_profile_image": []
+    },
     "repository": {
         "wardes_profile": [
             {
                 "name": "WardesProfileModel",
                 "description": "same as wardes_profile table in database"
+            }
+        ],
+        "wardes_profile_image": [
+            {
+                "name": "WardesProfileImageModel",
+                "description": "same as wardes_profile_image table on database"
             }
         ]
     },
@@ -76,6 +84,33 @@
                     "description": "This function will insert a new wardes_profile record into the database."
                 }
             ]
+        },
+        "wardes_profile_image": {
+            "functions": [
+                {
+                    "name": "InsertWardesProfileImage",
+                    "param": "context, tx, repository.WardesProfileImageModel",
+                    "table": "wardes_profile_image",
+                    "return": "repository.WardesProfileImageModel, error",
+                    "attribute": [
+                        "id",
+                        "uuid_key",
+                        "nexchief_account_id",
+                        "wardes_profile_id",
+                        "type",
+                        "path_image",
+                        "created_by",
+                        "created_client",
+                        "created_at",
+                        "updated_by",
+                        "updated_at",
+                        "updated_client",
+                        "deleted"
+                    ],
+                    "description": "This function will insert a new wardes_profile_image record."
+                }
+            ],
+            "db": "postgresql"
         }
     }
 }
