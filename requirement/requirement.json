@@ -189,6 +189,16 @@
                         "wpi.deleted"
                     ],
                     "description": "Retrieve a list of wardes profile records"
+                },
+                {
+                    "name": "UpdateStatusWardesProfile",
+                    "param": "context, tx, repository.WardesProfileModel",
+                    "table": "wardes_profile",
+                    "return": "error",
+                    "attribute": [
+                        "status"
+                    ],
+                    "description": "This function will update an existing wardes_profile record."
                 }
             ]
         },

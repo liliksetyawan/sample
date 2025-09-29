@@ -93,7 +93,7 @@ CREATE TABLE nexchief_wardes_profile (
 
 CREATE SEQUENCE IF NOT EXISTS "nexchief_person_profile_pkey_seq";
 CREATE TABLE nexchief_person_profile (
-    id BIGINT PRIMARY KEY,
+    id BIGINT DEFAULT nextval('nexchief_person_profile_pkey_seq') PRIMARY KEY,
     uuid_key UUID DEFAULT uuid_generate_v4(),
     person_profile_id BIGINT,
     title_id BIGINT,
@@ -164,7 +164,7 @@ CREATE TABLE nexchief_parameter (
 
 CREATE SEQUENCE IF NOT EXISTS "nexchief_wardes_profile_image_pkey_seq";
 CREATE TABLE nexchief_wardes_profile_image (
-    id BIGINT PRIMARY KEY,
+    id BIGINT DEFAULT nextval('nexchief_wardes_profile_image_pkey_seq') PRIMARY KEY,
     uuid_key UUID DEFAULT uuid_generate_v4(),
     nexchief_account_id BIGINT,
     wardes_profile_id BIGINT,

@@ -13,33 +13,5 @@
         "nexchief_parameter": "nexchief",
         "nexchief_wardes_profile_image": "nexchief"
     },
-    "valid_search": {
-        "wardes_profile": [
-            {
-                "functions": [
-                    "GetListWardesProfile"
-                ],
-                "attributes": [
-                    {
-                        "field": "code",
-                        "type": "char",
-                        "operator": "lk, eq",
-                        "description": "The code of the profile"
-                    },
-                    {
-                        "field": "name",
-                        "type": "char",
-                        "operator": "lk, eq",
-                        "description": "The name of the profile"
-                    },
-                    {
-                        "field": "nexchief_account_id",
-                        "type": "number",
-                        "operator": "lk, eq",
-                        "description": "The nexchief account ID associated with the profile"
-                    }
-                ]
-            }
-        ]
-    }
+    "valid_search": {}
 }

@@ -15,43 +15,14 @@ func (d *wardes_profilePostgresqlSQLDAO) GetDataByUniqueData(
     result repository.WardesProfileModel,
     err error,
 ){
-    var isNik bool
-
     query := fmt.Sprintf(`
-    SELECT
-        id, 
-        ( nik = $1 ) as unique_2 
-    FROM %s
-    WHERE 
-        (nik = $1) 
+        SELECT id, uuid_key
+        FROM %s
+        WHERE username = $1 OR email = $2
     `, dao.GetDBTable(ctx, "wardes_profile"))
 
-    args := []interface{}{
-        dtoIn.Nik.String,
-    }
-
-    if ctx.Limitation.UserID != 0 {
-        query += " AND created_by = $2 "
-        args = append(args, ctx.Limitation.UserID)
-    }
-
-    query += " LIMIT 1 "
-
-    if err = d.db.QueryRow(query, args...).Scan(&result.ID, &isNik); err != nil && err != sql.ErrNoRows {
-        return
-    }
-
-    if result.ID.Int64 != 0 {
-        var existValue []string
-        
-        if isNik {
-            existValue = append(existValue, "[nik]")
-        }
-        
-        err = fmt.Errorf("Data already used: %s", strings.Join(existValue, ", "))
-        return
-    }
-
-    err = nil
+    err = d.db.QueryRow(query, dtoIn.Username.String, dtoIn.Email.String).Scan(
+        &result.ID, &result.UUIDKey,
+    )
     return
 }

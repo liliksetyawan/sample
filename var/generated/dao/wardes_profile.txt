@@ -1,24 +1,23 @@
 ```go
 ***filename: wardes_profile/type.go
 package wardes_profile
-                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                            
 
 import (
     "github.com/nexsoft-git/nexcommon/context"
+    "database/sql"
     "github.com/nexsoft-git/nexcommon/dto/in"
     "github.com/nexsoft-git/nexcommon/model"
-    "database/sql"
     "nexsoft.co.id/example/repository"
 )
 
 type WardesProfileDAO interface {
     
-    GetListWardesProfile(
+    UpdateStatusWardesProfile(
         ctx *context.ContextModel,
-        dtoIn in.GetListRequest,
-        searchParams []model.SearchParam,
+        tx *sql.Tx,
+        dtoIn repository.WardesProfileModel,
     ) (
-        []interface{}, 
         error, 
     )
     
@@ -28,6 +27,15 @@ type WardesProfileDAO interface {
         dtoIn repository.WardesProfileModel,
     ) (
         repository.WardesProfileModel, 
+        error, 
+    )
+    
+    GetListWardesProfile(
+        ctx *context.ContextModel,
+        dtoIn in.GetListRequest,
+        searchParams []model.SearchParam,
+    ) (
+        []interface{}, 
         error, 
     )
     
@@ -74,36 +82,29 @@ func NewWardesProfilePostgresqlSQLDAO(
     }
 }
 
-***filename: wardes_profile/get_list_wardes_profile.go
+***filename: wardes_profile/update_status_wardes_profile.go
 package wardes_profile
 
 import (
-    //you allowed to add new import and delete the unused import from this section for imported package on file get_list_wardes_profile.go every file will containing 1 function
+    //you allowed to add new import and delete the unused import from this section for imported package on file update_status_wardes_profile.go every file will containing 1 function
     "fmt"
     "database/sql"
-    "github.com/nexsoft-git/nexcommon/model"
-    "github.com/nexsoft-git/nexcommon/dto/in"
     "github.com/nexsoft-git/nexcommon/context"
     "github.com/nexsoft-git/nexcommon/dao"
     "nexsoft.co.id/example/repository"
 )
 
-// Descriptions: Retrieve a list of wardes profile records
-func (d *wardes_profilePostgresqlSQLDAO) GetListWardesProfile(
+// Descriptions: This function will update an existing wardes_profile record.
+func (d *wardes_profilePostgresqlSQLDAO) UpdateStatusWardesProfile(
      ctx *context.ContextModel,
-     dtoIn in.GetListRequest,
-     searchParams []model.SearchParam,
+     tx *sql.Tx,
+     dtoIn repository.WardesProfileModel,
 ) (
-     []interface{}, 
      error, 
 ) {
     //TODO Implement the DAO function here
-    // @Affected Field: wp.id, wp.uuid_key, wp.nexchief_account_id, wp.user_id, wp.username, wp.personal_name, wp.gender, wp.phone, wp.email, wp.province_id, wp.district_id, wp.sub_district_id, wp.urban_village_id, wp.nik, wp.age, wp.hamlet, wp.neighbour, wp.village_family, wp.village_population, wp.building_location, wp.building_ownership, wp.building_type, wp.building_form, wp.building_width_first_floor, wp.building_length_first_floor, wp.building_height_first_floor, wp.building_width_second_floor, wp.building_length_second_floor, wp.building_height_second_floor, wp.parking_lot_width, wp.parking_lot_length, wp.village_internet_connection, wp.investment_capital, wp.investment_capital_source, wp.ownership_status, wp.ownership_fixed_asset, wp.permission_cover, wp.profile_completion_status, wp.company_profile_id, wp.code, wp.schema, wp.status, wp.active_date, wp.resign_date, wp.is_nexwise, wp.deadline_date, wp.created_by, wp.created_client, wp.created_at, wp.updated_by, wp.updated_at, wp.updated_client, wp.deleted, wp.new_profile_approval_status, wpi.id, wpi.uuid_key, wpi.nexchief_account_id, wpi.wardes_profile_id, wpi.type, wpi.path_image, wpi.created_by, wpi.created_client, wpi.created_at, wpi.updated_by, wpi.updated_at, wpi.updated_client, wpi.deleted
-    // @Affected Table: dao.GetDBTable(ctx, "wardes_profile") wp, dao.GetDBTable(ctx, "wardes_profile_image") wpi
-    // @Valid Search:
-    // - code : The code of the profile
-    // - name : The name of the profile
-    // - nexchief_account_id : The nexchief account ID associated with the profile
+    // @Affected Field: status
+    // @Affected Table: dao.GetDBTable(ctx, "wardes_profile") 
 }
 
 ***filename: wardes_profile/insert_wardes_profile.go
@@ -130,6 +131,34 @@ func (d *wardes_profilePostgresqlSQLDAO) InsertWardesProfile(
     //TODO Implement the DAO function here
     // @Affected Field: id, uuid_key, nexchief_account_id, user_id, username, personal_name, gender, phone, email, province_id, district_id, sub_district_id, urban_village_id, nik, age, hamlet, neighbour, village_family, village_population, building_location, building_ownership, building_type, building_form, building_width_first_floor, building_length_first_floor, building_height_first_floor, building_width_second_floor, building_length_second_floor, building_height_second_floor, parking_lot_width, parking_lot_length, village_internet_connection, investment_capital, investment_capital_source, ownership_status, ownership_fixed_asset, permission_cover, profile_completion_status, company_profile_id, code, schema, status, active_date, resign_date, is_nexwise, deadline_date, created_by, created_client, created_at, updated_by, updated_at, updated_client, deleted, new_profile_approval_status
     // @Affected Table: dao.GetDBTable(ctx, "wardes_profile") 
+}
+
+***filename: wardes_profile/get_list_wardes_profile.go
+package wardes_profile
+
+import (
+    //you allowed to add new import and delete the unused import from this section for imported package on file get_list_wardes_profile.go every file will containing 1 function
+    "fmt"
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/model"
+    "github.com/nexsoft-git/nexcommon/dto/in"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: Retrieve a list of wardes profile records
+func (d *wardes_profilePostgresqlSQLDAO) GetListWardesProfile(
+     ctx *context.ContextModel,
+     dtoIn in.GetListRequest,
+     searchParams []model.SearchParam,
+) (
+     []interface{}, 
+     error, 
+) {
+    //TODO Implement the DAO function here
+    // @Affected Field: wp.id, wp.uuid_key, wp.nexchief_account_id, wp.user_id, wp.username, wp.personal_name, wp.gender, wp.phone, wp.email, wp.province_id, wp.district_id, wp.sub_district_id, wp.urban_village_id, wp.nik, wp.age, wp.hamlet, wp.neighbour, wp.village_family, wp.village_population, wp.building_location, wp.building_ownership, wp.building_type, wp.building_form, wp.building_width_first_floor, wp.building_length_first_floor, wp.building_height_first_floor, wp.building_width_second_floor, wp.building_length_second_floor, wp.building_height_second_floor, wp.parking_lot_width, wp.parking_lot_length, wp.village_internet_connection, wp.investment_capital, wp.investment_capital_source, wp.ownership_status, wp.ownership_fixed_asset, wp.permission_cover, wp.profile_completion_status, wp.company_profile_id, wp.code, wp.schema, wp.status, wp.active_date, wp.resign_date, wp.is_nexwise, wp.deadline_date, wp.created_by, wp.created_client, wp.created_at, wp.updated_by, wp.updated_at, wp.updated_client, wp.deleted, wp.new_profile_approval_status, wpi.id, wpi.uuid_key, wpi.nexchief_account_id, wpi.wardes_profile_id, wpi.type, wpi.path_image, wpi.created_by, wpi.created_client, wpi.created_at, wpi.updated_by, wpi.updated_at, wpi.updated_client, wpi.deleted
+    // @Affected Table: dao.GetDBTable(ctx, "wardes_profile") wp, dao.GetDBTable(ctx, "wardes_profile_image") wpi
 }
 
 ***filename: wardes_profile/get_data_by_unique_data.go
