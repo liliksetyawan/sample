@@ -1,0 +1,81 @@
+{
+    "valid_search": {},
+    "repository": {
+        "wardes_profile": [
+            {
+                "name": "WardesProfileModel",
+                "description": "same as wardes_profile table in database"
+            }
+        ]
+    },
+    "dao": {
+        "wardes_profile": {
+            "db": "postgresql",
+            "functions": [
+                {
+                    "name": "InsertWardesProfile",
+                    "param": "context, tx, repository.WardesProfileModel",
+                    "table": "wardes_profile",
+                    "return": "repository.WardesProfileModel, error",
+                    "attribute": [
+                        "id",
+                        "uuid_key",
+                        "nexchief_account_id",
+                        "user_id",
+                        "username",
+                        "personal_name",
+                        "gender",
+                        "phone",
+                        "email",
+                        "province_id",
+                        "district_id",
+                        "sub_district_id",
+                        "urban_village_id",
+                        "nik",
+                        "age",
+                        "hamlet",
+                        "neighbour",
+                        "village_family",
+                        "village_population",
+                        "building_location",
+                        "building_ownership",
+                        "building_type",
+                        "building_form",
+                        "building_width_first_floor",
+                        "building_length_first_floor",
+                        "building_height_first_floor",
+                        "building_width_second_floor",
+                        "building_length_second_floor",
+                        "building_height_second_floor",
+                        "parking_lot_width",
+                        "parking_lot_length",
+                        "village_internet_connection",
+                        "investment_capital",
+                        "investment_capital_source",
+                        "ownership_status",
+                        "ownership_fixed_asset",
+                        "permission_cover",
+                        "profile_completion_status",
+                        "company_profile_id",
+                        "code",
+                        "schema",
+                        "status",
+                        "active_date",
+                        "resign_date",
+                        "is_nexwise",
+                        "deadline_date",
+                        "created_by",
+                        "created_client",
+                        "created_at",
+                        "updated_by",
+                        "updated_at",
+                        "updated_client",
+                        "deleted",
+                        "new_profile_approval_status"
+                    ],
+                    "description": "This function will insert a new wardes_profile record into the database."
+                }
+            ]
+        }
+    }
+}

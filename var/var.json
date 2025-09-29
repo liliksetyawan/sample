@@ -1,0 +1,17 @@
+{
+    "table_to_schema": {
+        "user": "nexchief",
+        "wardes_profile": "nexchief",
+        "person_profile": "nexchief",
+        "parameter": "nexchief",
+        "wardes_profile_image": "nexchief"
+    },
+    "schema_to_table": {
+        "user": "nexchief",
+        "wardes_profile": "nexchief",
+        "person_profile": "nexchief",
+        "parameter": "nexchief",
+        "wardes_profile_image": "nexchief"
+    },
+    "valid_search": {}
+}
