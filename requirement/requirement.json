@@ -1,12 +1,43 @@
 {
     "valid_search": {
-        "wardes_profile_image": []
+        "wardes_profile_image": [],
+        "wardes_profile": [
+            {
+                "functions": [
+                    "GetListWardesProfile"
+                ],
+                "attributes": [
+                    {
+                        "field": "code",
+                        "type": "char",
+                        "operator": "lk, eq",
+                        "description": "The code of the profile"
+                    },
+                    {
+                        "field": "name",
+                        "type": "char",
+                        "operator": "lk, eq",
+                        "description": "The name of the profile"
+                    },
+                    {
+                        "field": "nexchief_account_id",
+                        "type": "number",
+                        "operator": "lk, eq",
+                        "description": "The nexchief account ID associated with the profile"
+                    }
+                ]
+            }
+        ]
     },
     "repository": {
         "wardes_profile": [
             {
                 "name": "WardesProfileModel",
                 "description": "same as wardes_profile table in database"
+            },
+            {
+                "name": "UserWardesProfileModel",
+                "description": "same as wardes_profile table in database and the wardes_profile_image table on database"
             }
         ],
         "wardes_profile_image": [
@@ -82,6 +113,82 @@
                         "new_profile_approval_status"
                     ],
                     "description": "This function will insert a new wardes_profile record into the database."
+                },
+                {
+                    "name": "GetListWardesProfile",
+                    "param": "context, in.GetListRequest, []model.SearchParam",
+                    "table": "wardes_profile wp, wardes_profile_image wpi",
+                    "return": "[]interface{}, error",
+                    "attribute": [
+                        "wp.id",
+                        "wp.uuid_key",
+                        "wp.nexchief_account_id",
+                        "wp.user_id",
+                        "wp.username",
+                        "wp.personal_name",
+                        "wp.gender",
+                        "wp.phone",
+                        "wp.email",
+                        "wp.province_id",
+                        "wp.district_id",
+                        "wp.sub_district_id",
+                        "wp.urban_village_id",
+                        "wp.nik",
+                        "wp.age",
+                        "wp.hamlet",
+                        "wp.neighbour",
+                        "wp.village_family",
+                        "wp.village_population",
+                        "wp.building_location",
+                        "wp.building_ownership",
+                        "wp.building_type",
+                        "wp.building_form",
+                        "wp.building_width_first_floor",
+                        "wp.building_length_first_floor",
+                        "wp.building_height_first_floor",
+                        "wp.building_width_second_floor",
+                        "wp.building_length_second_floor",
+                        "wp.building_height_second_floor",
+                        "wp.parking_lot_width",
+                        "wp.parking_lot_length",
+                        "wp.village_internet_connection",
+                        "wp.investment_capital",
+                        "wp.investment_capital_source",
+                        "wp.ownership_status",
+                        "wp.ownership_fixed_asset",
+                        "wp.permission_cover",
+                        "wp.profile_completion_status",
+                        "wp.company_profile_id",
+                        "wp.code",
+                        "wp.schema",
+                        "wp.status",
+                        "wp.active_date",
+                        "wp.resign_date",
+                        "wp.is_nexwise",
+                        "wp.deadline_date",
+                        "wp.created_by",
+                        "wp.created_client",
+                        "wp.created_at",
+                        "wp.updated_by",
+                        "wp.updated_at",
+                        "wp.updated_client",
+                        "wp.deleted",
+                        "wp.new_profile_approval_status",
+                        "wpi.id",
+                        "wpi.uuid_key",
+                        "wpi.nexchief_account_id",
+                        "wpi.wardes_profile_id",
+                        "wpi.type",
+                        "wpi.path_image",
+                        "wpi.created_by",
+                        "wpi.created_client",
+                        "wpi.created_at",
+                        "wpi.updated_by",
+                        "wpi.updated_at",
+                        "wpi.updated_client",
+                        "wpi.deleted"
+                    ],
+                    "description": "Retrieve a list of wardes profile records"
                 }
             ]
         },
