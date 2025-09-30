@@ -2,7 +2,7 @@
 -- +migrate StatementBegin
 CREATE SEQUENCE IF NOT EXISTS "user_pkey_seq";
 CREATE TABLE nexchief.user (
-    id BIGINT DEFAULT nextval('user_pkey_seq') PRIMARY KEY,
+    id BIGINT DEFAULT nextval('user_pkey_seq'::regclass),
     uuid_key UUID DEFAULT uuid_generate_v4(),
     auth_user_id BIGINT,
     person_profile_id BIGINT,
@@ -24,18 +24,22 @@ CREATE TABLE nexchief.user (
     domain_nd6 VARCHAR(255),
     username_nd6 VARCHAR(255),
     password_nd6 VARCHAR(255),
+    domain_nexvin VARCHAR(255),
+    username_nexvin VARCHAR(255),
+    password_nexvin VARCHAR(255),
     created_by INT8 DEFAULT 0,
     created_client VARCHAR(256),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_by INT8,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_client VARCHAR(256),
-    deleted BOOLEAN DEFAULT FALSE
+    deleted BOOLEAN DEFAULT FALSE,
+    PRIMARY KEY (id)
 );
 
 CREATE SEQUENCE IF NOT EXISTS "wardes_profile_pkey_seq";
 CREATE TABLE nexchief.wardes_profile (
-    id BIGINT DEFAULT nextval('wardes_profile_pkey_seq') PRIMARY KEY,
+    id BIGINT DEFAULT nextval('wardes_profile_pkey_seq'::regclass),
     uuid_key UUID DEFAULT uuid_generate_v4(),
     nexchief_account_id BIGINT,
     user_id BIGINT,
@@ -88,12 +92,15 @@ CREATE TABLE nexchief.wardes_profile (
     updated_at TIMESTAMP NOT NULL,
     updated_client VARCHAR(256) NOT NULL,
     deleted BOOLEAN NOT NULL DEFAULT FALSE,
-    new_profile_approval_status VARCHAR(30)
+    new_profile_approval_status VARCHAR(30),
+    PRIMARY KEY (id),
+    UNIQUE (username),
+    UNIQUE (nik)
 );
 
 CREATE SEQUENCE IF NOT EXISTS "person_profile_pkey_seq";
 CREATE TABLE nexchief.person_profile (
-    id BIGINT DEFAULT nextval('person_profile_pkey_seq') PRIMARY KEY,
+    id BIGINT DEFAULT nextval('person_profile_pkey_seq'::regclass),
     uuid_key UUID DEFAULT uuid_generate_v4(),
     person_profile_id BIGINT,
     title_id BIGINT,
@@ -131,12 +138,13 @@ CREATE TABLE nexchief.person_profile (
     created_by BIGINT,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_by BIGINT,
-    deleted BOOLEAN DEFAULT FALSE
+    deleted BOOLEAN DEFAULT FALSE,
+    PRIMARY KEY (id)
 );
 
 CREATE SEQUENCE IF NOT EXISTS "parameter_pkey_seq";
 CREATE TABLE nexchief.parameter (
-    id BIGINT DEFAULT nextval('parameter_pkey_seq') PRIMARY KEY,
+    id BIGINT DEFAULT nextval('parameter_pkey_seq'::regclass),
     uuid_key UUID DEFAULT uuid_generate_v4(),
     parameter_group_id BIGINT,
     name VARCHAR(200),
@@ -159,12 +167,12 @@ CREATE TABLE nexchief.parameter (
     created_by BIGINT,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_by BIGINT,
-    deleted BOOLEAN DEFAULT FALSE
+    deleted BOOLEAN DEFAULT FALSE,
+    PRIMARY KEY (id)
 );
 
-CREATE SEQUENCE IF NOT EXISTS "wardes_profile_image_pkey_seq";
 CREATE TABLE nexchief.wardes_profile_image (
-    id BIGINT DEFAULT nextval('wardes_profile_image_pkey_seq') PRIMARY KEY,
+    id BIGINT,
     uuid_key UUID DEFAULT uuid_generate_v4(),
     nexchief_account_id BIGINT,
     wardes_profile_id BIGINT,
@@ -176,6 +184,7 @@ CREATE TABLE nexchief.wardes_profile_image (
     updated_by BIGINT NOT NULL,
     updated_at TIMESTAMP NOT NULL,
     updated_client VARCHAR(256) NOT NULL,
-    deleted BOOLEAN NOT NULL DEFAULT FALSE
+    deleted BOOLEAN NOT NULL DEFAULT FALSE,
+    PRIMARY KEY (id)
 );
 -- +migrate StatementEnd

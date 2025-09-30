@@ -48,7 +48,8 @@
                     }
                 ]
             }
-        ]
+        ],
+        "person_profile": []
     },
     "repository": {
         "wardes_profile": [
@@ -96,6 +97,12 @@
                         "type": "same as UserModel"
                     }
                 ]
+            }
+        ],
+        "person_profile": [
+            {
+                "name": "PersonProfileModel",
+                "description": "same as person_profile table in database"
             }
         ]
     },
@@ -344,6 +351,28 @@
                         "updated_client"
                     ],
                     "description": "Retrieves a list of users"
+                }
+            ],
+            "db": "postgresql"
+        },
+        "person_profile": {
+            "functions": [
+                {
+                    "name": "InsertPersonProfile",
+                    "param": "context, tx, repository.PersonProfileModel",
+                    "table": "person_profile",
+                    "return": "repository.PersonProfileModel, error",
+                    "attribute": [
+                        "person_profile_id",
+                        "title_id",
+                        "title_name",
+                        "first_name",
+                        "last_name",
+                        "sex",
+                        "phone",
+                        "email"
+                    ],
+                    "description": "This function will insert a new person profile entry into the database."
                 }
             ],
             "db": "postgresql"
