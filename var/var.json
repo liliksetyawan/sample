@@ -2,16 +2,38 @@
     "table_to_schema": {
         "user": "nexchief",
         "wardes_profile": "nexchief",
+        "wardes_profile_image": "nexchief",
         "person_profile": "nexchief",
-        "parameter": "nexchief",
-        "wardes_profile_image": "nexchief"
+        "parameter": "nexchief"
     },
     "schema_to_table": {
         "user": "nexchief",
         "wardes_profile": "nexchief",
+        "wardes_profile_image": "nexchief",
         "person_profile": "nexchief",
-        "parameter": "nexchief",
-        "wardes_profile_image": "nexchief"
+        "parameter": "nexchief"
     },
-    "valid_search": {}
+    "valid_search": {
+        "person_profile": [
+            {
+                "functions": [
+                    "GetListPersonProfile"
+                ],
+                "attributes": [
+                    {
+                        "field": "name",
+                        "type": "char",
+                        "operator": "lk, eq, in",
+                        "description": "The name of the person profile"
+                    },
+                    {
+                        "field": "email",
+                        "type": "char",
+                        "operator": "lk, eq, in",
+                        "description": "The email of the person profile"
+                    }
+                ]
+            }
+        ]
+    }
 }

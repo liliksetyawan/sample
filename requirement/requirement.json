@@ -49,7 +49,27 @@
                 ]
             }
         ],
-        "person_profile": []
+        "person_profile": [
+            {
+                "functions": [
+                    "GetListPersonProfile"
+                ],
+                "attributes": [
+                    {
+                        "field": "name",
+                        "type": "char",
+                        "operator": "lk, eq, in",
+                        "description": "The name of the person profile"
+                    },
+                    {
+                        "field": "email",
+                        "type": "char",
+                        "operator": "lk, eq, in",
+                        "description": "The email of the person profile"
+                    }
+                ]
+            }
+        ]
     },
     "repository": {
         "wardes_profile": [
@@ -103,6 +123,27 @@
             {
                 "name": "PersonProfileModel",
                 "description": "same as person_profile table in database"
+            },
+            {
+                "name": "PersonProfileDetailModel",
+                "attribute": [
+                    {
+                        "name": "person_profile",
+                        "type": "repository.PersonProfileModel"
+                    },
+                    {
+                        "name": "wardes_profile",
+                        "type": "repository.WardesProfileModel"
+                    },
+                    {
+                        "name": "wardes_profile_image",
+                        "type": "repository.WardesProfileImageModel"
+                    },
+                    {
+                        "name": "user",
+                        "type": "repository.UserModel"
+                    }
+                ]
             }
         ]
     },
@@ -373,6 +414,34 @@
                         "email"
                     ],
                     "description": "This function will insert a new person profile entry into the database."
+                },
+                {
+                    "name": "GetListPersonProfile",
+                    "param": "context, in.GetListRequest, []model.SearchParam",
+                    "table": "person_profile pp, LEFT JOIN wardes_profile wp, LEFT JOIN wardes_profile_image wpi, LEFT JOIN user u",
+                    "return": "[]interface{}, error",
+                    "attribute": [
+                        "pp.id",
+                        "pp.title_id",
+                        "pp.title_name",
+                        "pp.first_name",
+                        "pp.last_name",
+                        "wp.id",
+                        "wp.username",
+                        "wp.personal_name",
+                        "wpi.id",
+                        "wpi.path_image",
+                        "u.id",
+                        "u.client_id",
+                        "u.user_code",
+                        "created_at",
+                        "created_by",
+                        "created_client",
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "Retrieve a list of person profiles"
                 }
             ],
             "db": "postgresql"

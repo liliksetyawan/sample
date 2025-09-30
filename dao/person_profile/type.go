@@ -1,13 +1,24 @@
 package person_profile
-                                                                                                            
+                                                                                                                                                                                                                        
 
 import (
     "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dto/in"
+    "github.com/nexsoft-git/nexcommon/model"
     "database/sql"
     "nexsoft.co.id/example/repository"
 )
 
 type PersonProfileDAO interface {
+    
+    GetListPersonProfile(
+        ctx *context.ContextModel,
+        dtoIn in.GetListRequest,
+        searchParams []model.SearchParam,
+    ) (
+        []interface{}, 
+        error, 
+    )
     
     InsertPersonProfile(
         ctx *context.ContextModel,

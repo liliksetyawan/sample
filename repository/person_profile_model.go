@@ -45,3 +45,10 @@ type PersonProfileModel struct {
 	UpdatedBy         sql.NullInt64
 	Deleted           sql.NullBool
 }
+
+type PersonProfileDetailModel struct {
+	PersonProfile         PersonProfileModel
+	WardesProfile        WardesProfileModel
+	WardesProfileImage   WardesProfileImageModel
+	User                 UserModel
+}
