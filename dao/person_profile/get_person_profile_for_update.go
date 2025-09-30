@@ -38,6 +38,6 @@ func (d *person_profilePostgresqlSQLDAO) GetPersonProfileForUpdate(
 
     var model repository.PersonProfileModel
     err = stmt.QueryRow(param...).Scan(&model.Id, &model.UpdatedAt)
-
+    
     return model, err
 }

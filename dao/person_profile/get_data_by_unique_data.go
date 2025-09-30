@@ -14,13 +14,15 @@ func (d *person_profilePostgresqlSQLDAO) GetDataByUniqueData(
 )( 
     result repository.PersonProfileModel,
     err error,
-){
+){   
     query := fmt.Sprintf(`
-        SELECT id, uuid_key
+        SELECT id, uuid_key, person_profile_id
         FROM %s
-        WHERE email = $1
+        WHERE (phone = $1 OR email = $2)
     `, dao.GetDBTable(ctx, "person_profile"))
 
-    err = d.db.QueryRow(query, dtoIn.Email.String).Scan(&result.Id, &result.UuidKey)
+    err = d.db.QueryRow(query, dtoIn.Phone.String, dtoIn.Email.String).Scan(
+        &result.Id, &result.UuidKey, &result.PersonProfileId,
+    )
     return
 }
