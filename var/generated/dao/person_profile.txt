@@ -98,8 +98,8 @@ func (d *person_profilePostgresqlSQLDAO) GetListPersonProfile(
      error, 
 ) {
     //TODO Implement the DAO function here
-    // @Affected Field: pp.id, pp.title_id, pp.title_name, pp.first_name, pp.last_name, wp.id, wp.username, wp.personal_name, wpi.id, wpi.path_image, u.id, u.client_id, u.user_code, created_at, created_by, created_client, updated_at, updated_by, updated_client
-    // @Affected Table: dao.GetDBTable(ctx, "person_profile") pp, LEFT JOIN dao.GetDBTable(ctx, "wardes_profile") wp, LEFT JOIN dao.GetDBTable(ctx, "wardes_profile_image") wpi, LEFT JOIN dao.GetDBTable(ctx, "user") u
+    // @Affected Field: pp.id, pp.title_id, pp.title_name, pp.first_name, pp.last_name, wp.id, wp.username, wp.personal_name, wpi.id, wpi.path_image, u.id, u.client_id, u.user_code
+    // @Affected Table: dao.GetDBTable(ctx, "person_profile") pp, LEFT JOIN dao.GetDBTable(ctx, "wardes_profile") wp, LEFT JOIN dao.GetDBTable(ctx, "wardes_profile_image") wpi, RIGHT JOIN dao.GetDBTable(ctx, "user") u
     // @Valid Search:
     // - name : The name of the person profile
     // - email : The email of the person profile

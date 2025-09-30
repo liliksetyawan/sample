@@ -418,7 +418,7 @@
                 {
                     "name": "GetListPersonProfile",
                     "param": "context, in.GetListRequest, []model.SearchParam",
-                    "table": "person_profile pp, LEFT JOIN wardes_profile wp, LEFT JOIN wardes_profile_image wpi, LEFT JOIN user u",
+                    "table": "person_profile pp, LEFT JOIN wardes_profile wp, LEFT JOIN wardes_profile_image wpi, RIGHT JOIN user u",
                     "return": "[]interface{}, error",
                     "attribute": [
                         "pp.id",
@@ -433,13 +433,7 @@
                         "wpi.path_image",
                         "u.id",
                         "u.client_id",
-                        "u.user_code",
-                        "created_at",
-                        "created_by",
-                        "created_client",
-                        "updated_at",
-                        "updated_by",
-                        "updated_client"
+                        "u.user_code"
                     ],
                     "description": "Retrieve a list of person profiles"
                 }

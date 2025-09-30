@@ -88,15 +88,7 @@ CREATE TABLE nexchief.wardes_profile (
     updated_at TIMESTAMP NOT NULL,
     updated_client VARCHAR(256) NOT NULL,
     deleted BOOLEAN NOT NULL DEFAULT FALSE,
-    new_profile_approval_status VARCHAR(30),
-    CONSTRAINT uq_wardes_profile_username UNIQUE (username),
-    CONSTRAINT fk_wardes_profile_nexchief_account_id_user_id FOREIGN KEY (nexchief_account_id) REFERENCES nexchief.user(id),
-    CONSTRAINT fk_wardes_profile_user_id FOREIGN KEY (user_id) REFERENCES nexchief.user(id),
-    CONSTRAINT fk_wardes_profile_province_id FOREIGN KEY (province_id) REFERENCES nexchief.province(id),
-    CONSTRAINT fk_wardes_profile_district_id FOREIGN KEY (district_id) REFERENCES nexchief.district(id),
-    CONSTRAINT fk_wardes_profile_sub_district_id FOREIGN KEY (sub_district_id) REFERENCES nexchief.sub_district(id),
-    CONSTRAINT fk_wardes_profile_urban_village_id FOREIGN KEY (urban_village_id) REFERENCES nexchief.urban_village(id),
-    CONSTRAINT fk_wardes_profile_company_profile_id FOREIGN KEY (company_profile_id) REFERENCES nexchief.company_profile(id)
+    new_profile_approval_status VARCHAR(30)
 );
 
 CREATE SEQUENCE IF NOT EXISTS "person_profile_pkey_seq";
@@ -184,8 +176,6 @@ CREATE TABLE nexchief.wardes_profile_image (
     updated_by BIGINT NOT NULL,
     updated_at TIMESTAMP NOT NULL,
     updated_client VARCHAR(256) NOT NULL,
-    deleted BOOLEAN NOT NULL DEFAULT FALSE,
-    CONSTRAINT fk_wardes_profile_image_nexchief_account_id FOREIGN KEY (nexchief_account_id) REFERENCES nexchief.user(id),
-    CONSTRAINT fk_wardes_profile_image_wardes_profile_id FOREIGN KEY (wardes_profile_id) REFERENCES nexchief.wardes_profile(id)
+    deleted BOOLEAN NOT NULL DEFAULT FALSE
 );
 -- +migrate StatementEnd

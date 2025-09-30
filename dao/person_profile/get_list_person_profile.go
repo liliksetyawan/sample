@@ -23,15 +23,15 @@ func (d *person_profilePostgresqlSQLDAO) GetListPersonProfile(
         SELECT pp.id, pp.title_id, pp.title_name, pp.first_name, pp.last_name,
                wp.id, wp.username, wp.personal_name,
                wpi.id, wpi.path_image,
-               u.id, u.client_id, u.user_code,
-               pp.created_at, pp.created_by, pp.created_client,
-               pp.updated_at, pp.updated_by, pp.updated_client
+               u.id, u.client_id, u.user_code
         FROM %s pp
         LEFT JOIN %s wp ON pp.person_profile_id = wp.id
         LEFT JOIN %s wpi ON wp.id = wpi.wardes_profile_id
-        LEFT JOIN %s u ON pp.created_by = u.id
-    `, dao.GetDBTable(ctx, "person_profile"), dao.GetDBTable(ctx, "wardes_profile"),
-		dao.GetDBTable(ctx, "wardes_profile_image"), dao.GetDBTable(ctx, "user"))
+        RIGHT JOIN %s u ON pp.created_by = u.id
+    `, dao.GetDBTable(ctx, "person_profile"),
+		dao.GetDBTable(ctx, "wardes_profile"),
+		dao.GetDBTable(ctx, "wardes_profile_image"),
+		dao.GetDBTable(ctx, "user"))
 
 	param := d.NewGetListDataParam(
 		query,
@@ -40,23 +40,19 @@ func (d *person_profilePostgresqlSQLDAO) GetListPersonProfile(
 			var temp repository.PersonProfileModel
 			err := rows.Scan(
 				&temp.Id, &temp.TitleId, &temp.TitleName, &temp.FirstName, &temp.LastName,
-				&temp.CountryId, &temp.CountryName,
-				&temp.ProvinceId, &temp.ProvinceName,
-				&temp.DistrictId, &temp.DistrictName,
-				&temp.SubDistrictId, &temp.SubDistrictName,
-				&temp.UrbanVillageId, &temp.UrbanVillageName,
-				&temp.IslandId, &temp.IslandName,
-				&temp.PostalCodeId, &temp.PostalCodeName,
+				&temp.CountryId, &temp.CountryName, &temp.ProvinceId, &temp.ProvinceName,
+				&temp.DistrictId, &temp.DistrictName, &temp.SubDistrictId, &temp.SubDistrictName,
+				&temp.UrbanVillageId, &temp.UrbanVillageName, &temp.PostalCodeId, &temp.PostalCodeName,
 				&temp.Phone, &temp.Email, &temp.Photo,
-				&temp.CreatedAt, &temp.CreatedBy, &temp.CreatedClient,
-				&temp.UpdatedAt, &temp.UpdatedBy, &temp.UpdatedClient,
+				&temp.CreatedClient, &temp.UpdatedClient, &temp.CreatedAt,
+				&temp.CreatedBy, &temp.UpdatedAt, &temp.UpdatedBy, &temp.Deleted,
 			)
 			return temp, err
 		},
 	).FieldConverter(dao.NewParaFieldConverter().
 		Add("name", "pp.first_name || ' ' || pp.last_name").
-		Add("email", "u.user_code"),
-	).CreatedBy(ctx.Limitation.UserID)
+		Add("email", "u.email"),
+	)
 
 	return d.GetListDataWithDefaultMustCheck(param)
 }

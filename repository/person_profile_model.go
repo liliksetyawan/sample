@@ -47,8 +47,8 @@ type PersonProfileModel struct {
 }
 
 type PersonProfileDetailModel struct {
-	PersonProfile         PersonProfileModel
-	WardesProfile        WardesProfileModel
-	WardesProfileImage   WardesProfileImageModel
-	User                 UserModel
+	PersonProfile        PersonProfileModel
+	WardesProfile       WardesProfileModel
+	WardesProfileImage  WardesProfileImageModel
+	User                UserModel
 }
