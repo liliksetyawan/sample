@@ -1,21 +1,23 @@
 package repository
 
-import "database/sql"
+import (
+	"database/sql"
+)
 
 type WardesProfileModel struct {
-	ID                        sql.NullInt64
-	UUIDKey                   sql.NullString
-	NexchiefAccountID         sql.NullInt64
-	UserID                    sql.NullInt64
+	Id                        sql.NullInt64
+	UuidKey                   sql.NullString
+	NexchiefAccountId         sql.NullInt64
+	UserId                    sql.NullInt64
 	Username                  sql.NullString
 	PersonalName              sql.NullString
 	Gender                    sql.NullString
 	Phone                     sql.NullString
 	Email                     sql.NullString
-	ProvinceID                sql.NullInt64
-	DistrictID                sql.NullInt64
-	SubDistrictID             sql.NullInt64
-	UrbanVillageID            sql.NullInt64
+	ProvinceId                sql.NullInt64
+	DistrictId                sql.NullInt64
+	SubDistrictId             sql.NullInt64
+	UrbanVillageId            sql.NullInt64
 	Nik                       sql.NullString
 	Age                       sql.NullString
 	Hamlet                    sql.NullString
@@ -41,25 +43,36 @@ type WardesProfileModel struct {
 	OwnershipFixedAsset       sql.NullString
 	PermissionCover           sql.NullString
 	ProfileCompletionStatus   sql.NullString
-	CompanyProfileID          sql.NullInt64
+	CompanyProfileId          sql.NullInt64
 	Code                      sql.NullString
 	Schema                    sql.NullString
 	Status                    sql.NullString
-	ActiveDate                sql.NullTime
-	ResignDate                sql.NullTime
+	ActiveDate                sql.NullString
+	ResignDate                sql.NullString
 	IsNexwise                 sql.NullBool
-	DeadlineDate              sql.NullTime
+	DeadlineDate              sql.NullString
 	CreatedBy                 sql.NullInt64
 	CreatedClient             sql.NullString
-	CreatedAt                 sql.NullTime
+	CreatedAt                 sql.NullString
 	UpdatedBy                 sql.NullInt64
-	UpdatedAt                 sql.NullTime
+	UpdatedAt                 sql.NullString
 	UpdatedClient             sql.NullString
 	Deleted                   sql.NullBool
 	NewProfileApprovalStatus  sql.NullString
 }
 
-type UserWardesProfileModel struct {
-	WardesProfileModel
-	WardesProfileImageModel
+type WardesProfileImageDetailModel struct {
+	Id                sql.NullInt64
+	UuidKey           sql.NullString
+	NexchiefAccountId sql.NullInt64
+	WardesProfileId   sql.NullInt64
+	Type              sql.NullString
+	PathImage         sql.NullString
+	CreatedBy         sql.NullInt64
+	CreatedClient     sql.NullString
+	CreatedAt         sql.NullString
+	UpdatedBy         sql.NullInt64
+	UpdatedAt         sql.NullString
+	UpdatedClient     sql.NullString
+	Deleted           sql.NullBool
 }

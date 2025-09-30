@@ -1,0 +1,244 @@
+```go
+***filename: user/type.go
+package user
+                                                                                                                                                                                                                        
+
+import (
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dto/in"
+    "github.com/nexsoft-git/nexcommon/model"
+    "database/sql"
+    "nexsoft.co.id/example/repository"
+)
+
+type UserDAO interface {
+    
+    GetListUser(
+        ctx *context.ContextModel,
+        dtoIn in.GetListRequest,
+        searchParams []model.SearchParam,
+    ) (
+        []interface{}, 
+        error, 
+    )
+    
+    InsertUser(
+        ctx *context.ContextModel,
+        tx *sql.Tx,
+        dtoIn repository.UserModel,
+    ) (
+        repository.UserModel, 
+        error, 
+    )
+    
+    GetDataByUniqueData(
+        ctx *context.ContextModel,
+        dtoIn repository.UserModel,
+    )(
+        result repository.UserModel,
+        err error,
+    )
+
+    GetUserForUpdate(
+        ctx *context.ContextModel,
+        tx *sql.Tx,
+        uuid_key string,
+    ) (
+        repository.UserModel,
+        error,
+    )
+
+}
+
+***filename: user/postgresql.go
+package user
+
+import (
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/dao"
+)
+
+type userPostgresqlSQLDAO struct {
+    dao.GetListDataDAO
+    db *sql.DB
+}
+
+func NewUserPostgresqlSQLDAO(
+    db *sql.DB,
+) UserDAO {
+    return &userPostgresqlSQLDAO{
+        GetListDataDAO: dao.GetListDataDAO{
+            DB: db,
+        },
+        db: db,
+    }
+}
+
+***filename: user/get_list_user.go
+package user
+
+import (
+    //you allowed to add new import and delete the unused import from this section for imported package on file get_list_user.go every file will containing 1 function
+    "fmt"
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/model"
+    "github.com/nexsoft-git/nexcommon/dto/in"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: Retrieves a list of users
+func (d *userPostgresqlSQLDAO) GetListUser(
+     ctx *context.ContextModel,
+     dtoIn in.GetListRequest,
+     searchParams []model.SearchParam,
+) (
+     []interface{}, 
+     error, 
+) {
+    //TODO Implement the DAO function here
+    // @Affected Field: u.id, u.client_id, wp.id, wp.username, wp.email, created_at, created_by, created_client, updated_at, updated_by, updated_client
+    // @Affected Table:  dao.GetDBTable(ctx, "") 
+    // @Valid Search:
+    // - username : The username of the user
+    // - email : The email address of the user
+}
+
+***filename: user/insert_user.go
+package user
+
+import (
+    //you allowed to add new import and delete the unused import from this section for imported package on file insert_user.go every file will containing 1 function
+    "fmt"
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: This function will insert a new user into the database.
+func (d *userPostgresqlSQLDAO) InsertUser(
+     ctx *context.ContextModel,
+     tx *sql.Tx,
+     dtoIn repository.UserModel,
+) (
+     repository.UserModel, 
+     error, 
+) {
+    //TODO Implement the DAO function here
+    // @Affected Field: auth_user_id, client_id, user_code, username
+    // @Affected Table: dao.GetDBTable(ctx, "user") 
+}
+
+***filename: user/get_data_by_unique_data.go
+package user
+
+import (
+    "fmt"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: Check is data is exist before inserting/updating
+func (d *userPostgresqlSQLDAO) GetDataByUniqueData(
+      ctx *context.ContextModel,
+      dtoIn repository.UserModel,
+)(
+    result repository.UserModel,
+    err error,
+){
+    var isUqUserUsername bool
+
+    query := fmt.Sprintf(`
+    SELECT
+        id, 
+        ( username = $1 ) as unique_2 
+    FROM %s
+    WHERE 
+        (username = $1) 
+    `, dao.GetDBTable(ctx, "user"))
+
+    args := []interface{}{
+        //TODO: Complete this line of code. add all of the param that queried. example : dtoIn.Name.String, dtoIn.Address.String
+    }
+
+    if ctx.Limitation.UserID != 0 {
+        query += " AND created_by = $2 "
+        args = args.append(ctx.Limitation.UserID)
+    }
+
+    query += " LIMIT 1 "
+
+    if err = d.db.QueryRow(query, args...).Scan(&result.ID, &isUqUserUsername); err != nil && err != sql.ErrNoRows {
+        log.Error().
+            Err(err).
+            Caller().
+            Msg("Error Found When Processing Query")
+        return
+	}
+
+    if result.ID.Int64 != 0 {
+        var existValue []string
+        
+        if isUqUserUsername {
+            existValue = append(existValue, "[username]")
+        }
+        
+		err = commonError.ErrDataAlreadyUsed.Param(strings.Join(existValue, ", "))
+		return
+	}
+
+    err = nil
+    //No Unique Constraint on the database, return empty result
+    return
+
+}
+
+***filename: user/get_user_for_update.go
+package user
+
+import (
+    "fmt"
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: Get Data from database for optimistic lock
+func (d *userPostgresqlSQLDAO) GetUserForUpdate(
+    ctx *context.ContextModel,
+    tx *sql.Tx,
+    uuid_key string,
+) (
+    repository.UserModel,
+    error,
+) {
+    query := fmt.Sprintf(`
+        SELECT id, updated_at
+        FROM %s
+        WHERE uuid_key = $1
+    `, dao.GetDBTable(ctx, "user"))
+
+    param = []interface{}{uuid_key}
+    if ctx.Limitation.UserID != 0 {
+        query += " AND created_by = $2 "
+        param = param.append(ctx.Limitation.UserID)
+    }
+
+    query += " FOR UPDATE "
+
+    stmt, err := tx.Prepare(query)
+    if err != nil {
+        return repository.UserModel{}, err
+    }
+
+    var model repository.UserModel
+    err = stmt.QueryRow(param...).Scan(&model.ID, &model.UpdatedAt)
+
+    return model, err
+}
+
+```

@@ -1,7 +1,7 @@
 ```go
 ***filename: wardes_profile/type.go
 package wardes_profile
-                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                                                
 
 import (
     "github.com/nexsoft-git/nexcommon/context"
@@ -13,11 +13,11 @@ import (
 
 type WardesProfileDAO interface {
     
-    UpdateStatusWardesProfile(
+    GetDetailWardesProfile(
         ctx *context.ContextModel,
-        tx *sql.Tx,
-        dtoIn repository.WardesProfileModel,
+        uuid_key string,
     ) (
+        repository.WardesProfileImageDetailModel, 
         error, 
     )
     
@@ -36,6 +36,22 @@ type WardesProfileDAO interface {
         searchParams []model.SearchParam,
     ) (
         []interface{}, 
+        error, 
+    )
+    
+    UpdateStatusWardesProfile(
+        ctx *context.ContextModel,
+        tx *sql.Tx,
+        dtoIn repository.WardesProfileModel,
+    ) (
+        error, 
+    )
+    
+    DeleteWardesProfile(
+        ctx *context.ContextModel,
+        tx *sql.Tx,
+        dtoIn repository.WardesProfileModel,
+    ) (
         error, 
     )
     
@@ -82,11 +98,11 @@ func NewWardesProfilePostgresqlSQLDAO(
     }
 }
 
-***filename: wardes_profile/update_status_wardes_profile.go
+***filename: wardes_profile/get_detail_wardes_profile.go
 package wardes_profile
 
 import (
-    //you allowed to add new import and delete the unused import from this section for imported package on file update_status_wardes_profile.go every file will containing 1 function
+    //you allowed to add new import and delete the unused import from this section for imported package on file get_detail_wardes_profile.go every file will containing 1 function
     "fmt"
     "database/sql"
     "github.com/nexsoft-git/nexcommon/context"
@@ -94,17 +110,17 @@ import (
     "nexsoft.co.id/example/repository"
 )
 
-// Descriptions: This function will update an existing wardes_profile record.
-func (d *wardes_profilePostgresqlSQLDAO) UpdateStatusWardesProfile(
+// Descriptions: Get details of the wardes_profile entity.
+func (d *wardes_profilePostgresqlSQLDAO) GetDetailWardesProfile(
      ctx *context.ContextModel,
-     tx *sql.Tx,
-     dtoIn repository.WardesProfileModel,
+     uuid_key string,
 ) (
+     repository.WardesProfileImageDetailModel, 
      error, 
 ) {
     //TODO Implement the DAO function here
-    // @Affected Field: status
-    // @Affected Table: dao.GetDBTable(ctx, "wardes_profile") 
+    // @Affected Field: wp.id, wp.username, wp.personal_name, wp.email, wpi.id, wpi.path_image, created_at, created_by, created_client, updated_at, updated_by, updated_client
+    // @Affected Table: dao.GetDBTable(ctx, "wardes_profile") wp, LEFT JOIN dao.GetDBTable(ctx, "wardes_profile_image") wpi
 }
 
 ***filename: wardes_profile/insert_wardes_profile.go
@@ -161,6 +177,56 @@ func (d *wardes_profilePostgresqlSQLDAO) GetListWardesProfile(
     // @Affected Table: dao.GetDBTable(ctx, "wardes_profile") wp, dao.GetDBTable(ctx, "wardes_profile_image") wpi
 }
 
+***filename: wardes_profile/update_status_wardes_profile.go
+package wardes_profile
+
+import (
+    //you allowed to add new import and delete the unused import from this section for imported package on file update_status_wardes_profile.go every file will containing 1 function
+    "fmt"
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: This function will update an existing wardes_profile record.
+func (d *wardes_profilePostgresqlSQLDAO) UpdateStatusWardesProfile(
+     ctx *context.ContextModel,
+     tx *sql.Tx,
+     dtoIn repository.WardesProfileModel,
+) (
+     error, 
+) {
+    //TODO Implement the DAO function here
+    // @Affected Field: status
+    // @Affected Table: dao.GetDBTable(ctx, "wardes_profile") 
+}
+
+***filename: wardes_profile/delete_wardes_profile.go
+package wardes_profile
+
+import (
+    //you allowed to add new import and delete the unused import from this section for imported package on file delete_wardes_profile.go every file will containing 1 function
+    "fmt"
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: This function will delete a wardes profile entry by its identifier.
+func (d *wardes_profilePostgresqlSQLDAO) DeleteWardesProfile(
+     ctx *context.ContextModel,
+     tx *sql.Tx,
+     dtoIn repository.WardesProfileModel,
+) (
+     error, 
+) {
+    //TODO Implement the DAO function here
+    // @Affected Field: 
+    // @Affected Table: dao.GetDBTable(ctx, "wardes_profile") 
+}
+
 ***filename: wardes_profile/get_data_by_unique_data.go
 package wardes_profile
 
@@ -179,7 +245,48 @@ func (d *wardes_profilePostgresqlSQLDAO) GetDataByUniqueData(
     result repository.WardesProfileModel,
     err error,
 ){
-    
+    var isUqWardesProfileNik bool
+
+    query := fmt.Sprintf(`
+    SELECT
+        id, 
+        ( nik = $1 ) as unique_2 
+    FROM %s
+    WHERE 
+        (nik = $1) 
+    `, dao.GetDBTable(ctx, "wardes_profile"))
+
+    args := []interface{}{
+        //TODO: Complete this line of code. add all of the param that queried. example : dtoIn.Name.String, dtoIn.Address.String
+    }
+
+    if ctx.Limitation.UserID != 0 {
+        query += " AND created_by = $2 "
+        args = args.append(ctx.Limitation.UserID)
+    }
+
+    query += " LIMIT 1 "
+
+    if err = d.db.QueryRow(query, args...).Scan(&result.ID, &isUqWardesProfileNik); err != nil && err != sql.ErrNoRows {
+        log.Error().
+            Err(err).
+            Caller().
+            Msg("Error Found When Processing Query")
+        return
+	}
+
+    if result.ID.Int64 != 0 {
+        var existValue []string
+        
+        if isUqWardesProfileNik {
+            existValue = append(existValue, "[nik]")
+        }
+        
+		err = commonError.ErrDataAlreadyUsed.Param(strings.Join(existValue, ", "))
+		return
+	}
+
+    err = nil
     //No Unique Constraint on the database, return empty result
     return
 

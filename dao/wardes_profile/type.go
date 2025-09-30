@@ -1,5 +1,5 @@
 package wardes_profile
-                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                                                
 
 import (
     "github.com/nexsoft-git/nexcommon/context"
@@ -11,11 +11,11 @@ import (
 
 type WardesProfileDAO interface {
     
-    UpdateStatusWardesProfile(
+    GetDetailWardesProfile(
         ctx *context.ContextModel,
-        tx *sql.Tx,
-        dtoIn repository.WardesProfileModel,
+        uuid_key string,
     ) (
+        repository.WardesProfileImageDetailModel, 
         error, 
     )
     
@@ -34,6 +34,22 @@ type WardesProfileDAO interface {
         searchParams []model.SearchParam,
     ) (
         []interface{}, 
+        error, 
+    )
+    
+    UpdateStatusWardesProfile(
+        ctx *context.ContextModel,
+        tx *sql.Tx,
+        dtoIn repository.WardesProfileModel,
+    ) (
+        error, 
+    )
+    
+    DeleteWardesProfile(
+        ctx *context.ContextModel,
+        tx *sql.Tx,
+        dtoIn repository.WardesProfileModel,
+    ) (
         error, 
     )
     

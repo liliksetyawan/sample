@@ -1,17 +1,17 @@
 {
     "table_to_schema": {
-        "nexchief_user": "nexchief",
-        "nexchief_wardes_profile": "nexchief",
-        "nexchief_person_profile": "nexchief",
-        "nexchief_parameter": "nexchief",
-        "nexchief_wardes_profile_image": "nexchief"
+        "user": "nexchief",
+        "wardes_profile": "nexchief",
+        "person_profile": "nexchief",
+        "parameter": "nexchief",
+        "wardes_profile_image": "nexchief"
     },
     "schema_to_table": {
-        "nexchief_user": "nexchief",
-        "nexchief_wardes_profile": "nexchief",
-        "nexchief_person_profile": "nexchief",
-        "nexchief_parameter": "nexchief",
-        "nexchief_wardes_profile_image": "nexchief"
+        "user": "nexchief",
+        "wardes_profile": "nexchief",
+        "person_profile": "nexchief",
+        "parameter": "nexchief",
+        "wardes_profile_image": "nexchief"
     },
     "valid_search": {}
 }

@@ -1,8 +1,8 @@
 -- +migrate Up
 -- +migrate StatementBegin
-CREATE SEQUENCE IF NOT EXISTS "nexchief_user_pkey_seq";
-CREATE TABLE nexchief_user (
-    id BIGINT DEFAULT nextval('nexchief_user_pkey_seq') PRIMARY KEY,
+CREATE SEQUENCE IF NOT EXISTS "user_pkey_seq";
+CREATE TABLE nexchief.user (
+    id BIGINT DEFAULT nextval('user_pkey_seq') PRIMARY KEY,
     uuid_key UUID DEFAULT uuid_generate_v4(),
     auth_user_id BIGINT,
     person_profile_id BIGINT,
@@ -33,9 +33,9 @@ CREATE TABLE nexchief_user (
     deleted BOOLEAN DEFAULT FALSE
 );
 
-CREATE SEQUENCE IF NOT EXISTS "nexchief_wardes_profile_pkey_seq";
-CREATE TABLE nexchief_wardes_profile (
-    id BIGINT DEFAULT nextval('nexchief_wardes_profile_pkey_seq') PRIMARY KEY,
+CREATE SEQUENCE IF NOT EXISTS "wardes_profile_pkey_seq";
+CREATE TABLE nexchief.wardes_profile (
+    id BIGINT DEFAULT nextval('wardes_profile_pkey_seq') PRIMARY KEY,
     uuid_key UUID DEFAULT uuid_generate_v4(),
     nexchief_account_id BIGINT,
     user_id BIGINT,
@@ -91,9 +91,9 @@ CREATE TABLE nexchief_wardes_profile (
     new_profile_approval_status VARCHAR(30)
 );
 
-CREATE SEQUENCE IF NOT EXISTS "nexchief_person_profile_pkey_seq";
-CREATE TABLE nexchief_person_profile (
-    id BIGINT DEFAULT nextval('nexchief_person_profile_pkey_seq') PRIMARY KEY,
+CREATE SEQUENCE IF NOT EXISTS "person_profile_pkey_seq";
+CREATE TABLE nexchief.person_profile (
+    id BIGINT DEFAULT nextval('person_profile_pkey_seq') PRIMARY KEY,
     uuid_key UUID DEFAULT uuid_generate_v4(),
     person_profile_id BIGINT,
     title_id BIGINT,
@@ -134,9 +134,9 @@ CREATE TABLE nexchief_person_profile (
     deleted BOOLEAN DEFAULT FALSE
 );
 
-CREATE SEQUENCE IF NOT EXISTS "nexchief_parameter_pkey_seq";
-CREATE TABLE nexchief_parameter (
-    id BIGINT DEFAULT nextval('nexchief_parameter_pkey_seq') PRIMARY KEY,
+CREATE SEQUENCE IF NOT EXISTS "parameter_pkey_seq";
+CREATE TABLE nexchief.parameter (
+    id BIGINT DEFAULT nextval('parameter_pkey_seq') PRIMARY KEY,
     uuid_key UUID DEFAULT uuid_generate_v4(),
     parameter_group_id BIGINT,
     name VARCHAR(200),
@@ -162,9 +162,9 @@ CREATE TABLE nexchief_parameter (
     deleted BOOLEAN DEFAULT FALSE
 );
 
-CREATE SEQUENCE IF NOT EXISTS "nexchief_wardes_profile_image_pkey_seq";
-CREATE TABLE nexchief_wardes_profile_image (
-    id BIGINT DEFAULT nextval('nexchief_wardes_profile_image_pkey_seq') PRIMARY KEY,
+CREATE SEQUENCE IF NOT EXISTS "wardes_profile_image_pkey_seq";
+CREATE TABLE nexchief.wardes_profile_image (
+    id BIGINT DEFAULT nextval('wardes_profile_image_pkey_seq') PRIMARY KEY,
     uuid_key UUID DEFAULT uuid_generate_v4(),
     nexchief_account_id BIGINT,
     wardes_profile_id BIGINT,

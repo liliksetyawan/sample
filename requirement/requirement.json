@@ -27,6 +27,27 @@
                     }
                 ]
             }
+        ],
+        "user": [
+            {
+                "functions": [
+                    "GetListUser"
+                ],
+                "attributes": [
+                    {
+                        "field": "username",
+                        "type": "char",
+                        "operator": "lk, eq, in",
+                        "description": "The username of the user"
+                    },
+                    {
+                        "field": "email",
+                        "type": "char",
+                        "operator": "lk, eq, in",
+                        "description": "The email address of the user"
+                    }
+                ]
+            }
         ]
     },
     "repository": {
@@ -38,12 +59,43 @@
             {
                 "name": "UserWardesProfileModel",
                 "description": "same as wardes_profile table in database and the wardes_profile_image table on database"
+            },
+            {
+                "name": "WardesProfileImageModel",
+                "description": "same as wardes_profile_image table in database"
+            },
+            {
+                "name": "WardesProfileImageDetailModel",
+                "description": "same as wardes_profile_image table in database"
             }
         ],
         "wardes_profile_image": [
             {
                 "name": "WardesProfileImageModel",
                 "description": "same as wardes_profile_image table on database"
+            }
+        ],
+        "user": [
+            {
+                "name": "UserModel",
+                "description": "same as user table in database"
+            },
+            {
+                "name": "UserWithWardesProfileModel",
+                "description": "same as user and wardes_profile tables in database"
+            },
+            {
+                "name": "WardesProfileWithUserModel",
+                "attribute": [
+                    {
+                        "name": "wardes_profile",
+                        "type": "same as WardesProfileModel"
+                    },
+                    {
+                        "name": "user",
+                        "type": "same as UserModel"
+                    }
+                ]
             }
         ]
     },
@@ -199,6 +251,35 @@
                         "status"
                     ],
                     "description": "This function will update an existing wardes_profile record."
+                },
+                {
+                    "name": "DeleteWardesProfile",
+                    "param": "context, tx, repository.WardesProfileModel",
+                    "table": "wardes_profile",
+                    "return": "error",
+                    "attribute": [],
+                    "description": "This function will delete a wardes profile entry by its identifier."
+                },
+                {
+                    "name": "GetDetailWardesProfile",
+                    "param": "context, string",
+                    "table": "wardes_profile wp, LEFT JOIN wardes_profile_image wpi",
+                    "return": "repository.WardesProfileImageDetailModel, error",
+                    "attribute": [
+                        "wp.id",
+                        "wp.username",
+                        "wp.personal_name",
+                        "wp.email",
+                        "wpi.id",
+                        "wpi.path_image",
+                        "created_at",
+                        "created_by",
+                        "created_client",
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "Get details of the wardes_profile entity."
                 }
             ]
         },
@@ -225,6 +306,44 @@
                         "deleted"
                     ],
                     "description": "This function will insert a new wardes_profile_image record."
+                }
+            ],
+            "db": "postgresql"
+        },
+        "user": {
+            "functions": [
+                {
+                    "name": "InsertUser",
+                    "param": "context, tx, repository.UserModel",
+                    "table": "user",
+                    "return": "repository.UserModel, error",
+                    "attribute": [
+                        "auth_user_id",
+                        "client_id",
+                        "user_code",
+                        "username"
+                    ],
+                    "description": "This function will insert a new user into the database."
+                },
+                {
+                    "name": "GetListUser",
+                    "param": "context, in.GetListRequest, []model.SearchParam",
+                    "table": "wardes_profile wp LEFT JOIN user u",
+                    "return": "[]interface{}, error",
+                    "attribute": [
+                        "u.id",
+                        "u.client_id",
+                        "wp.id",
+                        "wp.username",
+                        "wp.email",
+                        "created_at",
+                        "created_by",
+                        "created_client",
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "Retrieves a list of users"
                 }
             ],
             "db": "postgresql"

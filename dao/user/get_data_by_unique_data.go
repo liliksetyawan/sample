@@ -1,4 +1,4 @@
-package wardes_profile
+package user
 
 import (
     "fmt"
@@ -7,26 +7,27 @@ import (
     "nexsoft.co.id/example/repository"
 )
 
-func (d *wardes_profilePostgresqlSQLDAO) GetDataByUniqueData(
+// Descriptions: Check is data is exist before inserting/updating
+func (d *userPostgresqlSQLDAO) GetDataByUniqueData(
       ctx *context.ContextModel,
-      dtoIn repository.WardesProfileModel,
-)( 
-    result repository.WardesProfileModel, 
+      dtoIn repository.UserModel,
+)(
+    result repository.UserModel,
     err error,
 ){
-    var isUqWardesProfileNik bool
+    var isUqUserUsername bool
 
     query := fmt.Sprintf(`
     SELECT
         id, 
-        ( nik = $1 ) as unique_2 
+        ( username = $1 ) as unique_2 
     FROM %s
     WHERE 
-        (nik = $1) 
-    `, dao.GetDBTable(ctx, "wardes_profile"))
+        (username = $1) 
+    `, dao.GetDBTable(ctx, "user"))
 
     args := []interface{}{
-        dtoIn.Nik.String,
+        dtoIn.Username.String,
     }
 
     if ctx.Limitation.UserID != 0 {
@@ -36,15 +37,15 @@ func (d *wardes_profilePostgresqlSQLDAO) GetDataByUniqueData(
 
     query += " LIMIT 1 "
 
-    if err = d.db.QueryRow(query, args...).Scan(&result.Id, &isUqWardesProfileNik); err != nil && err != sql.ErrNoRows {
+    if err = d.db.QueryRow(query, args...).Scan(&result.ID, &isUqUserUsername); err != nil && err != sql.ErrNoRows {
         return
     }
 
-    if result.Id.Int64 != 0 {
+    if result.ID.Int64 != 0 {
         var existValue []string
         
-        if isUqWardesProfileNik {
-            existValue = append(existValue, "[nik]")
+        if isUqUserUsername {
+            existValue = append(existValue, "[username]")
         }
         
         err = commonError.ErrDataAlreadyUsed.Param(strings.Join(existValue, ", "))
