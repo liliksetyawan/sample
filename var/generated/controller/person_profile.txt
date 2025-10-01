@@ -1,0 +1,116 @@
+```
+Please generate an API endpoint configuration based on the following template:
+Endpoint:
+1. person_profile:
+    - Features:
+        -> Name: insertPersonProfile
+            - URL: /v1/person_profile
+            - Type: default
+            - Auth: UserToken
+            - Method: POST
+            - Menu: insert
+            - Permission: master.person_profile.person_profile:insert
+            - ActivityEnabled : false
+            - Description : Insert a new person profile.
+            - InternalAPI : false
+        -> Name: listPersonProfiles
+            - URL: /v1/person_profile
+            - Type: getlist
+            - Auth: UserToken
+            - Method: GET
+            - Menu: list
+            - Permission: master.person_profile.person_profile:view
+            - ActivityEnabled : false
+            - Description : Retrieve a list of person profiles.
+            - InternalAPI : false
+        -> Name: countPersonProfiles
+            - URL: /v1/person_profile/count
+            - Type: getlist
+            - Auth: UserToken
+            - Method: GET
+            - Menu: count
+            - Permission: master.person_profile.person_profile:view
+            - ActivityEnabled : false
+            - Description : Count the number of person profiles.
+            - InternalAPI : false
+    - DTO:
+        -> In:
+            - Validator:
+                -> Descriptions:
+                    - Undefined
+            - Object:
+                -> PersonProfileDTOIn:
+                    - Fields:
+                        -> updated_at:
+                            - Type: time.Time
+                            - Required: [insert]
+                            - EmptyAllowed: false
+                        -> other_field_1:
+                            - Type: string
+                            - Required: [insert]
+                            - EmptyAllowed: false
+                            - Min: 1
+                            - Max: 100
+                            - Regex: "undefined"
+                            - Enum: "undefined"
+                            - AutoFix: "undefined"
+                            - Reserved: ["undefined"]
+                        -> other_field_2:
+                            - Type: int64
+                            - Required: [insert]
+                            - EmptyAllowed: false
+                            - Min: 0
+                            - Max: 1000
+        -> Out:
+            - PersonProfileDTOOut:
+                -> uuid_key: string
+                -> other_field_1: string
+                -> other_field_2: int64
+            - ListPersonProfileDTOOut:
+                -> id: string
+                -> person_profile_id: string
+                -> title_id: string
+                -> title_name: string
+                -> first_name: string
+                -> last_name: string
+                -> sex: string
+                -> nik: string
+                -> address_1: string
+                -> address_2: string
+                -> address_3: string
+    - Configuration:
+        - Regex:
+            -> directory_name: <default>
+            -> data_scope: <default>
+            -> profile_name: <default>
+            -> permission: <default>
+            -> numeric: <default>
+            -> lowercase_number: <default>
+            -> fax: <default>
+            -> nik: <default>
+            -> npwp: <default>
+            -> upercase: <default>
+            -> lowercase: <default>
+            -> username: <default>
+            -> additional_info: <default>
+            -> phone: <default>
+            -> email: <default>
+            -> country_code: <default>
+            -> alphanumeric: <default>
+            -> text_only: <default>
+            -> name: <default>
+        - Enum:
+            -> record_status: A, N, P
+            -> sharing_permission: edit, view
+            -> boolean_permission: Y, N
+        - DateFormat:
+            -> default: <default>
+            -> date_only: <default>
+            -> duration: <default>
+        - AutoFix:
+            -> uppercase: set the incoming string to uppercase
+            -> lowercase: set the incoming string to lowercase
+            -> title: set the incoming string to title format
+            -> trim: trim the incoming string 
+            -> filename: delete all of the incoming string from this character ./ , \ and /
+```

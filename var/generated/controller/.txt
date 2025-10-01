@@ -1,0 +1,112 @@
+```
+Please generate an API endpoint configuration based on the following template:
+Endpoint:
+1. wardes_profile:
+    - Features:
+        -> Name: insertWardesProfile
+            - URL: /v1/wardes_profile
+            - Type: default
+            - Auth: UserToken
+            - Method: POST
+            - Menu: insert
+            - Permission: master.wardes_profile.wardes_profile:insert
+            - ActivityEnabled : False
+            - Description : Insert a new wardes profile
+            - InternalAPI : False
+        -> Name: getListWardesProfile
+            - URL: /v1/wardes_profile
+            - Type: getlist
+            - Auth: UserToken
+            - Method: GET
+            - Menu: list
+            - Permission: master.wardes_profile.wardes_profile:view
+            - ActivityEnabled : False
+            - Description : Retrieve a list of wardes profiles
+            - InternalAPI : False
+        -> Name: getDetailWardesProfile
+            - URL: /v1/wardes_profile/{uuid_key}
+            - Type: default
+            - Auth: UserToken
+            - Method: GET
+            - Menu: view
+            - Permission: master.wardes_profile.wardes_profile:view
+            - ActivityEnabled : False
+            - Description : Retrieve details of a specific wardes profile
+            - InternalAPI : False
+        -> Name: countListWardesProfile
+            - URL: /v1/wardes_profile/count
+            - Type: getlist
+            - Auth: UserToken
+            - Method: GET
+            - Menu: count
+            - Permission: master.wardes_profile.wardes_profile:view
+            - ActivityEnabled : False
+            - Description : Count the number of wardes profiles
+            - InternalAPI : False
+    - DTO:
+        -> In:
+            - Validator:
+                -> Descriptions:
+                    - Undefined
+            - Object:
+                -> WardesProfileDTOIn:
+                    - Fields:
+                        -> updatedAt:
+                            - Type: time.Time
+                            - Required: [update, delete]
+                            - EmptyAllowed: False
+                            - DateFormat: undefined
+        -> Out:
+            - WardesProfileDTOOut:
+                -> id : string
+                -> uuidKey : string
+                -> nexChiefAccountId : string
+                -> userId : string
+                -> username : string
+                -> personalName : string
+                -> gender : string
+            - ListWardesProfileDTOOut:
+                -> id : string
+                -> uuidKey : string
+                -> nexChiefAccountId : string
+                -> userId : string
+                -> username : string
+                -> personalName : string
+                -> gender : string
+    - Configuration:
+        - Regex:
+            -> directory_name: <default>
+            -> data_scope: <default>
+            -> profile_name: <default>
+            -> permission: <default>
+            -> numeric: <default>
+            -> lowercase_number: <default>
+            -> fax: <default>
+            -> nik: <default>
+            -> npwp: <default>
+            -> upercase: <default>
+            -> lowercase: <default>
+            -> username: <default>
+            -> additional_info: <default>
+            -> phone: <default>
+            -> email: <default>
+            -> country_code: <default>
+            -> alphanumeric: <default>
+            -> text_only: <default>
+            -> name: <default>
+            -> profile_name: <default>
+        - Enum:
+            -> record_status: A, N, P
+            -> sharing_permission: edit, view
+            -> boolean_permission: Y, N
+        - DateFormat:
+            -> default: <default>
+            -> date_only: <default>
+            -> duration: <default>
+        - AutoFix:
+            -> uppercase: set the incoming string to uppercase
+            -> lowercase: set the incoming string to lowercase
+            -> title: set the incoming string to title format
+            -> trim: trim the incoming string
+            -> filename: delete all of the incoming string from this character ./ , \ and /
+```
