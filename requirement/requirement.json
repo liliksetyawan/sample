@@ -1,7 +1,65 @@
 {
     "valid_search": {
         "wardes_profile": [],
-        "wardes_profile_image": []
+        "wardes_profile_image": [],
+        "person_profile": [
+            {
+                "functions": [
+                    "GetListPersonProfile",
+                    "CountListPersonProfile"
+                ],
+                "attributes": [
+                    {
+                        "field": "person_profile_id",
+                        "type": "number",
+                        "operator": "equal, greater, less",
+                        "description": "Unique identifier for the person profile"
+                    },
+                    {
+                        "field": "title_id",
+                        "type": "number",
+                        "operator": "equal, greater, less",
+                        "description": "Identifier for the title"
+                    },
+                    {
+                        "field": "title_name",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "Name of the title"
+                    },
+                    {
+                        "field": "first_name",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "First name of the person"
+                    },
+                    {
+                        "field": "last_name",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "Last name of the person"
+                    },
+                    {
+                        "field": "sex",
+                        "type": "enum",
+                        "operator": "equal",
+                        "description": "Gender of the person"
+                    },
+                    {
+                        "field": "nik",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "National identification number"
+                    },
+                    {
+                        "field": "address_1",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "Primary address of the person"
+                    }
+                ]
+            }
+        ]
     },
     "repository": {
         "wardes_profile": [
@@ -14,6 +72,12 @@
             {
                 "name": "WardesProfileImageModel",
                 "description": "same as wardes_profile_image table in database"
+            }
+        ],
+        "person_profile": [
+            {
+                "name": "PersonProfileModel",
+                "description": "same as person_profile table in database"
             }
         ]
     },
@@ -65,6 +129,98 @@
                         "updated_client"
                     ],
                     "description": "Insert a new wardes profile image record"
+                }
+            ],
+            "db": "postgresql"
+        },
+        "person_profile": {
+            "functions": [
+                {
+                    "name": "InsertPersonProfile",
+                    "param": "context, tx, repository.PersonProfileModel",
+                    "table": "person_profile",
+                    "return": "repository.PersonProfileModel, error",
+                    "attribute": [
+                        "person_profile_id",
+                        "title_id",
+                        "title_name",
+                        "first_name",
+                        "last_name",
+                        "sex",
+                        "nik",
+                        "address_1",
+                        "created_at",
+                        "created_by",
+                        "created_client",
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "Insert a new person profile record"
+                },
+                {
+                    "name": "UpdatePersonProfile",
+                    "param": "context, tx, repository.PersonProfileModel",
+                    "table": "person_profile",
+                    "return": "error",
+                    "attribute": [
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "Update an existing person profile record"
+                },
+                {
+                    "name": "DeletePersonProfile",
+                    "param": "context, tx, repository.PersonProfileModel",
+                    "table": "person_profile",
+                    "return": "error",
+                    "attribute": [
+                        "id"
+                    ],
+                    "description": "Delete a person profile record"
+                },
+                {
+                    "name": "GetPersonProfile",
+                    "param": "context, string",
+                    "table": "person_profile",
+                    "return": "error",
+                    "attribute": [
+                        "uuid_key",
+                        "created_by",
+                        "created_client",
+                        "created_at",
+                        "updated_by",
+                        "updated_client",
+                        "updated_at"
+                    ],
+                    "description": "Get a single person profile record by ID"
+                },
+                {
+                    "name": "GetListPersonProfile",
+                    "param": "context, in.GetListRequest, []model.SearchParam",
+                    "table": "person_profile",
+                    "return": "[]interface{}, error",
+                    "attribute": [
+                        "uuid_key",
+                        "created_by",
+                        "created_client",
+                        "created_at",
+                        "updated_by",
+                        "updated_client",
+                        "updated_at"
+                    ],
+                    "description": "Get a list of person profile records with search and pagination"
+                },
+                {
+                    "name": "CountListPersonProfile",
+                    "param": "context, in.GetListRequest, []model.SearchParam",
+                    "table": "person_profile",
+                    "return": "int, error",
+                    "attribute": [
+                        "count(id)"
+                    ],
+                    "description": "Count the number of person profile records matching search criteria"
                 }
             ],
             "db": "postgresql"

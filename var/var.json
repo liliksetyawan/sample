@@ -14,6 +14,63 @@
         "wardes_profile_image": "nexchief"
     },
     "valid_search": {
-        "wardes_profile_image": []
+        "person_profile": [
+            {
+                "functions": [
+                    "GetListPersonProfile",
+                    "CountListPersonProfile"
+                ],
+                "attributes": [
+                    {
+                        "field": "person_profile_id",
+                        "type": "number",
+                        "operator": "equal, greater, less",
+                        "description": "Unique identifier for the person profile"
+                    },
+                    {
+                        "field": "title_id",
+                        "type": "number",
+                        "operator": "equal, greater, less",
+                        "description": "Identifier for the title"
+                    },
+                    {
+                        "field": "title_name",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "Name of the title"
+                    },
+                    {
+                        "field": "first_name",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "First name of the person"
+                    },
+                    {
+                        "field": "last_name",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "Last name of the person"
+                    },
+                    {
+                        "field": "sex",
+                        "type": "enum",
+                        "operator": "equal",
+                        "description": "Gender of the person"
+                    },
+                    {
+                        "field": "nik",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "National identification number"
+                    },
+                    {
+                        "field": "address_1",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "Primary address of the person"
+                    }
+                ]
+            }
+        ]
     }
 }

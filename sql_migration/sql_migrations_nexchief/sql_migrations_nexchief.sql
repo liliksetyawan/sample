@@ -6,7 +6,7 @@ CREATE SEQUENCE IF NOT EXISTS "person_profile_pkey_seq";
 CREATE SEQUENCE IF NOT EXISTS "parameter_pkey_seq";
 CREATE SEQUENCE IF NOT EXISTS "wardes_profile_image_pkey_seq";
 
-CREATE TABLE "user" (
+CREATE TABLE IF NOT EXISTS "user" (
     id BIGINT PRIMARY KEY DEFAULT nextval('user_pkey_seq'::regclass),
     uuid_key UUID DEFAULT public.uuid_generate_v4(),
     auth_user_id BIGINT,
@@ -33,15 +33,15 @@ CREATE TABLE "user" (
     username_nexvin VARCHAR(255),
     password_nexvin VARCHAR(255),
     created_by BIGINT DEFAULT 0,
-    created_client VARCHAR(256),
+    created_client VARCHAR(50),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_by BIGINT,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_client VARCHAR(256),
+    updated_client VARCHAR(50),
     deleted BOOLEAN DEFAULT false
 );
 
-CREATE TABLE "wardes_profile" (
+CREATE TABLE IF NOT EXISTS "wardes_profile" (
     id BIGINT PRIMARY KEY DEFAULT nextval('wardes_profile_pkey_seq'::regclass),
     uuid_key UUID DEFAULT public.uuid_generate_v4(),
     nexchief_account_id BIGINT,
@@ -83,7 +83,7 @@ CREATE TABLE "wardes_profile" (
     company_profile_id BIGINT,
     code VARCHAR(38),
     schema VARCHAR(256),
-    status record_status DEFAULT 'A',
+    status VARCHAR(256) DEFAULT 'A',
     active_date DATE,
     resign_date DATE,
     is_nexwise BOOLEAN DEFAULT FALSE,
@@ -98,7 +98,7 @@ CREATE TABLE "wardes_profile" (
     new_profile_approval_status VARCHAR(30)
 );
 
-CREATE TABLE "person_profile" (
+CREATE TABLE IF NOT EXISTS "person_profile" (
     id BIGINT PRIMARY KEY DEFAULT nextval('person_profile_pkey_seq'::regclass),
     uuid_key UUID DEFAULT public.uuid_generate_v4(),
     person_profile_id BIGINT,
@@ -140,7 +140,7 @@ CREATE TABLE "person_profile" (
     deleted BOOLEAN DEFAULT false
 );
 
-CREATE TABLE "parameter" (
+CREATE TABLE IF NOT EXISTS "parameter" (
     id BIGINT PRIMARY KEY DEFAULT nextval('parameter_pkey_seq'::regclass),
     uuid_key UUID DEFAULT public.uuid_generate_v4(),
     parameter_group_id BIGINT,
@@ -167,7 +167,7 @@ CREATE TABLE "parameter" (
     deleted BOOLEAN DEFAULT false
 );
 
-CREATE TABLE "wardes_profile_image" (
+CREATE TABLE IF NOT EXISTS "wardes_profile_image" (
     id BIGINT PRIMARY KEY DEFAULT nextval('wardes_profile_image_pkey_seq'::regclass),
     uuid_key UUID DEFAULT public.uuid_generate_v4(),
     nexchief_account_id BIGINT,
