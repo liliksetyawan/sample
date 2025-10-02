@@ -14,60 +14,204 @@
         "wardes_profile_image": "nexchief"
     },
     "valid_search": {
-        "person_profile": [
+        "user": [
             {
                 "functions": [
-                    "GetListPersonProfile",
-                    "CountListPersonProfile"
+                    "GetListUser",
+                    "CountListUser"
                 ],
                 "attributes": [
+                    {
+                        "field": "id",
+                        "type": "number",
+                        "operator": "equal, greater, less",
+                        "description": "Unique identifier for the user"
+                    },
+                    {
+                        "field": "uuid_key",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "UUID key for the user"
+                    },
+                    {
+                        "field": "auth_user_id",
+                        "type": "number",
+                        "operator": "equal, greater, less",
+                        "description": "Authentication user ID"
+                    },
                     {
                         "field": "person_profile_id",
                         "type": "number",
                         "operator": "equal, greater, less",
-                        "description": "Unique identifier for the person profile"
+                        "description": "Person profile ID associated with the user"
                     },
                     {
-                        "field": "title_id",
+                        "field": "client_id",
                         "type": "number",
                         "operator": "equal, greater, less",
-                        "description": "Identifier for the title"
+                        "description": "Client ID associated with the user"
                     },
                     {
-                        "field": "title_name",
+                        "field": "user_code",
                         "type": "char",
                         "operator": "equal, like",
-                        "description": "Name of the title"
+                        "description": "User code identifier"
                     },
                     {
-                        "field": "first_name",
+                        "field": "username",
                         "type": "char",
                         "operator": "equal, like",
-                        "description": "First name of the person"
+                        "description": "Username for login"
                     },
                     {
-                        "field": "last_name",
+                        "field": "last_token",
                         "type": "char",
                         "operator": "equal, like",
-                        "description": "Last name of the person"
+                        "description": "Last authentication token used"
                     },
                     {
-                        "field": "sex",
+                        "field": "signature_key",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "Signature key for security"
+                    },
+                    {
+                        "field": "ip_whitelist",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "IP addresses allowed for access"
+                    },
+                    {
+                        "field": "device",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "Device information"
+                    },
+                    {
+                        "field": "level",
+                        "type": "number",
+                        "operator": "equal, greater, less",
+                        "description": "User access level"
+                    },
+                    {
+                        "field": "locale",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "User locale setting"
+                    },
+                    {
+                        "field": "additional_info",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "Additional user information"
+                    },
+                    {
+                        "field": "alias",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "User alias name"
+                    },
+                    {
+                        "field": "is_user_nex_acc",
                         "type": "enum",
                         "operator": "equal",
-                        "description": "Gender of the person"
+                        "description": "Flag indicating if user has NEX account access"
                     },
                     {
-                        "field": "nik",
-                        "type": "char",
-                        "operator": "equal, like",
-                        "description": "National identification number"
+                        "field": "mobile_access",
+                        "type": "enum",
+                        "operator": "equal",
+                        "description": "Flag indicating mobile access permission"
                     },
                     {
-                        "field": "address_1",
+                        "field": "website_access",
+                        "type": "enum",
+                        "operator": "equal",
+                        "description": "Flag indicating website access permission"
+                    },
+                    {
+                        "field": "wdi_portal_access",
+                        "type": "enum",
+                        "operator": "equal",
+                        "description": "Flag indicating WDI portal access permission"
+                    },
+                    {
+                        "field": "domain_nd6",
                         "type": "char",
                         "operator": "equal, like",
-                        "description": "Primary address of the person"
+                        "description": "ND6 domain information"
+                    },
+                    {
+                        "field": "username_nd6",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "ND6 username"
+                    },
+                    {
+                        "field": "password_nd6",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "ND6 password"
+                    },
+                    {
+                        "field": "domain_nexvin",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "NEXVIN domain information"
+                    },
+                    {
+                        "field": "username_nexvin",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "NEXVIN username"
+                    },
+                    {
+                        "field": "password_nexvin",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "NEXVIN password"
+                    },
+                    {
+                        "field": "created_by",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "User who created the record"
+                    },
+                    {
+                        "field": "created_client",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "Client that created the record"
+                    },
+                    {
+                        "field": "created_at",
+                        "type": "date",
+                        "operator": "equal, greater, less",
+                        "description": "Timestamp when record was created"
+                    },
+                    {
+                        "field": "updated_by",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "User who last updated the record"
+                    },
+                    {
+                        "field": "updated_at",
+                        "type": "date",
+                        "operator": "equal, greater, less",
+                        "description": "Timestamp when record was last updated"
+                    },
+                    {
+                        "field": "updated_client",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "Client that last updated the record"
+                    },
+                    {
+                        "field": "deleted",
+                        "type": "enum",
+                        "operator": "equal",
+                        "description": "Flag indicating if record is deleted"
                     }
                 ]
             }
