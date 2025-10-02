@@ -1,0 +1,120 @@
+```
+Please generate an API endpoint configuration based on the following template:
+Endpoint:
+1. wardes_profile:
+    - Features:
+        -> Name: insertWardesProfile
+            - URL: /v1/wardes_profile
+            - Type: default
+            - Auth: UserToken
+            - Method: POST
+            - Menu: insert
+            - Permission: master.wardes_profile.wardes_profile:insert
+            - ActivityEnabled: false
+            - Description: Insert new wardes profile data
+            - InternalAPI: false
+    - DTO:
+        -> In:
+            - Validator:
+                -> Descriptions:
+                    - Undefined
+            - Object:
+                -> WardesProfileDTOIn:
+                    - Fields:
+                        -> name:
+                            - Type: string
+                            - Required: [insert]
+                            - EmptyAllowed: false
+                            - Min: 1
+                            - Max: 255
+                            - Regex: "undefined"
+                            - Enum: "undefined"
+                            - AutoFix: "undefined"
+                            - Reserved: ["undefined"]
+                        -> address:
+                            - Type: string
+                            - Required: [insert]
+                            - EmptyAllowed: false
+                            - Min: 1
+                            - Max: 500
+                            - Regex: "undefined"
+                            - Enum: "undefined"
+                            - AutoFix: "undefined"
+                            - Reserved: ["undefined"]
+                        -> phone:
+                            - Type: string
+                            - Required: [insert]
+                            - EmptyAllowed: false
+                            - Min: 1
+                            - Max: 20
+                            - Regex: "undefined"
+                            - Enum: "undefined"
+                            - AutoFix: "undefined"
+                            - Reserved: ["undefined"]
+                        -> email:
+                            - Type: string
+                            - Required: [insert]
+                            - EmptyAllowed: false
+                            - Min: 1
+                            - Max: 255
+                            - Regex: "undefined"
+                            - Enum: "undefined"
+                            - AutoFix: "undefined"
+                            - Reserved: ["undefined"]
+                        -> record_status:
+                            - Type: string
+                            - Required: [insert]
+                            - EmptyAllowed: false
+                            - Min: 1
+                            - Max: 1
+                            - Regex: "undefined"
+                            - Enum: "record_status"
+                            - AutoFix: "undefined"
+                            - Reserved: ["undefined"]
+        -> Out:
+            - WardesProfileDTOOut:
+                -> name: string
+                -> address: string
+                -> phone: string
+                -> email: string
+                -> record_status: string
+                -> created_at: time
+                -> updated_at: time
+    - Configuration:
+        - Regex:
+            -> directory_name: <default>
+            -> data_scope: <default>
+            -> profile_name: <default>
+            -> permission: <default>
+            -> numeric: <default>
+            -> lowercase_number: <default>
+            -> fax: <default>
+            -> nik: <default>
+            -> npwp: <default>
+            -> upercase: <default>
+            -> lowercase: <default>
+            -> username: <default>
+            -> additional_info: <default>
+            -> phone: <default>
+            -> email: <default>
+            -> country_code: <default>
+            -> alphanumeric: <default>
+            -> text_only: <default>
+            -> name: <default>
+            -> profile_name: <default>
+        - DateFormat:
+            -> default: <default>
+            -> date_only: <default>
+            -> duration: <default>
+            -> datetime: <default>
+        - Enum:
+            -> record_status: A, N, P
+            -> sharing_permission: edit, view
+            -> boolean_permission: Y, N
+        - AutoFix:
+            -> uppercase: <default>
+            -> lowercase: <default>
+            -> title: <default>
+            -> trim: <default>
+            -> filename: <default>
+```
