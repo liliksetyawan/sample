@@ -1,79 +1,151 @@
 {
-  "wardes_profile": {
-    "features": [
-      {
-        "name": "insertWardesProfile",
-        "url": "/v1/wardes_profile",
-        "type": "default",
-        "auth": "UserToken",
-        "method": "POST",
-        "menu": "insert",
-        "permission": "master.wardes_profile.wardes_profile:insert",
-        "activity_enabled": false,
-        "description": "Insert new wardes profile data",
-        "internal_api": false
-      }
-    ],
-    "dto": {
-      "in": {
-        "validator": [
-          ""
-        ],
-        "object": {
-          "name": "WardesProfileDTOIn",
-          "fields": {
-            "name": {
-              "type": "string",
-              "required": ["insert"],
-              "empty_allowed": false,
-              "min": 1,
-              "max": 255
-            },
-            "address": {
-              "type": "string",
-              "required": ["insert"],
-              "empty_allowed": false,
-              "min": 1,
-              "max": 500
-            },
-            "phone": {
-              "type": "string",
-              "required": ["insert"],
-              "empty_allowed": false,
-              "min": 1,
-              "max": 20
-            },
-            "email": {
-              "type": "string",
-              "required": ["insert"],
-              "empty_allowed": false,
-              "min": 1,
-              "max": 255
-            },
-            "record_status": {
-              "type": "string",
-              "required": ["insert"],
-              "empty_allowed": false,
-              "min": 1,
-              "max": 1,
-              "enum": "record_status"
+    "wardes_profile": {
+        "features": [
+            {
+                "name": "insertWardesProfile",
+                "url": "/v1/wardes_profile",
+                "type": "default",
+                "auth": "UserToken",
+                "method": "POST",
+                "menu": "insert",
+                "permission": "master.wardes_profile.wardes_profile:insert",
+                "activity_enabled": false,
+                "description": "Insert new wardes profile data",
+                "internal_api": false
             }
-          }
+        ],
+        "dto": {
+            "in": {
+                "validator": [
+                    ""
+                ],
+                "object": {
+                    "name": "WardesProfileDTOIn",
+                    "fields": {
+                        "name": {
+                            "type": "string",
+                            "required": [
+                                "insert"
+                            ],
+                            "empty_allowed": false,
+                            "min": 1,
+                            "max": 255
+                        },
+                        "address": {
+                            "type": "string",
+                            "required": [
+                                "insert"
+                            ],
+                            "empty_allowed": false,
+                            "min": 1,
+                            "max": 500
+                        },
+                        "phone": {
+                            "type": "string",
+                            "required": [
+                                "insert"
+                            ],
+                            "empty_allowed": false,
+                            "min": 1,
+                            "max": 20
+                        },
+                        "email": {
+                            "type": "string",
+                            "required": [
+                                "insert"
+                            ],
+                            "empty_allowed": false,
+                            "min": 1,
+                            "max": 255
+                        },
+                        "record_status": {
+                            "type": "string",
+                            "required": [
+                                "insert"
+                            ],
+                            "empty_allowed": false,
+                            "min": 1,
+                            "max": 1,
+                            "enum": "record_status"
+                        }
+                    }
+                }
+            },
+            "out": [
+                {
+                    "WardesProfileDTOOut": {
+                        "name": "string",
+                        "address": "string",
+                        "phone": "string",
+                        "email": "string",
+                        "record_status": "string",
+                        "created_at": "time",
+                        "updated_at": "time"
+                    }
+                }
+            ]
         }
-      },
-      "out": [
-        {
-          "WardesProfileDTOOut": {
-            "name": "string",
-            "address": "string",
-            "phone": "string",
-            "email": "string",
-            "record_status": "string",
-            "created_at": "time",
-            "updated_at": "time"
-          }
+    },
+    "wardes_profile_image": {
+        "features": [
+            {
+                "name": "insertWardesProfileImage",
+                "url": "/v1/wardes_profile_image",
+                "type": "default",
+                "auth": "UserToken",
+                "method": "POST",
+                "menu": "insert",
+                "permission": "master.wardes_profile_image.wardes_profile_image:insert",
+                "activity_enabled": false,
+                "description": "Insert new wardes profile image",
+                "internal_api": false
+            }
+        ],
+        "dto": {
+            "in": {
+                "validator": [
+                    ""
+                ],
+                "object": {
+                    "name": "WardesProfileImageDTOIn",
+                    "fields": {
+                        "profile_image": {
+                            "type": "string",
+                            "required": "insert",
+                            "empty_allowed": false,
+                            "min": 1,
+                            "max": 255
+                        },
+                        "description": {
+                            "type": "string",
+                            "required": "insert",
+                            "empty_allowed": true,
+                            "min": 0,
+                            "max": 500
+                        },
+                        "record_status": {
+                            "type": "string",
+                            "required": "insert",
+                            "empty_allowed": false,
+                            "min": 1,
+                            "max": 1,
+                            "enum": "record_status"
+                        }
+                    }
+                }
+            },
+            "out": [
+                {
+                    "WardesProfileImageDTOOut": {
+                        "uuid_key": "string",
+                        "profile_image": "string",
+                        "description": "string",
+                        "record_status": "string",
+                        "created_at": "time",
+                        "updated_at": "time"
+                    }
+                }
+            ]
         }
-      ]
     }
-  }
 }
