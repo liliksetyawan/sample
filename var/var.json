@@ -1,0 +1,130 @@
+{
+    "table_to_schema": {
+        "user": "nexchief",
+        "wardes_profile": "nexchief",
+        "person_profile": "nexchief",
+        "parameter": "nexchief",
+        "wardes_profile_image": "nexchief"
+    },
+    "schema_to_table": {
+        "user": "nexchief",
+        "wardes_profile": "nexchief",
+        "person_profile": "nexchief",
+        "parameter": "nexchief",
+        "wardes_profile_image": "nexchief"
+    },
+    "valid_search": {
+        "wardes_profile": [
+            {
+                "functions": [
+                    "GetListWardesProfile",
+                    "CountListWardesProfile"
+                ],
+                "attributes": [
+                    {
+                        "field": "username",
+                        "type": "char",
+                        "operator": "like, equal",
+                        "description": "Username of the wardes profile"
+                    },
+                    {
+                        "field": "personal_name",
+                        "type": "char",
+                        "operator": "like, equal",
+                        "description": "Personal name of the wardes"
+                    },
+                    {
+                        "field": "gender",
+                        "type": "enum",
+                        "operator": "equal",
+                        "description": "Gender of the wardes"
+                    },
+                    {
+                        "field": "phone",
+                        "type": "char",
+                        "operator": "like, equal",
+                        "description": "Phone number of the wardes"
+                    },
+                    {
+                        "field": "email",
+                        "type": "char",
+                        "operator": "like, equal",
+                        "description": "Email address of the wardes"
+                    },
+                    {
+                        "field": "urban_village_id",
+                        "type": "number",
+                        "operator": "equal",
+                        "description": "ID of the urban village"
+                    },
+                    {
+                        "field": "nik",
+                        "type": "char",
+                        "operator": "like, equal",
+                        "description": "National ID number of the wardes"
+                    },
+                    {
+                        "field": "age",
+                        "type": "number",
+                        "operator": "equal, greater, less",
+                        "description": "Age of the wardes"
+                    },
+                    {
+                        "field": "profile_completion_status",
+                        "type": "enum",
+                        "operator": "equal",
+                        "description": "Status of profile completion"
+                    },
+                    {
+                        "field": "company_profile_id",
+                        "type": "number",
+                        "operator": "equal",
+                        "description": "ID of the company profile"
+                    },
+                    {
+                        "field": "code",
+                        "type": "char",
+                        "operator": "like, equal",
+                        "description": "Code of the wardes profile"
+                    },
+                    {
+                        "field": "status",
+                        "type": "enum",
+                        "operator": "equal",
+                        "description": "Status of the wardes profile"
+                    },
+                    {
+                        "field": "active_date",
+                        "type": "date",
+                        "operator": "equal, greater, less",
+                        "description": "Date when the wardes became active"
+                    },
+                    {
+                        "field": "resign_date",
+                        "type": "date",
+                        "operator": "equal, greater, less",
+                        "description": "Date when the wardes resigned"
+                    },
+                    {
+                        "field": "is_nexwise",
+                        "type": "enum",
+                        "operator": "equal",
+                        "description": "Flag indicating if wardes is nexwise"
+                    },
+                    {
+                        "field": "deadline_date",
+                        "type": "date",
+                        "operator": "equal, greater, less",
+                        "description": "Deadline date for the wardes"
+                    },
+                    {
+                        "field": "new_profile_approval_status",
+                        "type": "enum",
+                        "operator": "equal",
+                        "description": "Approval status for new profile"
+                    }
+                ]
+            }
+        ]
+    }
+}

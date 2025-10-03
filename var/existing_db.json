@@ -1,0 +1,867 @@
+{
+  "version": "1.1.0",
+  "metadata": {},
+  "packages": {
+    "nexchief": [
+      "nexchief.user",
+      "nexchief.wardes_profile",
+      "nexchief.wardes_profile_image",
+      "nexchief.person_profile",
+      "nexchief.parameter"
+    ]
+  },
+  "entities": {
+    "nexchief.user": {
+      "name": "user",
+      "package": "nexchief",
+      "fields": {
+        "id": {
+          "name": "id",
+          "data_type": "bigint <<PK>>",
+          "relationships": ""
+        },
+        "uuid_key": {
+          "name": "uuid_key",
+          "data_type": "uuid <<DEFAULT uuid_generate_v4()>>",
+          "relationships": ""
+        },
+        "auth_user_id": {
+          "name": "auth_user_id",
+          "data_type": "bigint <<FK>>",
+          "relationships": ""
+        },
+        "person_profile_id": {
+          "name": "person_profile_id",
+          "data_type": "bigint <<FK>>",
+          "relationships": ""
+        },
+        "client_id": {
+          "name": "client_id",
+          "data_type": "varchar(256)",
+          "relationships": ""
+        },
+        "user_code": {
+          "name": "user_code",
+          "data_type": "varchar(23)",
+          "relationships": ""
+        },
+        "username": {
+          "name": "username",
+          "data_type": "varchar(256)",
+          "relationships": ""
+        },
+        "last_token": {
+          "name": "last_token",
+          "data_type": "date",
+          "relationships": ""
+        },
+        "signature_key": {
+          "name": "signature_key",
+          "data_type": "varchar(256)",
+          "relationships": ""
+        },
+        "ip_whitelist": {
+          "name": "ip_whitelist",
+          "data_type": "varchar(256)",
+          "relationships": ""
+        },
+        "device": {
+          "name": "device",
+          "data_type": "varchar(256)",
+          "relationships": ""
+        },
+        "level": {
+          "name": "level",
+          "data_type": "smallint",
+          "relationships": ""
+        },
+        "locale": {
+          "name": "locale",
+          "data_type": "varchar(50)",
+          "relationships": ""
+        },
+        "additional_info": {
+          "name": "additional_info",
+          "data_type": "text",
+          "relationships": ""
+        },
+        "alias": {
+          "name": "alias",
+          "data_type": "varchar(256)",
+          "relationships": ""
+        },
+        "is_user_nex_acc": {
+          "name": "is_user_nex_acc",
+          "data_type": "boolean",
+          "relationships": ""
+        },
+        "mobile_access": {
+          "name": "mobile_access",
+          "data_type": "boolean",
+          "relationships": ""
+        },
+        "website_access": {
+          "name": "website_access",
+          "data_type": "boolean",
+          "relationships": ""
+        },
+        "wdi_portal_access": {
+          "name": "wdi_portal_access",
+          "data_type": "boolean",
+          "relationships": ""
+        },
+        "domain_nd6": {
+          "name": "domain_nd6",
+          "data_type": "varchar(255)",
+          "relationships": ""
+        },
+        "username_nd6": {
+          "name": "username_nd6",
+          "data_type": "varchar(255)",
+          "relationships": ""
+        },
+        "password_nd6": {
+          "name": "password_nd6",
+          "data_type": "varchar(255)",
+          "relationships": ""
+        },
+        "domain_nexvin": {
+          "name": "domain_nexvin",
+          "data_type": "varchar(255)",
+          "relationships": ""
+        },
+        "username_nexvin": {
+          "name": "username_nexvin",
+          "data_type": "varchar(255)",
+          "relationships": ""
+        },
+        "password_nexvin": {
+          "name": "password_nexvin",
+          "data_type": "varchar(255)",
+          "relationships": ""
+        },
+        "created_by": {
+          "name": "created_by",
+          "data_type": "int8",
+          "relationships": ""
+        },
+        "created_client": {
+          "name": "created_client",
+          "data_type": "varchar(256)",
+          "relationships": ""
+        },
+        "created_at": {
+          "name": "created_at",
+          "data_type": "timestamp <<DEFAULT CURRENT_TIMESTAMP>>",
+          "relationships": ""
+        },
+        "updated_by": {
+          "name": "updated_by",
+          "data_type": "int8",
+          "relationships": ""
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "data_type": "timestamp <<DEFAULT CURRENT_TIMESTAMP>>",
+          "relationships": ""
+        },
+        "updated_client": {
+          "name": "updated_client",
+          "data_type": "varchar(256)",
+          "relationships": ""
+        },
+        "deleted": {
+          "name": "deleted",
+          "data_type": "bool <<DEFAULT false>>",
+          "relationships": ""
+        }
+      },
+      "unique_constraints": [],
+      "depends_on": []
+    },
+    "nexchief.wardes_profile": {
+      "name": "wardes_profile",
+      "package": "nexchief",
+      "fields": {
+        "id": {
+          "name": "id",
+          "data_type": "bigint <<PK, DEFAULT nextval('wardes_profile_pkey_seq')>>",
+          "relationships": ""
+        },
+        "uuid_key": {
+          "name": "uuid_key",
+          "data_type": "uuid <<DEFAULT uuid_generate_v4()>>",
+          "relationships": ""
+        },
+        "nexchief_account_id": {
+          "name": "nexchief_account_id",
+          "data_type": "bigint <<FK>>",
+          "relationships": ""
+        },
+        "user_id": {
+          "name": "user_id",
+          "data_type": "bigint <<FK>>",
+          "relationships": ""
+        },
+        "username": {
+          "name": "username",
+          "data_type": "varchar(256) <<UNIQUE>>",
+          "relationships": ""
+        },
+        "personal_name": {
+          "name": "personal_name",
+          "data_type": "varchar(256)",
+          "relationships": ""
+        },
+        "gender": {
+          "name": "gender",
+          "data_type": "char(1)",
+          "relationships": ""
+        },
+        "phone": {
+          "name": "phone",
+          "data_type": "varchar(35)",
+          "relationships": ""
+        },
+        "email": {
+          "name": "email",
+          "data_type": "varchar(100)",
+          "relationships": ""
+        },
+        "province_id": {
+          "name": "province_id",
+          "data_type": "bigint",
+          "relationships": ""
+        },
+        "district_id": {
+          "name": "district_id",
+          "data_type": "bigint",
+          "relationships": ""
+        },
+        "sub_district_id": {
+          "name": "sub_district_id",
+          "data_type": "bigint",
+          "relationships": ""
+        },
+        "urban_village_id": {
+          "name": "urban_village_id",
+          "data_type": "bigint",
+          "relationships": ""
+        },
+        "nik": {
+          "name": "nik",
+          "data_type": "varchar(20) <<UNIQUE>>",
+          "relationships": ""
+        },
+        "age": {
+          "name": "age",
+          "data_type": "varchar(3)",
+          "relationships": ""
+        },
+        "hamlet": {
+          "name": "hamlet",
+          "data_type": "varchar(3)",
+          "relationships": ""
+        },
+        "neighbour": {
+          "name": "neighbour",
+          "data_type": "varchar(3)",
+          "relationships": ""
+        },
+        "village_family": {
+          "name": "village_family",
+          "data_type": "varchar(20)",
+          "relationships": ""
+        },
+        "village_population": {
+          "name": "village_population",
+          "data_type": "varchar(20)",
+          "relationships": ""
+        },
+        "building_location": {
+          "name": "building_location",
+          "data_type": "text",
+          "relationships": ""
+        },
+        "building_ownership": {
+          "name": "building_ownership",
+          "data_type": "varchar(256)",
+          "relationships": ""
+        },
+        "building_type": {
+          "name": "building_type",
+          "data_type": "varchar(256)",
+          "relationships": ""
+        },
+        "building_form": {
+          "name": "building_form",
+          "data_type": "varchar(256)",
+          "relationships": ""
+        },
+        "building_width_first_floor": {
+          "name": "building_width_first_floor",
+          "data_type": "float8",
+          "relationships": ""
+        },
+        "building_length_first_floor": {
+          "name": "building_length_first_floor",
+          "data_type": "float8",
+          "relationships": ""
+        },
+        "building_height_first_floor": {
+          "name": "building_height_first_floor",
+          "data_type": "float8",
+          "relationships": ""
+        },
+        "building_width_second_floor": {
+          "name": "building_width_second_floor",
+          "data_type": "float8",
+          "relationships": ""
+        },
+        "building_length_second_floor": {
+          "name": "building_length_second_floor",
+          "data_type": "float8",
+          "relationships": ""
+        },
+        "building_height_second_floor": {
+          "name": "building_height_second_floor",
+          "data_type": "float8",
+          "relationships": ""
+        },
+        "parking_lot_width": {
+          "name": "parking_lot_width",
+          "data_type": "float8",
+          "relationships": ""
+        },
+        "parking_lot_length": {
+          "name": "parking_lot_length",
+          "data_type": "float8",
+          "relationships": ""
+        },
+        "village_internet_connection": {
+          "name": "village_internet_connection",
+          "data_type": "varchar(256)",
+          "relationships": ""
+        },
+        "investment_capital": {
+          "name": "investment_capital",
+          "data_type": "text",
+          "relationships": ""
+        },
+        "investment_capital_source": {
+          "name": "investment_capital_source",
+          "data_type": "varchar(256)",
+          "relationships": ""
+        },
+        "ownership_status": {
+          "name": "ownership_status",
+          "data_type": "varchar(256)",
+          "relationships": ""
+        },
+        "ownership_fixed_asset": {
+          "name": "ownership_fixed_asset",
+          "data_type": "varchar(256)",
+          "relationships": ""
+        },
+        "permission_cover": {
+          "name": "permission_cover",
+          "data_type": "varchar(256)",
+          "relationships": ""
+        },
+        "profile_completion_status": {
+          "name": "profile_completion_status",
+          "data_type": "bpchar(1) <<DEFAULT 'N'>>",
+          "relationships": ""
+        },
+        "company_profile_id": {
+          "name": "company_profile_id",
+          "data_type": "bigint <<FK>>",
+          "relationships": ""
+        },
+        "code": {
+          "name": "code",
+          "data_type": "varchar(38)",
+          "relationships": ""
+        },
+        "schema": {
+          "name": "schema",
+          "data_type": "varchar(256)",
+          "relationships": ""
+        },
+        "status": {
+          "name": "status",
+          "data_type": "record_status <<DEFAULT 'A'>>",
+          "relationships": ""
+        },
+        "active_date": {
+          "name": "active_date",
+          "data_type": "date",
+          "relationships": ""
+        },
+        "resign_date": {
+          "name": "resign_date",
+          "data_type": "date",
+          "relationships": ""
+        },
+        "is_nexwise": {
+          "name": "is_nexwise",
+          "data_type": "boolean <<DEFAULT FALSE>>",
+          "relationships": ""
+        },
+        "deadline_date": {
+          "name": "deadline_date",
+          "data_type": "date",
+          "relationships": ""
+        },
+        "created_by": {
+          "name": "created_by",
+          "data_type": "bigint <<NOT NULL>>",
+          "relationships": ""
+        },
+        "created_client": {
+          "name": "created_client",
+          "data_type": "varchar(256) <<NOT NULL>>",
+          "relationships": ""
+        },
+        "created_at": {
+          "name": "created_at",
+          "data_type": "timestamp <<NOT NULL>>",
+          "relationships": ""
+        },
+        "updated_by": {
+          "name": "updated_by",
+          "data_type": "bigint <<NOT NULL>>",
+          "relationships": ""
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "data_type": "timestamp <<NOT NULL>>",
+          "relationships": ""
+        },
+        "updated_client": {
+          "name": "updated_client",
+          "data_type": "varchar(256) <<NOT NULL>>",
+          "relationships": ""
+        },
+        "deleted": {
+          "name": "deleted",
+          "data_type": "boolean <<NOT NULL, DEFAULT FALSE>>",
+          "relationships": ""
+        },
+        "new_profile_approval_status": {
+          "name": "new_profile_approval_status",
+          "data_type": "varchar(30)",
+          "relationships": ""
+        }
+      },
+      "unique_constraints": [],
+      "depends_on": []
+    },
+    "nexchief.wardes_profile_image": {
+      "name": "wardes_profile_image",
+      "package": "nexchief",
+      "fields": {
+        "id": {
+          "name": "id",
+          "data_type": "bigint <<PK>>",
+          "relationships": ""
+        },
+        "uuid_key": {
+          "name": "uuid_key",
+          "data_type": "uuid <<DEFAULT uuid_generate_v4()>>",
+          "relationships": ""
+        },
+        "nexchief_account_id": {
+          "name": "nexchief_account_id",
+          "data_type": "bigint <<FK>>",
+          "relationships": ""
+        },
+        "wardes_profile_id": {
+          "name": "wardes_profile_id",
+          "data_type": "bigint <<FK>>",
+          "relationships": "FK:nexchief.wardes_profile.id"
+        },
+        "type": {
+          "name": "type",
+          "data_type": "char(1)",
+          "relationships": ""
+        },
+        "path_image": {
+          "name": "path_image",
+          "data_type": "varchar(256)",
+          "relationships": ""
+        },
+        "created_by": {
+          "name": "created_by",
+          "data_type": "bigint <<NOT NULL>>",
+          "relationships": ""
+        },
+        "created_client": {
+          "name": "created_client",
+          "data_type": "varchar(256) <<NOT NULL>>",
+          "relationships": ""
+        },
+        "created_at": {
+          "name": "created_at",
+          "data_type": "timestamp <<NOT NULL>>",
+          "relationships": ""
+        },
+        "updated_by": {
+          "name": "updated_by",
+          "data_type": "bigint <<NOT NULL>>",
+          "relationships": ""
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "data_type": "timestamp <<NOT NULL>>",
+          "relationships": ""
+        },
+        "updated_client": {
+          "name": "updated_client",
+          "data_type": "varchar(256) <<NOT NULL>>",
+          "relationships": ""
+        },
+        "deleted": {
+          "name": "deleted",
+          "data_type": "boolean <<NOT NULL, DEFAULT FALSE>>",
+          "relationships": ""
+        }
+      },
+      "unique_constraints": [],
+      "depends_on": [
+        "nexchief.wardes_profile"
+      ]
+    },
+    "nexchief.person_profile": {
+      "name": "person_profile",
+      "package": "nexchief",
+      "fields": {
+        "id": {
+          "name": "id",
+          "data_type": "bigint <<PK>>",
+          "relationships": ""
+        },
+        "uuid_key": {
+          "name": "uuid_key",
+          "data_type": "uuid <<DEFAULT uuid_generate_v4()>>",
+          "relationships": ""
+        },
+        "person_profile_id": {
+          "name": "person_profile_id",
+          "data_type": "bigint",
+          "relationships": ""
+        },
+        "title_id": {
+          "name": "title_id",
+          "data_type": "bigint <<FK>>",
+          "relationships": ""
+        },
+        "title_name": {
+          "name": "title_name",
+          "data_type": "varchar(25)",
+          "relationships": ""
+        },
+        "first_name": {
+          "name": "first_name",
+          "data_type": "varchar(100)",
+          "relationships": ""
+        },
+        "last_name": {
+          "name": "last_name",
+          "data_type": "varchar(35)",
+          "relationships": ""
+        },
+        "sex": {
+          "name": "sex",
+          "data_type": "char(1)",
+          "relationships": ""
+        },
+        "nik": {
+          "name": "nik",
+          "data_type": "varchar(20)",
+          "relationships": ""
+        },
+        "address_1": {
+          "name": "address_1",
+          "data_type": "varchar(100)",
+          "relationships": ""
+        },
+        "address_2": {
+          "name": "address_2",
+          "data_type": "varchar(100)",
+          "relationships": ""
+        },
+        "address_3": {
+          "name": "address_3",
+          "data_type": "varchar(100)",
+          "relationships": ""
+        },
+        "hamlet": {
+          "name": "hamlet",
+          "data_type": "varchar(3)",
+          "relationships": ""
+        },
+        "neighbour": {
+          "name": "neighbour",
+          "data_type": "varchar(3)",
+          "relationships": ""
+        },
+        "country_id": {
+          "name": "country_id",
+          "data_type": "bigint <<FK>>",
+          "relationships": ""
+        },
+        "country_name": {
+          "name": "country_name",
+          "data_type": "varchar(100)",
+          "relationships": ""
+        },
+        "province_id": {
+          "name": "province_id",
+          "data_type": "bigint <<FK>>",
+          "relationships": ""
+        },
+        "province_name": {
+          "name": "province_name",
+          "data_type": "varchar(256)",
+          "relationships": ""
+        },
+        "district_id": {
+          "name": "district_id",
+          "data_type": "bigint <<FK>>",
+          "relationships": ""
+        },
+        "district_name": {
+          "name": "district_name",
+          "data_type": "varchar(50)",
+          "relationships": ""
+        },
+        "sub_district_id": {
+          "name": "sub_district_id",
+          "data_type": "bigint <<FK>>",
+          "relationships": ""
+        },
+        "sub_district_name": {
+          "name": "sub_district_name",
+          "data_type": "varchar(50)",
+          "relationships": ""
+        },
+        "urban_village_id": {
+          "name": "urban_village_id",
+          "data_type": "bigint <<FK>>",
+          "relationships": ""
+        },
+        "urban_village_name": {
+          "name": "urban_village_name",
+          "data_type": "varchar(50)",
+          "relationships": ""
+        },
+        "island_id": {
+          "name": "island_id",
+          "data_type": "bigint <<FK>>",
+          "relationships": ""
+        },
+        "island_name": {
+          "name": "island_name",
+          "data_type": "varchar(100)",
+          "relationships": ""
+        },
+        "postal_code_id": {
+          "name": "postal_code_id",
+          "data_type": "bigint <<FK>>",
+          "relationships": ""
+        },
+        "postal_code_name": {
+          "name": "postal_code_name",
+          "data_type": "varchar(30)",
+          "relationships": ""
+        },
+        "phone": {
+          "name": "phone",
+          "data_type": "varchar(35)",
+          "relationships": ""
+        },
+        "email": {
+          "name": "email",
+          "data_type": "varchar(100)",
+          "relationships": ""
+        },
+        "photo": {
+          "name": "photo",
+          "data_type": "text",
+          "relationships": ""
+        },
+        "last_sync": {
+          "name": "last_sync",
+          "data_type": "timestamp",
+          "relationships": ""
+        },
+        "created_client": {
+          "name": "created_client",
+          "data_type": "varchar(256)",
+          "relationships": ""
+        },
+        "updated_client": {
+          "name": "updated_client",
+          "data_type": "varchar(256)",
+          "relationships": ""
+        },
+        "created_at": {
+          "name": "created_at",
+          "data_type": "timestamp <<DEFAULT CURRENT_TIMESTAMP>>",
+          "relationships": ""
+        },
+        "created_by": {
+          "name": "created_by",
+          "data_type": "bigint",
+          "relationships": ""
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "data_type": "timestamp <<DEFAULT CURRENT_TIMESTAMP>>",
+          "relationships": ""
+        },
+        "updated_by": {
+          "name": "updated_by",
+          "data_type": "bigint",
+          "relationships": ""
+        },
+        "deleted": {
+          "name": "deleted",
+          "data_type": "boolean <<DEFAULT false>>",
+          "relationships": ""
+        }
+      },
+      "unique_constraints": [],
+      "depends_on": []
+    },
+    "nexchief.parameter": {
+      "name": "parameter",
+      "package": "nexchief",
+      "fields": {
+        "id": {
+          "name": "id",
+          "data_type": "bigint <<PK, DEFAULT nextval('nexchief.parameter_pkey_seq')>>",
+          "relationships": ""
+        },
+        "uuid_key": {
+          "name": "uuid_key",
+          "data_type": "uuid <<DEFAULT uuid_generate_v4()>>",
+          "relationships": ""
+        },
+        "parameter_group_id": {
+          "name": "parameter_group_id",
+          "data_type": "bigint <<FK>>",
+          "relationships": ""
+        },
+        "name": {
+          "name": "name",
+          "data_type": "varchar(200)",
+          "relationships": ""
+        },
+        "name_en": {
+          "name": "name_en",
+          "data_type": "varchar(200)",
+          "relationships": ""
+        },
+        "code": {
+          "name": "code",
+          "data_type": "varchar(50)",
+          "relationships": ""
+        },
+        "sequence": {
+          "name": "sequence",
+          "data_type": "int4",
+          "relationships": ""
+        },
+        "level": {
+          "name": "level",
+          "data_type": "int2",
+          "relationships": ""
+        },
+        "type": {
+          "name": "type",
+          "data_type": "char(1)",
+          "relationships": ""
+        },
+        "length": {
+          "name": "length",
+          "data_type": "int2",
+          "relationships": ""
+        },
+        "min_val": {
+          "name": "min_val",
+          "data_type": "int4",
+          "relationships": ""
+        },
+        "max_val": {
+          "name": "max_val",
+          "data_type": "int4",
+          "relationships": ""
+        },
+        "default_val": {
+          "name": "default_val",
+          "data_type": "text",
+          "relationships": ""
+        },
+        "select_list_value": {
+          "name": "select_list_value",
+          "data_type": "varchar(256)",
+          "relationships": ""
+        },
+        "select_list_name": {
+          "name": "select_list_name",
+          "data_type": "varchar(255)",
+          "relationships": ""
+        },
+        "description": {
+          "name": "description",
+          "data_type": "varchar(200)",
+          "relationships": ""
+        },
+        "parameter_id": {
+          "name": "parameter_id",
+          "data_type": "bigint",
+          "relationships": ""
+        },
+        "created_client": {
+          "name": "created_client",
+          "data_type": "varchar(256)",
+          "relationships": ""
+        },
+        "updated_client": {
+          "name": "updated_client",
+          "data_type": "varchar(256)",
+          "relationships": ""
+        },
+        "created_at": {
+          "name": "created_at",
+          "data_type": "timestamp <<DEFAULT CURRENT_TIMESTAMP>>",
+          "relationships": ""
+        },
+        "created_by": {
+          "name": "created_by",
+          "data_type": "bigint",
+          "relationships": ""
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "data_type": "timestamp <<DEFAULT CURRENT_TIMESTAMP>>",
+          "relationships": ""
+        },
+        "updated_by": {
+          "name": "updated_by",
+          "data_type": "bigint",
+          "relationships": ""
+        },
+        "deleted": {
+          "name": "deleted",
+          "data_type": "boolean <<DEFAULT false>>",
+          "relationships": ""
+        }
+      },
+      "unique_constraints": [],
+      "depends_on": []
+    }
+  }
+}
