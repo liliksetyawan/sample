@@ -7,7 +7,7 @@ import (
     "github.com/nexsoft-git/nexcommon/context"
     "github.com/nexsoft-git/nexcommon/dao"
     "nexsoft.co.id/example/repository"
-    "github.com/nexsoft-git/nexcommon/commonError"
+    commonError "github.com/nexsoft-git/nexcommon/error"
     "github.com/rs/zerolog/log"
 )
 
@@ -51,7 +51,7 @@ func (d *wardes_profilePostgresqlSQLDAO) GetDataByUniqueData(
             Caller().
             Msg("Error Found When Processing Query")
         return
-    }
+	}
 
     if result.ID.Int64 != 0 {
         var existValue []string
@@ -64,11 +64,17 @@ func (d *wardes_profilePostgresqlSQLDAO) GetDataByUniqueData(
             existValue = append(existValue, "[nik]")
         }
         
-        err = commonError.ErrDataAlreadyUsed.Param(strings.Join(existValue, ", "))
-        return
-    }
+		err = commonError.ErrDataAlreadyUsed.Param(strings.Join(existValue, ", "))
+		return
+	}
 
     err = nil
     //No Unique Constraint on the database, return empty result
     return
+
 }
+
+
+
+
+go

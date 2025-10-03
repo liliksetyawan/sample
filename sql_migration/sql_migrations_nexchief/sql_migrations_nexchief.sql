@@ -33,7 +33,7 @@ CREATE TABLE "user" (
     username_nexvin VARCHAR(255),
     password_nexvin VARCHAR(255),
     created_by BIGINT DEFAULT 0,
-    created_client VARCHAR(256),
+    created_client VARCHAR(50),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_by BIGINT,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -83,7 +83,7 @@ CREATE TABLE "wardes_profile" (
     company_profile_id BIGINT,
     code VARCHAR(38),
     schema VARCHAR(256),
-    status VARCHAR(50) DEFAULT 'A',
+    status VARCHAR(256) DEFAULT 'A',
     active_date DATE,
     resign_date DATE,
     is_nexwise BOOLEAN DEFAULT FALSE,
@@ -190,7 +190,7 @@ ALTER TABLE "user" ADD CONSTRAINT "fk_user_auth_user_id" FOREIGN KEY (auth_user_
 ALTER TABLE "user" ADD CONSTRAINT "fk_user_person_profile_id" FOREIGN KEY (person_profile_id) REFERENCES "person_profile"(id);
 ALTER TABLE "wardes_profile" ADD CONSTRAINT "fk_wardes_profile_nexchief_account_id" FOREIGN KEY (nexchief_account_id) REFERENCES "user"(id);
 ALTER TABLE "wardes_profile" ADD CONSTRAINT "fk_wardes_profile_user_id" FOREIGN KEY (user_id) REFERENCES "user"(id);
-ALTER TABLE "wardes_profile" ADD CONSTRAINT "fk_wardes_profile_company_profile_id" FOREIGN KEY (company_profile_id) REFERENCES "wardes_profile"(id);
+ALTER TABLE "wardes_profile" ADD CONSTRAINT "fk_wardes_profile_company_profile_id" FOREIGN KEY (company_profile_id) REFERENCES "person_profile"(id);
 ALTER TABLE "person_profile" ADD CONSTRAINT "fk_person_profile_title_id" FOREIGN KEY (title_id) REFERENCES "parameter"(id);
 ALTER TABLE "person_profile" ADD CONSTRAINT "fk_person_profile_country_id" FOREIGN KEY (country_id) REFERENCES "parameter"(id);
 ALTER TABLE "person_profile" ADD CONSTRAINT "fk_person_profile_province_id" FOREIGN KEY (province_id) REFERENCES "parameter"(id);

@@ -1,541 +1,77 @@
 {
     "valid_search": {
-        "wardes_profile": [
-            {
-                "functions": [
-                    "GetListWardesProfile",
-                    "CountListWardesProfile"
-                ],
-                "attributes": [
-                    {
-                        "field": "username",
-                        "type": "char",
-                        "operator": "like, equal",
-                        "description": "Username of the wardes profile"
-                    },
-                    {
-                        "field": "personal_name",
-                        "type": "char",
-                        "operator": "like, equal",
-                        "description": "Personal name of the wardes"
-                    },
-                    {
-                        "field": "gender",
-                        "type": "enum",
-                        "operator": "equal",
-                        "description": "Gender of the wardes"
-                    },
-                    {
-                        "field": "phone",
-                        "type": "char",
-                        "operator": "like, equal",
-                        "description": "Phone number of the wardes"
-                    },
-                    {
-                        "field": "email",
-                        "type": "char",
-                        "operator": "like, equal",
-                        "description": "Email address of the wardes"
-                    },
-                    {
-                        "field": "urban_village_id",
-                        "type": "number",
-                        "operator": "equal",
-                        "description": "ID of the urban village"
-                    },
-                    {
-                        "field": "nik",
-                        "type": "char",
-                        "operator": "like, equal",
-                        "description": "National ID number of the wardes"
-                    },
-                    {
-                        "field": "age",
-                        "type": "number",
-                        "operator": "equal, greater, less",
-                        "description": "Age of the wardes"
-                    },
-                    {
-                        "field": "profile_completion_status",
-                        "type": "enum",
-                        "operator": "equal",
-                        "description": "Status of profile completion"
-                    },
-                    {
-                        "field": "company_profile_id",
-                        "type": "number",
-                        "operator": "equal",
-                        "description": "ID of the company profile"
-                    },
-                    {
-                        "field": "code",
-                        "type": "char",
-                        "operator": "like, equal",
-                        "description": "Code of the wardes profile"
-                    },
-                    {
-                        "field": "status",
-                        "type": "enum",
-                        "operator": "equal",
-                        "description": "Status of the wardes profile"
-                    },
-                    {
-                        "field": "active_date",
-                        "type": "date",
-                        "operator": "equal, greater, less",
-                        "description": "Date when the wardes became active"
-                    },
-                    {
-                        "field": "resign_date",
-                        "type": "date",
-                        "operator": "equal, greater, less",
-                        "description": "Date when the wardes resigned"
-                    },
-                    {
-                        "field": "is_nexwise",
-                        "type": "enum",
-                        "operator": "equal",
-                        "description": "Flag indicating if wardes is nexwise"
-                    },
-                    {
-                        "field": "deadline_date",
-                        "type": "date",
-                        "operator": "equal, greater, less",
-                        "description": "Deadline date for the wardes"
-                    },
-                    {
-                        "field": "new_profile_approval_status",
-                        "type": "enum",
-                        "operator": "equal",
-                        "description": "Approval status for new profile"
-                    }
-                ]
-            }
-        ],
-        "wardes_profile_image": [
-            {
-                "functions": [
-                    "GetListWardesProfileImage",
-                    "CountListWardesProfileImage"
-                ],
-                "attributes": [
-                    {
-                        "field": "uuid_key",
-                        "type": "char",
-                        "operator": "equal, like",
-                        "description": "Unique identifier for the wardes profile image"
-                    },
-                    {
-                        "field": "nexchief_account_id",
-                        "type": "number",
-                        "operator": "equal, greater, less",
-                        "description": "ID of the associated Nexchief account"
-                    },
-                    {
-                        "field": "wardes_profile_id",
-                        "type": "number",
-                        "operator": "equal, greater, less",
-                        "description": "ID of the associated wardes profile"
-                    },
-                    {
-                        "field": "type",
-                        "type": "char",
-                        "operator": "equal, like",
-                        "description": "Type of the profile image"
-                    },
-                    {
-                        "field": "path_image",
-                        "type": "char",
-                        "operator": "equal, like",
-                        "description": "Path to the stored image file"
-                    },
-                    {
-                        "field": "created_by",
-                        "type": "char",
-                        "operator": "equal, like",
-                        "description": "User who created the record"
-                    },
-                    {
-                        "field": "created_client",
-                        "type": "char",
-                        "operator": "equal, like",
-                        "description": "Client that created the record"
-                    },
-                    {
-                        "field": "updated_by",
-                        "type": "char",
-                        "operator": "equal, like",
-                        "description": "User who last updated the record"
-                    },
-                    {
-                        "field": "updated_client",
-                        "type": "char",
-                        "operator": "equal, like",
-                        "description": "Client that last updated the record"
-                    },
-                    {
-                        "field": "deleted",
-                        "type": "number",
-                        "operator": "equal",
-                        "description": "Soft delete flag (0=active, 1=deleted)"
-                    }
-                ]
-            }
-        ],
-        "person_profile": [
-            {
-                "functions": [
-                    "GetListPersonProfile",
-                    "CountListPersonProfile"
-                ],
-                "attributes": [
-                    {
-                        "field": "id",
-                        "type": "number",
-                        "operator": "equal, greater, less",
-                        "description": "Unique identifier for the person profile"
-                    },
-                    {
-                        "field": "uuid_key",
-                        "type": "char",
-                        "operator": "equal, like",
-                        "description": "UUID key for the person profile"
-                    },
-                    {
-                        "field": "created_at",
-                        "type": "date",
-                        "operator": "equal, greater, less",
-                        "description": "Timestamp when the record was created"
-                    },
-                    {
-                        "field": "updated_at",
-                        "type": "date",
-                        "operator": "equal, greater, less",
-                        "description": "Timestamp when the record was last updated"
-                    }
-                ]
-            }
-        ]
+        "wardes_profile": []
     },
     "repository": {
-        "wardes_profile": [
-            {
-                "name": "WardesProfileModel",
-                "description": "same as wardes_profile table in database"
-            }
-        ],
-        "wardes_profile_image": [
-            {
-                "name": "WardesProfileImageModel",
-                "description": "same as wardes_profile_image table in database"
-            }
-        ],
-        "person_profile": [
-            {
-                "name": "PersonProfileModel",
-                "description": "same as person_profile table in database"
-            }
-        ]
+        "wardes_profile": [{
+            "name": "WardesProfileModel",
+            "description": "same as wardes_profile table in database"
+        }]
     },
     "dao": {
         "wardes_profile": {
             "db": "postgresql",
-            "functions": [
-                {
-                    "name": "InsertWardesProfile",
-                    "param": "context, tx, repository.WardesProfileModel",
-                    "table": "wardes_profile",
-                    "return": "repository.WardesProfileModel, error",
-                    "attribute": [
-                        "uuid_key",
-                        "nexchief_account_id",
-                        "user_id",
-                        "username",
-                        "personal_name",
-                        "gender",
-                        "phone",
-                        "email",
-                        "urban_village_id",
-                        "nik",
-                        "age",
-                        "hamlet",
-                        "neighbour",
-                        "village_family",
-                        "village_population",
-                        "building_location",
-                        "building_ownership",
-                        "building_type",
-                        "building_form",
-                        "building_width_first_floor",
-                        "building_length_first_floor",
-                        "building_height_first_floor",
-                        "building_width_second_floor",
-                        "building_length_second_floor",
-                        "building_height_second_floor",
-                        "parking_lot_width",
-                        "parking_lot_length",
-                        "village_internet_connection",
-                        "investment_capital",
-                        "investment_capital_source",
-                        "ownership_status",
-                        "ownership_fixed_asset",
-                        "permission_cover",
-                        "profile_completion_status",
-                        "company_profile_id",
-                        "code",
-                        "schema",
-                        "status",
-                        "active_date",
-                        "resign_date",
-                        "is_nexwise",
-                        "deadline_date",
-                        "created_by",
-                        "created_client",
-                        "updated_by",
-                        "updated_at",
-                        "updated_client",
-                        "deleted",
-                        "new_profile_approval_status"
-                    ],
-                    "description": "Insert new wardes profile record"
-                },
-                {
-                    "name": "UpdateWardesProfile",
-                    "param": "context, tx, repository.WardesProfileModel",
-                    "table": "wardes_profile",
-                    "return": "error",
-                    "attribute": [
-                        "updated_at",
-                        "updated_by",
-                        "updated_client"
-                    ],
-                    "description": "Update existing wardes profile record"
-                },
-                {
-                    "name": "DeleteWardesProfile",
-                    "param": "context, tx, repository.WardesProfileModel",
-                    "table": "wardes_profile",
-                    "return": "error",
-                    "attribute": [
-                        "id"
-                    ],
-                    "description": "Delete wardes profile record"
-                },
-                {
-                    "name": "GetWardesProfile",
-                    "param": "context, string",
-                    "table": "wardes_profile",
-                    "return": "repository.WardesProfileModel, error",
-                    "attribute": [
-                        "uuid_key",
-                        "created_by",
-                        "created_client",
-                        "created_at",
-                        "updated_by",
-                        "updated_client",
-                        "updated_at"
-                    ],
-                    "description": "Get single wardes profile record by ID"
-                },
-                {
-                    "name": "GetListWardesProfile",
-                    "param": "context, in.GetListRequest, []model.SearchParam",
-                    "table": "wardes_profile",
-                    "return": "[]interface{}, error",
-                    "attribute": [
-                        "uuid_key",
-                        "created_by",
-                        "created_client",
-                        "created_at",
-                        "updated_by",
-                        "updated_client",
-                        "updated_at"
-                    ],
-                    "description": "Get list of wardes profile records with search and pagination"
-                },
-                {
-                    "name": "CountListWardesProfile",
-                    "param": "context, in.GetListRequest, []model.SearchParam",
-                    "table": "wardes_profile",
-                    "return": "int, error",
-                    "attribute": [
-                        "count(id)"
-                    ],
-                    "description": "Count total wardes profile records matching search criteria"
-                }
-            ]
-        },
-        "wardes_profile_image": {
-            "functions": [
-                {
-                    "name": "InsertWardesProfileImage",
-                    "param": "context, tx, repository.WardesProfileImageModel",
-                    "table": "wardes_profile_image",
-                    "return": "repository.WardesProfileImageModel, error",
-                    "attribute": [
-                        "uuid_key",
-                        "nexchief_account_id",
-                        "wardes_profile_id",
-                        "type",
-                        "path_image",
-                        "created_by",
-                        "created_client",
-                        "updated_by",
-                        "updated_client",
-                        "deleted"
-                    ],
-                    "description": "Insert new wardes_profile_image record"
-                },
-                {
-                    "name": "UpdateWardesProfileImage",
-                    "param": "context, tx, repository.WardesProfileImageModel",
-                    "table": "wardes_profile_image",
-                    "return": "error",
-                    "attribute": [
-                        "updated_at",
-                        "updated_by",
-                        "updated_client"
-                    ],
-                    "description": "Update existing wardes_profile_image record"
-                },
-                {
-                    "name": "DeleteWardesProfileImage",
-                    "param": "context, tx, repository.WardesProfileImageModel",
-                    "table": "wardes_profile_image",
-                    "return": "error",
-                    "attribute": [
-                        "id"
-                    ],
-                    "description": "Delete wardes_profile_image record"
-                },
-                {
-                    "name": "GetWardesProfileImage",
-                    "param": "context, string",
-                    "table": "wardes_profile_image",
-                    "return": "error",
-                    "attribute": [
-                        "uuid_key",
-                        "created_by",
-                        "created_client",
-                        "created_at",
-                        "updated_by",
-                        "updated_client",
-                        "updated_at"
-                    ],
-                    "description": "Get single wardes_profile_image record by ID"
-                },
-                {
-                    "name": "GetListWardesProfileImage",
-                    "param": "context, in.GetListRequest, []model.SearchParam",
-                    "table": "wardes_profile_image",
-                    "return": "[]interface{}, error",
-                    "attribute": [
-                        "uuid_key",
-                        "created_by",
-                        "created_client",
-                        "created_at",
-                        "updated_by",
-                        "updated_client",
-                        "updated_at"
-                    ],
-                    "description": "Get list of wardes_profile_image records with search and pagination"
-                },
-                {
-                    "name": "CountListWardesProfileImage",
-                    "param": "context, in.GetListRequest, []model.SearchParam",
-                    "table": "wardes_profile_image",
-                    "return": "int, error",
-                    "attribute": [
-                        "count(id)"
-                    ],
-                    "description": "Count total wardes_profile_image records matching search criteria"
-                }
-            ],
-            "db": "postgresql"
-        },
-        "person_profile": {
-            "functions": [
-                {
-                    "name": "InsertPersonProfile",
-                    "param": "context, tx, repository.PersonProfileModel",
-                    "table": "person_profile",
-                    "return": "repository.PersonProfileModel, error",
-                    "attribute": [
-                        "created_at",
-                        "created_by",
-                        "created_client",
-                        "updated_at",
-                        "updated_by",
-                        "updated_client"
-                    ],
-                    "description": "Insert a new person profile record"
-                },
-                {
-                    "name": "UpdatePersonProfile",
-                    "param": "context, tx, repository.PersonProfileModel",
-                    "table": "person_profile",
-                    "return": "error",
-                    "attribute": [
-                        "updated_at",
-                        "updated_by",
-                        "updated_client"
-                    ],
-                    "description": "Update an existing person profile record"
-                },
-                {
-                    "name": "DeletePersonProfile",
-                    "param": "context, tx, repository.PersonProfileModel",
-                    "table": "person_profile",
-                    "return": "error",
-                    "attribute": [
-                        "id"
-                    ],
-                    "description": "Delete a person profile record"
-                },
-                {
-                    "name": "GetPersonProfile",
-                    "param": "context, string",
-                    "table": "person_profile",
-                    "return": "repository.PersonProfileModel, error",
-                    "attribute": [
-                        "uuid_key",
-                        "created_by",
-                        "created_client",
-                        "created_at",
-                        "updated_by",
-                        "updated_client",
-                        "updated_at"
-                    ],
-                    "description": "Retrieve a single person profile record by UUID"
-                },
-                {
-                    "name": "GetListPersonProfile",
-                    "param": "context, in.GetListRequest, []model.SearchParam",
-                    "table": "person_profile",
-                    "return": "[]repository.PersonProfileModel, error",
-                    "attribute": [
-                        "uuid_key",
-                        "created_by",
-                        "created_client",
-                        "created_at",
-                        "updated_by",
-                        "updated_client",
-                        "updated_at"
-                    ],
-                    "description": "Retrieve a list of person profile records with search and pagination"
-                },
-                {
-                    "name": "CountListPersonProfile",
-                    "param": "context, in.GetListRequest, []model.SearchParam",
-                    "table": "person_profile",
-                    "return": "int, error",
-                    "attribute": [
-                        "count(id)"
-                    ],
-                    "description": "Count the number of person profile records matching search criteria"
-                }
-            ],
-            "db": "postgresql"
+            "functions": [{
+                "name": "InsertWardesProfile",
+                "param": "context, tx, repository.WardesProfileModel",
+                "table": "wardes_profile",
+                "return": "repository.WardesProfileModel, error",
+                "attribute": [
+                    "id",
+                    "uuid_key",
+                    "nexchief_account_id",
+                    "user_id",
+                    "username",
+                    "personal_name",
+                    "gender",
+                    "phone",
+                    "email",
+                    "sub_district_id",
+                    "urban_village_id",
+                    "nik",
+                    "age",
+                    "hamlet",
+                    "neighbour",
+                    "village_family",
+                    "village_population",
+                    "building_location",
+                    "building_ownership",
+                    "building_type",
+                    "building_form",
+                    "building_width_first_floor",
+                    "building_length_first_floor",
+                    "building_height_first_floor",
+                    "building_width_second_floor",
+                    "building_length_second_floor",
+                    "building_height_second_floor",
+                    "parking_lot_width",
+                    "parking_lot_length",
+                    "village_internet_connection",
+                    "investment_capital",
+                    "investment_capital_source",
+                    "ownership_status",
+                    "ownership_fixed_asset",
+                    "permission_cover",
+                    "profile_completion_status",
+                    "company_profile_id",
+                    "code",
+                    "schema",
+                    "status",
+                    "active_date",
+                    "resign_date",
+                    "is_nexwise",
+                    "deadline_date",
+                    "created_by",
+                    "created_client",
+                    "created_at",
+                    "updated_by",
+                    "updated_at",
+                    "updated_client",
+                    "deleted",
+                    "new_profile_approval_status"
+                ],
+                "description": "Insert a new wardes profile record"
+            }]
         }
     }
 }
