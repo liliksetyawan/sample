@@ -1,0 +1,57 @@
+package person_profile
+
+import (
+    "fmt"
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/model"
+    "github.com/nexsoft-git/nexcommon/dto/in"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: Retrieve a list of person profile records with search and pagination
+func (d *person_profilePostgresqlSQLDAO) GetListPersonProfile(
+     ctx *context.ContextModel,
+     dtoIn in.GetListRequest,
+     searchParams []model.SearchParam,
+) (
+     []repository.PersonProfileModel, 
+     error, 
+) {
+    query := fmt.Sprintf(`
+        SELECT uuid_key, created_by, created_client, created_at,
+            updated_by, updated_client, updated_at
+        FROM %s
+    `, dao.GetDBTable(ctx, "person_profile"))
+
+    param := d.NewGetListDataParam(
+        query,
+        dtoIn,
+        searchParams, func(rows *sql.Rows) (interface{}, error) {
+            var temp repository.PersonProfileModel
+            err := rows.Scan(
+                &temp.UUIDKey, &temp.CreatedBy, &temp.CreatedClient, &temp.CreatedAt,
+                &temp.UpdatedBy, &temp.UpdatedClient, &temp.UpdatedAt,
+            )
+            return temp, err
+        },
+    ).NoDeleted().CreatedBy(ctx.Limitation.UserID)
+
+    result, err := d.GetListDataWithDefaultMustCheck(param)
+    if err != nil {
+        return nil, err
+    }
+
+    var models []repository.PersonProfileModel
+    for _, item := range result {
+        models = append(models, item.(repository.PersonProfileModel))
+    }
+
+    return models, nil
+}
+
+
+
+
+go

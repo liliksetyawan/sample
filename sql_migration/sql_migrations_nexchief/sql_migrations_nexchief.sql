@@ -6,7 +6,7 @@ CREATE SEQUENCE IF NOT EXISTS "person_profile_pkey_seq";
 CREATE SEQUENCE IF NOT EXISTS "parameter_pkey_seq";
 CREATE SEQUENCE IF NOT EXISTS "wardes_profile_image_pkey_seq";
 
-CREATE TABLE IF NOT EXISTS "user" (
+CREATE TABLE "user" (
     id BIGINT PRIMARY KEY DEFAULT nextval('user_pkey_seq'::regclass),
     uuid_key UUID DEFAULT public.uuid_generate_v4(),
     auth_user_id BIGINT,
@@ -33,15 +33,15 @@ CREATE TABLE IF NOT EXISTS "user" (
     username_nexvin VARCHAR(255),
     password_nexvin VARCHAR(255),
     created_by BIGINT DEFAULT 0,
-    created_client VARCHAR(50),
+    created_client VARCHAR(256),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_by BIGINT,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_client VARCHAR(50),
+    updated_client VARCHAR(256),
     deleted BOOLEAN DEFAULT false
 );
 
-CREATE TABLE IF NOT EXISTS "wardes_profile" (
+CREATE TABLE "wardes_profile" (
     id BIGINT PRIMARY KEY DEFAULT nextval('wardes_profile_pkey_seq'::regclass),
     uuid_key UUID DEFAULT public.uuid_generate_v4(),
     nexchief_account_id BIGINT,
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS "wardes_profile" (
     company_profile_id BIGINT,
     code VARCHAR(38),
     schema VARCHAR(256),
-    status VARCHAR(256) DEFAULT 'A',
+    status VARCHAR(50) DEFAULT 'A',
     active_date DATE,
     resign_date DATE,
     is_nexwise BOOLEAN DEFAULT FALSE,
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS "wardes_profile" (
     new_profile_approval_status VARCHAR(30)
 );
 
-CREATE TABLE IF NOT EXISTS "person_profile" (
+CREATE TABLE "person_profile" (
     id BIGINT PRIMARY KEY DEFAULT nextval('person_profile_pkey_seq'::regclass),
     uuid_key UUID DEFAULT public.uuid_generate_v4(),
     person_profile_id BIGINT,
@@ -140,7 +140,7 @@ CREATE TABLE IF NOT EXISTS "person_profile" (
     deleted BOOLEAN DEFAULT false
 );
 
-CREATE TABLE IF NOT EXISTS "parameter" (
+CREATE TABLE "parameter" (
     id BIGINT PRIMARY KEY DEFAULT nextval('parameter_pkey_seq'::regclass),
     uuid_key UUID DEFAULT public.uuid_generate_v4(),
     parameter_group_id BIGINT,
@@ -167,7 +167,7 @@ CREATE TABLE IF NOT EXISTS "parameter" (
     deleted BOOLEAN DEFAULT false
 );
 
-CREATE TABLE IF NOT EXISTS "wardes_profile_image" (
+CREATE TABLE "wardes_profile_image" (
     id BIGINT PRIMARY KEY DEFAULT nextval('wardes_profile_image_pkey_seq'::regclass),
     uuid_key UUID DEFAULT public.uuid_generate_v4(),
     nexchief_account_id BIGINT,
@@ -190,7 +190,7 @@ ALTER TABLE "user" ADD CONSTRAINT "fk_user_auth_user_id" FOREIGN KEY (auth_user_
 ALTER TABLE "user" ADD CONSTRAINT "fk_user_person_profile_id" FOREIGN KEY (person_profile_id) REFERENCES "person_profile"(id);
 ALTER TABLE "wardes_profile" ADD CONSTRAINT "fk_wardes_profile_nexchief_account_id" FOREIGN KEY (nexchief_account_id) REFERENCES "user"(id);
 ALTER TABLE "wardes_profile" ADD CONSTRAINT "fk_wardes_profile_user_id" FOREIGN KEY (user_id) REFERENCES "user"(id);
-ALTER TABLE "wardes_profile" ADD CONSTRAINT "fk_wardes_profile_company_profile_id" FOREIGN KEY (company_profile_id) REFERENCES "person_profile"(id);
+ALTER TABLE "wardes_profile" ADD CONSTRAINT "fk_wardes_profile_company_profile_id" FOREIGN KEY (company_profile_id) REFERENCES "wardes_profile"(id);
 ALTER TABLE "person_profile" ADD CONSTRAINT "fk_person_profile_title_id" FOREIGN KEY (title_id) REFERENCES "parameter"(id);
 ALTER TABLE "person_profile" ADD CONSTRAINT "fk_person_profile_country_id" FOREIGN KEY (country_id) REFERENCES "parameter"(id);
 ALTER TABLE "person_profile" ADD CONSTRAINT "fk_person_profile_province_id" FOREIGN KEY (province_id) REFERENCES "parameter"(id);

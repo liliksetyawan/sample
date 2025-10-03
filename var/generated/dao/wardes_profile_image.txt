@@ -1,0 +1,356 @@
+```go
+***filename: wardes_profile_image/type.go
+package wardes_profile_image
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+
+import (
+    "github.com/nexsoft-git/nexcommon/context"
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/dto/in"
+    "github.com/nexsoft-git/nexcommon/model"
+    "nexsoft.co.id/example/repository"
+)
+
+type WardesProfileImageDAO interface {
+    
+    InsertWardesProfileImage(
+        ctx *context.ContextModel,
+        tx *sql.Tx,
+        dtoIn repository.WardesProfileImageModel,
+    ) (
+        repository.WardesProfileImageModel, 
+        error, 
+    )
+    
+    UpdateWardesProfileImage(
+        ctx *context.ContextModel,
+        tx *sql.Tx,
+        dtoIn repository.WardesProfileImageModel,
+    ) (
+        error, 
+    )
+    
+    DeleteWardesProfileImage(
+        ctx *context.ContextModel,
+        tx *sql.Tx,
+        dtoIn repository.WardesProfileImageModel,
+    ) (
+        error, 
+    )
+    
+    GetWardesProfileImage(
+        ctx *context.ContextModel,
+        uuid_key string,
+    ) (
+        error, 
+    )
+    
+    GetListWardesProfileImage(
+        ctx *context.ContextModel,
+        dtoIn in.GetListRequest,
+        searchParams []model.SearchParam,
+    ) (
+        []interface{}, 
+        error, 
+    )
+    
+    CountListWardesProfileImage(
+        ctx *context.ContextModel,
+        dtoIn in.GetListRequest,
+        searchParams []model.SearchParam,
+    ) (
+        int, 
+        error, 
+    )
+    
+    GetDataByUniqueData(
+        ctx *context.ContextModel,
+        dtoIn repository.WardesProfileImageModel,
+    )(
+        result repository.WardesProfileImageModel,
+        err error,
+    )
+
+    GetWardesProfileImageForUpdate(
+        ctx *context.ContextModel,
+        tx *sql.Tx,
+        uuid_key string,
+    ) (
+        repository.WardesProfileImageModel,
+        error,
+    )
+
+}
+
+***filename: wardes_profile_image/postgresql.go
+package wardes_profile_image
+
+import (
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/dao"
+)
+
+type wardes_profile_imagePostgresqlSQLDAO struct {
+    dao.GetListDataDAO
+    db *sql.DB
+}
+
+func NewWardesProfileImagePostgresqlSQLDAO(
+    db *sql.DB,
+) WardesProfileImageDAO {
+    return &wardes_profile_imagePostgresqlSQLDAO{
+        GetListDataDAO: dao.GetListDataDAO{
+            DB: db,
+        },
+        db: db,
+    }
+}
+
+***filename: wardes_profile_image/insert_wardes_profile_image.go
+package wardes_profile_image
+
+import (
+    //you allowed to add new import and delete the unused import from this section for imported package on file insert_wardes_profile_image.go every file will containing 1 function
+    "fmt"
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: Insert new wardes_profile_image record
+func (d *wardes_profile_imagePostgresqlSQLDAO) InsertWardesProfileImage(
+     ctx *context.ContextModel,
+     tx *sql.Tx,
+     dtoIn repository.WardesProfileImageModel,
+) (
+     repository.WardesProfileImageModel, 
+     error, 
+) {
+    //TODO Implement the DAO function here
+    // @Affected Field: uuid_key, nexchief_account_id, wardes_profile_id, type, path_image, created_by, created_client, updated_by, updated_client, deleted
+    // @Affected Table: dao.GetDBTable(ctx, "wardes_profile_image") 
+}
+
+***filename: wardes_profile_image/update_wardes_profile_image.go
+package wardes_profile_image
+
+import (
+    //you allowed to add new import and delete the unused import from this section for imported package on file update_wardes_profile_image.go every file will containing 1 function
+    "fmt"
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: Update existing wardes_profile_image record
+func (d *wardes_profile_imagePostgresqlSQLDAO) UpdateWardesProfileImage(
+     ctx *context.ContextModel,
+     tx *sql.Tx,
+     dtoIn repository.WardesProfileImageModel,
+) (
+     error, 
+) {
+    //TODO Implement the DAO function here
+    // @Affected Field: updated_at, updated_by, updated_client
+    // @Affected Table: dao.GetDBTable(ctx, "wardes_profile_image") 
+}
+
+***filename: wardes_profile_image/delete_wardes_profile_image.go
+package wardes_profile_image
+
+import (
+    //you allowed to add new import and delete the unused import from this section for imported package on file delete_wardes_profile_image.go every file will containing 1 function
+    "fmt"
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: Delete wardes_profile_image record
+func (d *wardes_profile_imagePostgresqlSQLDAO) DeleteWardesProfileImage(
+     ctx *context.ContextModel,
+     tx *sql.Tx,
+     dtoIn repository.WardesProfileImageModel,
+) (
+     error, 
+) {
+    //TODO Implement the DAO function here
+    // @Affected Field: id
+    // @Affected Table: dao.GetDBTable(ctx, "wardes_profile_image") 
+}
+
+***filename: wardes_profile_image/get_wardes_profile_image.go
+package wardes_profile_image
+
+import (
+    //you allowed to add new import and delete the unused import from this section for imported package on file get_wardes_profile_image.go every file will containing 1 function
+    "fmt"
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: Get single wardes_profile_image record by ID
+func (d *wardes_profile_imagePostgresqlSQLDAO) GetWardesProfileImage(
+     ctx *context.ContextModel,
+     uuid_key string,
+) (
+     error, 
+) {
+    //TODO Implement the DAO function here
+    // @Affected Field: uuid_key, created_by, created_client, created_at, updated_by, updated_client, updated_at
+    // @Affected Table: dao.GetDBTable(ctx, "wardes_profile_image") 
+}
+
+***filename: wardes_profile_image/get_list_wardes_profile_image.go
+package wardes_profile_image
+
+import (
+    //you allowed to add new import and delete the unused import from this section for imported package on file get_list_wardes_profile_image.go every file will containing 1 function
+    "fmt"
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/model"
+    "github.com/nexsoft-git/nexcommon/dto/in"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: Get list of wardes_profile_image records with search and pagination
+func (d *wardes_profile_imagePostgresqlSQLDAO) GetListWardesProfileImage(
+     ctx *context.ContextModel,
+     dtoIn in.GetListRequest,
+     searchParams []model.SearchParam,
+) (
+     []interface{}, 
+     error, 
+) {
+    //TODO Implement the DAO function here
+    // @Affected Field: uuid_key, created_by, created_client, created_at, updated_by, updated_client, updated_at
+    // @Affected Table: dao.GetDBTable(ctx, "wardes_profile_image") 
+    // @Valid Search:
+    // - uuid_key : Unique identifier for the wardes profile image
+    // - nexchief_account_id : ID of the associated Nexchief account
+    // - wardes_profile_id : ID of the associated wardes profile
+    // - type : Type of the profile image
+    // - path_image : Path to the stored image file
+    // - created_by : User who created the record
+    // - created_client : Client that created the record
+    // - updated_by : User who last updated the record
+    // - updated_client : Client that last updated the record
+    // - deleted : Soft delete flag (0=active, 1=deleted)
+}
+
+***filename: wardes_profile_image/count_list_wardes_profile_image.go
+package wardes_profile_image
+
+import (
+    //you allowed to add new import and delete the unused import from this section for imported package on file count_list_wardes_profile_image.go every file will containing 1 function
+    "fmt"
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/model"
+    "github.com/nexsoft-git/nexcommon/dto/in"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: Count total wardes_profile_image records matching search criteria
+func (d *wardes_profile_imagePostgresqlSQLDAO) CountListWardesProfileImage(
+     ctx *context.ContextModel,
+     dtoIn in.GetListRequest,
+     searchParams []model.SearchParam,
+) (
+     int, 
+     error, 
+) {
+    //TODO Implement the DAO function here
+    // @Affected Field: count(id)
+    // @Affected Table: dao.GetDBTable(ctx, "wardes_profile_image") 
+    // @Valid Search:
+    // - uuid_key : Unique identifier for the wardes profile image
+    // - nexchief_account_id : ID of the associated Nexchief account
+    // - wardes_profile_id : ID of the associated wardes profile
+    // - type : Type of the profile image
+    // - path_image : Path to the stored image file
+    // - created_by : User who created the record
+    // - created_client : Client that created the record
+    // - updated_by : User who last updated the record
+    // - updated_client : Client that last updated the record
+    // - deleted : Soft delete flag (0=active, 1=deleted)
+}
+
+***filename: wardes_profile_image/get_data_by_unique_data.go
+package wardes_profile_image
+
+import (
+    "fmt"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: Check is data is exist before inserting/updating
+func (d *wardes_profile_imagePostgresqlSQLDAO) GetDataByUniqueData(
+      ctx *context.ContextModel,
+      dtoIn repository.WardesProfileImageModel,
+)(
+    result repository.WardesProfileImageModel,
+    err error,
+){
+    
+    //No Unique Constraint on the database, return empty result
+    return
+
+}
+
+***filename: wardes_profile_image/get_wardes_profile_image_for_update.go
+package wardes_profile_image
+
+import (
+    "fmt"
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: Get Data from database for optimistic lock
+func (d *wardes_profile_imagePostgresqlSQLDAO) GetWardesProfileImageForUpdate(
+    ctx *context.ContextModel,
+    tx *sql.Tx,
+    uuid_key string,
+) (
+    repository.WardesProfileImageModel,
+    error,
+) {
+    query := fmt.Sprintf(`
+        SELECT id, updated_at
+        FROM %s
+        WHERE uuid_key = $1
+    `, dao.GetDBTable(ctx, "wardes_profile_image"))
+
+    param = []interface{}{uuid_key}
+    if ctx.Limitation.UserID != 0 {
+        query += " AND created_by = $2 "
+        param = param.append(ctx.Limitation.UserID)
+    }
+
+    query += " FOR UPDATE "
+
+    stmt, err := tx.Prepare(query)
+    if err != nil {
+        return repository.WardesProfileImageModel{}, err
+    }
+
+    var model repository.WardesProfileImageModel
+    err = stmt.QueryRow(param...).Scan(&model.ID, &model.UpdatedAt)
+
+    return model, err
+}
+
+```

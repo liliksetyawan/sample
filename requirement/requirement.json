@@ -111,6 +111,110 @@
                     }
                 ]
             }
+        ],
+        "wardes_profile_image": [
+            {
+                "functions": [
+                    "GetListWardesProfileImage",
+                    "CountListWardesProfileImage"
+                ],
+                "attributes": [
+                    {
+                        "field": "uuid_key",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "Unique identifier for the wardes profile image"
+                    },
+                    {
+                        "field": "nexchief_account_id",
+                        "type": "number",
+                        "operator": "equal, greater, less",
+                        "description": "ID of the associated Nexchief account"
+                    },
+                    {
+                        "field": "wardes_profile_id",
+                        "type": "number",
+                        "operator": "equal, greater, less",
+                        "description": "ID of the associated wardes profile"
+                    },
+                    {
+                        "field": "type",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "Type of the profile image"
+                    },
+                    {
+                        "field": "path_image",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "Path to the stored image file"
+                    },
+                    {
+                        "field": "created_by",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "User who created the record"
+                    },
+                    {
+                        "field": "created_client",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "Client that created the record"
+                    },
+                    {
+                        "field": "updated_by",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "User who last updated the record"
+                    },
+                    {
+                        "field": "updated_client",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "Client that last updated the record"
+                    },
+                    {
+                        "field": "deleted",
+                        "type": "number",
+                        "operator": "equal",
+                        "description": "Soft delete flag (0=active, 1=deleted)"
+                    }
+                ]
+            }
+        ],
+        "person_profile": [
+            {
+                "functions": [
+                    "GetListPersonProfile",
+                    "CountListPersonProfile"
+                ],
+                "attributes": [
+                    {
+                        "field": "id",
+                        "type": "number",
+                        "operator": "equal, greater, less",
+                        "description": "Unique identifier for the person profile"
+                    },
+                    {
+                        "field": "uuid_key",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "UUID key for the person profile"
+                    },
+                    {
+                        "field": "created_at",
+                        "type": "date",
+                        "operator": "equal, greater, less",
+                        "description": "Timestamp when the record was created"
+                    },
+                    {
+                        "field": "updated_at",
+                        "type": "date",
+                        "operator": "equal, greater, less",
+                        "description": "Timestamp when the record was last updated"
+                    }
+                ]
+            }
         ]
     },
     "repository": {
@@ -118,6 +222,18 @@
             {
                 "name": "WardesProfileModel",
                 "description": "same as wardes_profile table in database"
+            }
+        ],
+        "wardes_profile_image": [
+            {
+                "name": "WardesProfileImageModel",
+                "description": "same as wardes_profile_image table in database"
+            }
+        ],
+        "person_profile": [
+            {
+                "name": "PersonProfileModel",
+                "description": "same as person_profile table in database"
             }
         ]
     },
@@ -248,6 +364,178 @@
                     "description": "Count total wardes profile records matching search criteria"
                 }
             ]
+        },
+        "wardes_profile_image": {
+            "functions": [
+                {
+                    "name": "InsertWardesProfileImage",
+                    "param": "context, tx, repository.WardesProfileImageModel",
+                    "table": "wardes_profile_image",
+                    "return": "repository.WardesProfileImageModel, error",
+                    "attribute": [
+                        "uuid_key",
+                        "nexchief_account_id",
+                        "wardes_profile_id",
+                        "type",
+                        "path_image",
+                        "created_by",
+                        "created_client",
+                        "updated_by",
+                        "updated_client",
+                        "deleted"
+                    ],
+                    "description": "Insert new wardes_profile_image record"
+                },
+                {
+                    "name": "UpdateWardesProfileImage",
+                    "param": "context, tx, repository.WardesProfileImageModel",
+                    "table": "wardes_profile_image",
+                    "return": "error",
+                    "attribute": [
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "Update existing wardes_profile_image record"
+                },
+                {
+                    "name": "DeleteWardesProfileImage",
+                    "param": "context, tx, repository.WardesProfileImageModel",
+                    "table": "wardes_profile_image",
+                    "return": "error",
+                    "attribute": [
+                        "id"
+                    ],
+                    "description": "Delete wardes_profile_image record"
+                },
+                {
+                    "name": "GetWardesProfileImage",
+                    "param": "context, string",
+                    "table": "wardes_profile_image",
+                    "return": "error",
+                    "attribute": [
+                        "uuid_key",
+                        "created_by",
+                        "created_client",
+                        "created_at",
+                        "updated_by",
+                        "updated_client",
+                        "updated_at"
+                    ],
+                    "description": "Get single wardes_profile_image record by ID"
+                },
+                {
+                    "name": "GetListWardesProfileImage",
+                    "param": "context, in.GetListRequest, []model.SearchParam",
+                    "table": "wardes_profile_image",
+                    "return": "[]interface{}, error",
+                    "attribute": [
+                        "uuid_key",
+                        "created_by",
+                        "created_client",
+                        "created_at",
+                        "updated_by",
+                        "updated_client",
+                        "updated_at"
+                    ],
+                    "description": "Get list of wardes_profile_image records with search and pagination"
+                },
+                {
+                    "name": "CountListWardesProfileImage",
+                    "param": "context, in.GetListRequest, []model.SearchParam",
+                    "table": "wardes_profile_image",
+                    "return": "int, error",
+                    "attribute": [
+                        "count(id)"
+                    ],
+                    "description": "Count total wardes_profile_image records matching search criteria"
+                }
+            ],
+            "db": "postgresql"
+        },
+        "person_profile": {
+            "functions": [
+                {
+                    "name": "InsertPersonProfile",
+                    "param": "context, tx, repository.PersonProfileModel",
+                    "table": "person_profile",
+                    "return": "repository.PersonProfileModel, error",
+                    "attribute": [
+                        "created_at",
+                        "created_by",
+                        "created_client",
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "Insert a new person profile record"
+                },
+                {
+                    "name": "UpdatePersonProfile",
+                    "param": "context, tx, repository.PersonProfileModel",
+                    "table": "person_profile",
+                    "return": "error",
+                    "attribute": [
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "Update an existing person profile record"
+                },
+                {
+                    "name": "DeletePersonProfile",
+                    "param": "context, tx, repository.PersonProfileModel",
+                    "table": "person_profile",
+                    "return": "error",
+                    "attribute": [
+                        "id"
+                    ],
+                    "description": "Delete a person profile record"
+                },
+                {
+                    "name": "GetPersonProfile",
+                    "param": "context, string",
+                    "table": "person_profile",
+                    "return": "repository.PersonProfileModel, error",
+                    "attribute": [
+                        "uuid_key",
+                        "created_by",
+                        "created_client",
+                        "created_at",
+                        "updated_by",
+                        "updated_client",
+                        "updated_at"
+                    ],
+                    "description": "Retrieve a single person profile record by UUID"
+                },
+                {
+                    "name": "GetListPersonProfile",
+                    "param": "context, in.GetListRequest, []model.SearchParam",
+                    "table": "person_profile",
+                    "return": "[]repository.PersonProfileModel, error",
+                    "attribute": [
+                        "uuid_key",
+                        "created_by",
+                        "created_client",
+                        "created_at",
+                        "updated_by",
+                        "updated_client",
+                        "updated_at"
+                    ],
+                    "description": "Retrieve a list of person profile records with search and pagination"
+                },
+                {
+                    "name": "CountListPersonProfile",
+                    "param": "context, in.GetListRequest, []model.SearchParam",
+                    "table": "person_profile",
+                    "return": "int, error",
+                    "attribute": [
+                        "count(id)"
+                    ],
+                    "description": "Count the number of person profile records matching search criteria"
+                }
+            ],
+            "db": "postgresql"
         }
     }
 }
