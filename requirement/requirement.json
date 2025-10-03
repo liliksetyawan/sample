@@ -261,7 +261,8 @@
                     }
                 ]
             }
-        ]
+        ],
+        "parameter": []
     },
     "repository": {
         "wardes_profile": [
@@ -286,6 +287,12 @@
             {
                 "name": "UserModel",
                 "description": "same as user table in database"
+            }
+        ],
+        "parameter": [
+            {
+                "name": "ParameterModel",
+                "description": "same as parameter table in database"
             }
         ]
     },
@@ -591,6 +598,33 @@
                         "count(id)"
                     ],
                     "description": "Count the number of users matching search criteria"
+                }
+            ],
+            "db": "postgresql"
+        },
+        "parameter": {
+            "functions": [
+                {
+                    "name": "InsertParameter",
+                    "param": "context, tx, repository.ParameterModel",
+                    "table": "parameter",
+                    "return": "repository.ParameterModel, error",
+                    "attribute": [
+                        "parameter_group_id",
+                        "name",
+                        "name_en",
+                        "code",
+                        "sequence",
+                        "level",
+                        "type",
+                        "created_at",
+                        "created_by",
+                        "created_client",
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "Insert a new parameter record"
                 }
             ],
             "db": "postgresql"
