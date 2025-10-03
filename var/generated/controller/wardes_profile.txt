@@ -13,6 +13,16 @@ Endpoint:
             - ActivityEnabled: false
             - Description: Insert new wardes profile data
             - InternalAPI: false
+        -> Name: updateWardesProfile
+            - URL: /v1/wardes_profile/{uuid_key}
+            - Type: default
+            - Auth: UserToken
+            - Method: PUT
+            - Menu: update
+            - Permission: master.wardes_profile.wardes_profile:update
+            - ActivityEnabled: false
+            - Description: Update existing wardes profile data
+            - InternalAPI: false
     - DTO:
         -> In:
             - Validator:
@@ -23,7 +33,7 @@ Endpoint:
                     - Fields:
                         -> name:
                             - Type: string
-                            - Required: [insert]
+                            - Required: [insert, update]
                             - EmptyAllowed: false
                             - Min: 1
                             - Max: 255
@@ -33,7 +43,7 @@ Endpoint:
                             - Reserved: ["undefined"]
                         -> address:
                             - Type: string
-                            - Required: [insert]
+                            - Required: [insert, update]
                             - EmptyAllowed: false
                             - Min: 1
                             - Max: 500
@@ -43,7 +53,7 @@ Endpoint:
                             - Reserved: ["undefined"]
                         -> phone:
                             - Type: string
-                            - Required: [insert]
+                            - Required: [insert, update]
                             - EmptyAllowed: false
                             - Min: 1
                             - Max: 20
@@ -53,7 +63,7 @@ Endpoint:
                             - Reserved: ["undefined"]
                         -> email:
                             - Type: string
-                            - Required: [insert]
+                            - Required: [insert, update]
                             - EmptyAllowed: false
                             - Min: 1
                             - Max: 255
@@ -63,7 +73,7 @@ Endpoint:
                             - Reserved: ["undefined"]
                         -> record_status:
                             - Type: string
-                            - Required: [insert]
+                            - Required: [insert, update]
                             - EmptyAllowed: false
                             - Min: 1
                             - Max: 1
@@ -71,6 +81,11 @@ Endpoint:
                             - Enum: "record_status"
                             - AutoFix: "undefined"
                             - Reserved: ["undefined"]
+                        -> updated_at:
+                            - Type: time.Time
+                            - Required: [update]
+                            - EmptyAllowed: false
+                            - DateFormat: "undefined"
         -> Out:
             - WardesProfileDTOOut:
                 -> name: string

@@ -42,4 +42,20 @@ func (e *wardesProfileEndpoint) RegisterEndpoint() {
 			http.MethodPost, http.MethodOptions,
 		),
 	)
+
+	e.httpValidator.HandleFunc(
+		http_validator.NewHandleFuncParam(
+		    fmt.Sprintf("/v1/%s/wardes_profile/{uuid_key}", e.config.Server.ResourceID),
+			e.httpValidator.WrapService(
+				http_validator.NewWarpServiceParam(
+					e.srv,
+					e.srv.UpdateWardesProfile,
+					e.httpValidator.UserAccessValidatorWithKong,
+				).Menu("update").
+				Permission("master.wardes_profile.wardes_profile:update").
+				PathParams("uuid_key"),
+			),
+			http.MethodPut, http.MethodOptions,
+		),
+	)
 }
