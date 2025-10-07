@@ -21,6 +21,16 @@ type WardesProfileService interface {
         err error,
     )
     
+    UpdateWardesProfile(
+        ctx *context.ContextModel,
+        param model.URLParam,
+        dto interface{},
+    ) (
+        header map[string]string,
+        output interface{},
+        err error,
+    )
+    
     GetDTO() interface{}
     GetListScope() []string
     GetListValidLimit() []int
@@ -39,20 +49,20 @@ import (
     "github.com/nexsoft-git/nexcommon/services"
     "github.com/nexsoft-git/nexcommon/bundles"
     "nexsoft.co.id/example/dto/in"
-    wardes_profileDAO "nexsoft.co.id/example/dao/wardes_profile"
     wardes_profile_imageDAO "nexsoft.co.id/example/dao/wardes_profile_image"
+    wardes_profileDAO "nexsoft.co.id/example/dao/wardes_profile"
 )
 
 func NewWardesProfileService(
-    wardes_profileDAO wardes_profileDAO.WardesProfileDAO,
     wardes_profile_imageDAO wardes_profile_imageDAO.WardesProfileImageDAO,
+    wardes_profileDAO wardes_profileDAO.WardesProfileDAO,
 ) WardesProfileService {
 
     operator := make(services.DefaultOperators)
 
     service := &wardes_profileService{ 
-        wardes_profileDAO: wardes_profileDAO,
         wardes_profile_imageDAO: wardes_profile_imageDAO,
+        wardes_profileDAO: wardes_profileDAO,
         searchOperator: operator,
     }
 
@@ -60,8 +70,8 @@ func NewWardesProfileService(
 }
 
 type wardes_profileService struct { 
-    wardes_profileDAO wardes_profileDAO.WardesProfileDAO
     wardes_profile_imageDAO wardes_profile_imageDAO.WardesProfileImageDAO
+    wardes_profileDAO wardes_profileDAO.WardesProfileDAO
     searchOperator services.DefaultOperators
 }
 
@@ -141,7 +151,50 @@ func (s *wardes_profileService) InsertwardesProfile(
 	return
 
 }
+***filename: wardes_profile/update_wardes_profile.go
+package wardes_profile
+
+import (
+    "github.com/nexsoft-git/nexcommon/model"
+    "github.com/nexsoft-git/nexcommon/context"
+    "nexsoft.co.id/example/dto/out"
+    "nexsoft.co.id/example/repository"
+    out2 "github.com/nexsoft-git/nexcommon/dto/out"
+    // TODO: Add other import package if necessary. Delete this line of TODO if you not adding other import package
+)
+
+func (s *wardes_profileService) UpdateWardesProfile(
+    ctx *context.ContextModel,
+    param model.URLParam,
+    dto interface{},
+) (
+    header map[string]string,
+    output interface{},
+    err error,
+) {
+    
+
+    // TODO: Implement the default function logic here
+    // @Descriptions:
+        /*
+        - undefined*/
+    // @Audit Enabled: False
+    // @DTO Type: default
+    // @Method Type: default
+
+    result := //TODO: ***set the result of function here
+    output = out2.DefaultResponsePayloadMessage{
+		Status: out2.DefaultResponsePayloadStatus{
+			Code:    "OK",
+			Message: s.bundles.ReadMessageBundle("wardes_profile", "SUCCESS_UPDATE_WARDES_PROFILE_MESSAGE", ctx.AuthAccessTokenModel.Locale, nil),
+		},
+		Data: result,
+	}
+
+	return
+
+}
 
 ```
-***List DAO : wardes_profile, wardes_profile_image
-***List i18n : SUCCESS_INSERTWARDES_PROFILE_MESSAGE
+***List DAO : wardes_profile_image, wardes_profile
+***List i18n : SUCCESS_INSERTWARDES_PROFILE_MESSAGE, SUCCESS_UPDATE_WARDES_PROFILE_MESSAGE

@@ -26,6 +26,31 @@
                         ""
                     ]
                 }
+            },
+            {
+                "name": "UpdateWardesProfile",
+                "url": "/v1/wardes_profile/{uuid_key}",
+                "menu": "update",
+                "permission": "[master].[wardes_profile].[wardes_profile]:update",
+                "descriptions": "Update existing wardes profile data",
+                "audit_enabled": false,
+                "type": "default",
+                "dto_in": "default",
+                "dto_out": "WardesProfileDTOOut",
+                "functionality": [
+                    "undefined"
+                ],
+                "utility": {
+                    "email": [
+                        ""
+                    ],
+                    "azure": [
+                        ""
+                    ],
+                    "api_connector": [
+                        ""
+                    ]
+                }
             }
         ],
         "scope": [
@@ -43,8 +68,8 @@
             100
         ],
         "needs": [
-            "wardes_profileDAO",
-            "wardes_profile_imageDAO"
+            "wardes_profile_imageDAO",
+            "wardes_profileDAO"
         ]
     }
 }
