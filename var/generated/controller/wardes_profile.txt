@@ -11,6 +11,16 @@ Endpoint:
             - ActivityEnabled: false
             - Description: Insert new wardes profile data
             - InternalAPI: false
+        -> Name: updateWardesProfile
+            - URL: /v1/wardes_profile/{uuid_key}
+            - Type: default
+            - Auth: UserToken
+            - Method: PUT
+            - Menu: update
+            - Permission: [master].[wardes_profile].[wardes_profile]:update
+            - ActivityEnabled: false
+            - Description: Update existing wardes profile data
+            - InternalAPI: false
     - DTO:
         -> In:
             - Validator:
@@ -388,6 +398,11 @@ Endpoint:
                             - Enum: undefined
                             - AutoFix: undefined
                             - Reserved: ["undefined"]
+                        -> updated_at:
+                            - Type: time.Time
+                            - Required: [update]
+                            - EmptyAllowed: false
+                            - DateFormat: undefined
         -> Out:
             - WardesProfileDTOOut:
                 -> id: int64
