@@ -1,19 +1,19 @@
-package wardes_profile
+package wardes_profile_image
 
 import (
     "database/sql"
     "github.com/nexsoft-git/nexcommon/dao"
 )
 
-type wardes_profilePostgresqlSQLDAO struct {
+type wardes_profile_imagePostgresqlSQLDAO struct {
     dao.GetListDataDAO
     db *sql.DB
 }
 
-func NewWardesProfilePostgresqlSQLDAO(
+func NewWardesProfileImagePostgresqlSQLDAO(
     db *sql.DB,
-) WardesProfileDAO {
-    return &wardes_profilePostgresqlSQLDAO{
+) WardesProfileImageDAO {
+    return &wardes_profile_imagePostgresqlSQLDAO{
         GetListDataDAO: dao.GetListDataDAO{
             DB: db,
         },

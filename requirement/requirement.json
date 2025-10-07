@@ -1,77 +1,307 @@
 {
     "valid_search": {
-        "wardes_profile": []
+        "wardes_profile": [],
+        "person_profile": [
+            {
+                "functions": [
+                    "GetListPersonProfile"
+                ],
+                "attributes": [
+                    {
+                        "field": "name",
+                        "type": "char",
+                        "operator": "lk, eq, in",
+                        "description": "The name of the person profile"
+                    },
+                    {
+                        "field": "email",
+                        "type": "char",
+                        "operator": "lk, eq, in",
+                        "description": "The email of the person profile"
+                    }
+                ]
+            }
+        ],
+        "wardes_profile_image": []
     },
     "repository": {
-        "wardes_profile": [{
-            "name": "WardesProfileModel",
-            "description": "same as wardes_profile table in database"
-        }]
+        "wardes_profile": [
+            {
+                "name": "WardesProfileModel",
+                "description": "same as wardes_profile table in database"
+            }
+        ],
+        "person_profile": [
+            {
+                "name": "PersonProfileDetailModel",
+                "attribute": [
+                    {
+                        "name": "person_profile",
+                        "type": "repository.PersonProfileModel"
+                    },
+                    {
+                        "name": "wardes_profile",
+                        "type": "repository.WardesProfileModel"
+                    },
+                    {
+                        "name": "wardes_profile_image",
+                        "type": "repository.WardesProfileImageModel"
+                    },
+                    {
+                        "name": "user",
+                        "type": "repository.UserModel"
+                    }
+                ]
+            }
+        ],
+        "wardes_profile_image": [
+            {
+                "name": "WardesProfileImageModel",
+                "description": "same as wardes_profile_image table in database"
+            }
+        ]
     },
     "dao": {
         "wardes_profile": {
             "db": "postgresql",
-            "functions": [{
-                "name": "InsertWardesProfile",
-                "param": "context, tx, repository.WardesProfileModel",
-                "table": "wardes_profile",
-                "return": "repository.WardesProfileModel, error",
-                "attribute": [
-                    "id",
-                    "uuid_key",
-                    "nexchief_account_id",
-                    "user_id",
-                    "username",
-                    "personal_name",
-                    "gender",
-                    "phone",
-                    "email",
-                    "sub_district_id",
-                    "urban_village_id",
-                    "nik",
-                    "age",
-                    "hamlet",
-                    "neighbour",
-                    "village_family",
-                    "village_population",
-                    "building_location",
-                    "building_ownership",
-                    "building_type",
-                    "building_form",
-                    "building_width_first_floor",
-                    "building_length_first_floor",
-                    "building_height_first_floor",
-                    "building_width_second_floor",
-                    "building_length_second_floor",
-                    "building_height_second_floor",
-                    "parking_lot_width",
-                    "parking_lot_length",
-                    "village_internet_connection",
-                    "investment_capital",
-                    "investment_capital_source",
-                    "ownership_status",
-                    "ownership_fixed_asset",
-                    "permission_cover",
-                    "profile_completion_status",
-                    "company_profile_id",
-                    "code",
-                    "schema",
-                    "status",
-                    "active_date",
-                    "resign_date",
-                    "is_nexwise",
-                    "deadline_date",
-                    "created_by",
-                    "created_client",
-                    "created_at",
-                    "updated_by",
-                    "updated_at",
-                    "updated_client",
-                    "deleted",
-                    "new_profile_approval_status"
-                ],
-                "description": "Insert a new wardes profile record"
-            }]
+            "functions": [
+                {
+                    "name": "InsertWardesProfile",
+                    "param": "context, tx, repository.WardesProfileModel",
+                    "table": "wardes_profile",
+                    "return": "repository.WardesProfileModel, error",
+                    "attribute": [
+                        "id",
+                        "uuid_key",
+                        "nexchief_account_id",
+                        "user_id",
+                        "username",
+                        "personal_name",
+                        "gender",
+                        "phone",
+                        "email",
+                        "sub_district_id",
+                        "urban_village_id",
+                        "nik",
+                        "age",
+                        "hamlet",
+                        "neighbour",
+                        "village_family",
+                        "village_population",
+                        "building_location",
+                        "building_ownership",
+                        "building_type",
+                        "building_form",
+                        "building_width_first_floor",
+                        "building_length_first_floor",
+                        "building_height_first_floor",
+                        "building_width_second_floor",
+                        "building_length_second_floor",
+                        "building_height_second_floor",
+                        "parking_lot_width",
+                        "parking_lot_length",
+                        "village_internet_connection",
+                        "investment_capital",
+                        "investment_capital_source",
+                        "ownership_status",
+                        "ownership_fixed_asset",
+                        "permission_cover",
+                        "profile_completion_status",
+                        "company_profile_id",
+                        "code",
+                        "schema",
+                        "status",
+                        "active_date",
+                        "resign_date",
+                        "is_nexwise",
+                        "deadline_date",
+                        "created_by",
+                        "created_client",
+                        "created_at",
+                        "updated_by",
+                        "updated_at",
+                        "updated_client",
+                        "deleted",
+                        "new_profile_approval_status"
+                    ],
+                    "description": "Insert a new wardes profile record"
+                },
+                {
+                    "name": "UpdateWardesProfile",
+                    "param": "context, tx, repository.WardesProfileModel",
+                    "table": "wardes_profile",
+                    "return": "error",
+                    "attribute": [
+                        "id",
+                        "uuid_key",
+                        "nexchief_account_id",
+                        "user_id",
+                        "username",
+                        "personal_name",
+                        "gender",
+                        "phone",
+                        "email",
+                        "sub_district_id",
+                        "urban_village_id",
+                        "nik",
+                        "age",
+                        "hamlet",
+                        "neighbour",
+                        "village_family",
+                        "village_population",
+                        "building_location",
+                        "building_ownership",
+                        "building_type",
+                        "building_form",
+                        "building_width_first_floor",
+                        "building_length_first_floor",
+                        "building_height_first_floor",
+                        "building_width_second_floor",
+                        "building_length_second_floor",
+                        "building_height_second_floor",
+                        "parking_lot_width",
+                        "parking_lot_length",
+                        "village_internet_connection",
+                        "investment_capital",
+                        "investment_capital_source",
+                        "ownership_status",
+                        "ownership_fixed_asset",
+                        "permission_cover",
+                        "profile_completion_status",
+                        "company_profile_id",
+                        "code",
+                        "schema",
+                        "status",
+                        "active_date",
+                        "resign_date",
+                        "is_nexwise",
+                        "deadline_date",
+                        "created_by",
+                        "created_client",
+                        "created_at",
+                        "updated_by",
+                        "updated_at",
+                        "updated_client",
+                        "deleted",
+                        "new_profile_approval_status"
+                    ],
+                    "description": "Update a new wardes profile record"
+                }
+            ]
+        },
+        "person_profile": {
+            "functions": [
+                {
+                    "name": "InsertPersonProfile",
+                    "param": "context, tx, repository.PersonProfileModel",
+                    "table": "person_profile",
+                    "return": "repository.PersonProfileModel, error",
+                    "attribute": [
+                        "created_at",
+                        "created_by",
+                        "created_client",
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "Insert a new person profile record into the database"
+                },
+                {
+                    "name": "UpdatePersonProfile",
+                    "param": "context, tx, repository.PersonProfileModel",
+                    "table": "person_profile",
+                    "return": "error",
+                    "attribute": [
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "Update an existing person profile record in the database"
+                },
+                {
+                    "name": "DeletePersonProfile",
+                    "param": "context, tx, repository.PersonProfileModel",
+                    "table": "person_profile",
+                    "return": "error",
+                    "attribute": [
+                        "id"
+                    ],
+                    "description": "Delete a person profile record from the database"
+                },
+                {
+                    "name": "GetPersonProfile",
+                    "param": "context, string",
+                    "table": "person_profile",
+                    "return": "error",
+                    "attribute": [
+                        "uuid_key",
+                        "created_by",
+                        "created_client",
+                        "created_at",
+                        "updated_by",
+                        "updated_client",
+                        "updated_at"
+                    ],
+                    "description": "Retrieve a single person profile record from the database"
+                },
+                {
+                    "name": "GetListPersonProfile",
+                    "param": "context, in.GetListRequest, []model.SearchParam",
+                    "table": "person_profile pp, LEFT JOIN wardes_profile wp, LEFT JOIN wardes_profile_image wpi, LEFT JOIN user u",
+                    "return": "[]interface{}, error",
+                    "attribute": [
+                        "pp.id",
+                        "pp.title_id",
+                        "pp.title_name",
+                        "pp.first_name",
+                        "pp.last_name",
+                        "wp.id",
+                        "wp.username",
+                        "wp.personal_name",
+                        "wpi.id",
+                        "wpi.path_image",
+                        "u.id",
+                        "u.client_id",
+                        "u.user_code"
+                    ],
+                    "description": "Retrieve a list of person profiles"
+                },
+                {
+                    "name": "CountListPersonProfile",
+                    "param": "context, in.GetListRequest, []model.SearchParam",
+                    "table": "person_profile",
+                    "return": "int, error",
+                    "attribute": [
+                        "count(id)"
+                    ],
+                    "description": "Count the total number of person profile records matching the search criteria"
+                }
+            ],
+            "db": "postgresql"
+        },
+        "wardes_profile_image": {
+            "functions": [
+                {
+                    "name": "InsertWardesProfileImage",
+                    "param": "context, tx, repository.WardesProfileImageModel",
+                    "table": "wardes_profile_image",
+                    "return": "repository.WardesProfileImageModel, error",
+                    "attribute": [
+                        "nexchief_account_id",
+                        "wardes_profile_id",
+                        "type",
+                        "path_image",
+                        "created_at",
+                        "created_by",
+                        "created_client",
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "Insert a new wardes profile image record"
+                }
+            ],
+            "db": "postgresql"
         }
     }
 }

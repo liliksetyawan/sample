@@ -1,19 +1,19 @@
-package wardes_profile
+package person_profile
 
 import (
     "database/sql"
     "github.com/nexsoft-git/nexcommon/dao"
 )
 
-type wardes_profilePostgresqlSQLDAO struct {
+type person_profilePostgresqlSQLDAO struct {
     dao.GetListDataDAO
     db *sql.DB
 }
 
-func NewWardesProfilePostgresqlSQLDAO(
+func NewPersonProfilePostgresqlSQLDAO(
     db *sql.DB,
-) WardesProfileDAO {
-    return &wardes_profilePostgresqlSQLDAO{
+) PersonProfileDAO {
+    return &person_profilePostgresqlSQLDAO{
         GetListDataDAO: dao.GetListDataDAO{
             DB: db,
         },

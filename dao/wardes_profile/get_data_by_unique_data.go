@@ -6,9 +6,8 @@ import (
     "database/sql"
     "github.com/nexsoft-git/nexcommon/context"
     "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/common/commonError"
     "nexsoft.co.id/example/repository"
-    commonError "github.com/nexsoft-git/nexcommon/error"
-    "github.com/rs/zerolog/log"
 )
 
 // Descriptions: Check is data is exist before inserting/updating
@@ -46,12 +45,8 @@ func (d *wardes_profilePostgresqlSQLDAO) GetDataByUniqueData(
     query += " LIMIT 1 "
 
     if err = d.db.QueryRow(query, args...).Scan(&result.ID, &isUqWardesProfileUsername, &isUqWardesProfileNik); err != nil && err != sql.ErrNoRows {
-        log.Error().
-            Err(err).
-            Caller().
-            Msg("Error Found When Processing Query")
         return
-	}
+    }
 
     if result.ID.Int64 != 0 {
         var existValue []string
@@ -64,17 +59,11 @@ func (d *wardes_profilePostgresqlSQLDAO) GetDataByUniqueData(
             existValue = append(existValue, "[nik]")
         }
         
-		err = commonError.ErrDataAlreadyUsed.Param(strings.Join(existValue, ", "))
-		return
-	}
+        err = commonError.ErrDataAlreadyUsed.Param(strings.Join(existValue, ", "))
+        return
+    }
 
     err = nil
     //No Unique Constraint on the database, return empty result
     return
-
 }
-
-
-
-
-go
