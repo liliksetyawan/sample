@@ -15,5 +15,6 @@
     },
     "valid_search": {
         "wardes_profile_image": []
-    }
+    },
+    "kong_enabled": false
 }
