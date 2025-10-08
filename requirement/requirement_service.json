@@ -1,0 +1,52 @@
+{
+    "wardes_profile": {
+        "features": [
+            {
+                "name": "Insertwardesprofile",
+                "url": "/v1/wardes_profile",
+                "menu": "insert",
+                "permission": "[master].[wardes_profile].[wardes_profile]:insert",
+                "descriptions": "Insert new wardes profile data",
+                "audit_enabled": false,
+                "type": "default",
+                "dto_in": "default",
+                "dto_out": "WardesProfileDTOOut",
+                "functionality": [
+                    "Call external API user_auth_api PostInternalUsersUpload",
+                    "Insert data into wardes_profile using wardes_profileDAO.InsertWardesProfile",
+                    "Insert data into wardes_profile_image using wardes_profile_imageDAO.InsertWardesProfileImage"
+                ],
+                "utility": {
+                    "email": [
+                        ""
+                    ],
+                    "azure": [
+                        ""
+                    ],
+                    "api_connector": [
+                        "user_auth_api.PostInternalUsersUpload"
+                    ]
+                }
+            }
+        ],
+        "scope": [
+            "read",
+            "write"
+        ],
+        "order": [
+            "id"
+        ],
+        "limit": [
+            10,
+            20,
+            30,
+            50,
+            100
+        ],
+        "needs": [
+            "wardes_profileDAO",
+            "wardes_profile_imageDAO",
+            "http_connector"
+        ]
+    }
+}

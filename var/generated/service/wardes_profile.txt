@@ -1,0 +1,152 @@
+```go 
+***filename: wardes_profile/type.go
+package wardes_profile
+
+import (
+	"github.com/nexsoft-git/nexcommon/context"
+	"github.com/nexsoft-git/nexcommon/dto/in"
+	"github.com/nexsoft-git/nexcommon/model"
+	"github.com/nexsoft-git/nexcommon/services"
+)
+
+type WardesProfileService interface {
+    
+    Insertwardesprofile(
+        ctx *context.ContextModel,
+        param model.URLParam,
+        dto interface{},
+    ) (
+        header map[string]string,
+        output interface{},
+        err error,
+    )
+    
+    GetDTO() interface{}
+    GetListScope() []string
+    GetListValidLimit() []int
+    GetListValidOrderBy() []string
+    GetListValidSearch() []string
+    GetDefaultOperator() services.DefaultOperators
+    GetMultipartDTO() interface{}
+}
+***SPLIT**HERE***
+
+***filename: wardes_profile/service.go
+package wardes_profile
+
+import (
+    "github.com/nexsoft-git/nexcommon/model"
+    "github.com/nexsoft-git/nexcommon/services"
+    "github.com/nexsoft-git/nexcommon/bundles"
+    "nexsoft.co.id/example/dto/in"
+    wardes_profileDAO "nexsoft.co.id/example/dao/wardes_profile"
+    wardes_profile_imageDAO "nexsoft.co.id/example/dao/wardes_profile_image"
+    "nexsoft.co.id/example/util/http_connector"
+)
+
+func NewWardesProfileService(
+    wardes_profileDAO wardes_profileDAO.WardesProfileDAO,
+    wardes_profile_imageDAO wardes_profile_imageDAO.WardesProfileImageDAO,
+    http_connector http_connector.HttpConnector,
+) WardesProfileService {
+
+    operator := make(services.DefaultOperators)
+
+    service := &wardes_profileService{ 
+        wardes_profileDAO: wardes_profileDAO,
+        wardes_profile_imageDAO: wardes_profile_imageDAO,
+        http_connector: http_connector,
+        searchOperator: operator,
+    }
+
+    return service
+}
+
+type wardes_profileService struct { 
+    wardes_profileDAO wardes_profileDAO.WardesProfileDAO
+    wardes_profile_imageDAO wardes_profile_imageDAO.WardesProfileImageDAO
+    http_connector http_connector.HttpConnector
+    searchOperator services.DefaultOperators
+}
+
+func (s *wardes_profileService) GetDTO() interface{} {
+    return &in.WardesProfileDTOIn{}
+}
+
+func (s *wardes_profileService) GetMultipartDTO() interface{} {
+    return nil
+}
+
+func (s *wardes_profileService) GetListScope() []string {
+    return []string{ "read", "write" }
+}
+
+func (s *wardes_profileService) parseDTO(dtoIn interface{}) *in.WardesProfileDTOIn {
+    return dtoIn.(*in.WardesProfileDTOIn)
+}
+
+func (s *wardes_profileService) GetListValidLimit() []int {
+    return []int{ 10, 20, 30, 50, 100 }
+}
+
+func (s *wardes_profileService) GetListValidOrderBy() []string {
+    return []string{ "id" }
+}
+
+func (s *wardes_profileService) GetListValidSearch() []string {
+    return s.searchOperator.GetListValidSearch()
+}
+
+func (s *wardes_profileService) GetDefaultOperator() services.DefaultOperators {
+    return s.searchOperator
+}
+***SPLIT**HERE***
+***filename: wardes_profile/insertwardesprofile.go
+package wardes_profile
+
+import (
+    "github.com/nexsoft-git/nexcommon/model"
+    "github.com/nexsoft-git/nexcommon/context"
+    "nexsoft.co.id/example/dto/out"
+    "nexsoft.co.id/example/repository"
+    out2 "github.com/nexsoft-git/nexcommon/dto/out"
+    // TODO: Add other import package if necessary. Delete this line of TODO if you not adding other import package
+)
+
+func (s *wardes_profileService) Insertwardesprofile(
+    ctx *context.ContextModel,
+    param model.URLParam,
+    dto interface{},
+) (
+    header map[string]string,
+    output interface{},
+    err error,
+) {
+    
+
+    // TODO: Implement the default function logic here
+    // @Descriptions:
+        /*
+        - Call external API user_auth_api PostInternalUsersUpload
+        - Insert data into wardes_profile using wardes_profileDAO.InsertWardesProfile
+        - Insert data into wardes_profile_image using wardes_profile_imageDAO.InsertWardesProfileImage*/
+    // @Audit Enabled: False
+    // @DTO Type: default
+    // @Method Type: default
+
+    result := //TODO: ***set the result of function here
+    output = out2.DefaultResponsePayloadMessage{
+		Status: out2.DefaultResponsePayloadStatus{
+			Code:    "OK",
+			Message: s.bundles.ReadMessageBundle("wardes_profile", "SUCCESS_INSERTWARDESPROFILE_MESSAGE", ctx.AuthAccessTokenModel.Locale, nil),
+		},
+		Data: result,
+	}
+
+	return
+
+}
+
+```
+***List DAO : wardes_profile, wardes_profile_image
+***List i18n : SUCCESS_INSERTWARDESPROFILE_MESSAGE
