@@ -8,7 +8,7 @@ import (
     "nexsoft.co.id/example/repository"
 )
 
-// Descriptions: Insert new wardes profile data
+// Descriptions: Insert new wardes profile data into database
 func (d *wardes_profilePostgresqlSQLDAO) InsertWardesProfile(
      ctx *context.ContextModel,
      tx *sql.Tx,
@@ -19,14 +19,12 @@ func (d *wardes_profilePostgresqlSQLDAO) InsertWardesProfile(
 ) {
     query := fmt.Sprintf(`
         INSERT INTO %s (
-            nexchief_account_id, user_id, username, personal_name, gender, phone, email,
             created_at, created_by, created_client,
             updated_at, updated_by, updated_client
         )
         VALUES (
-            $1, $2, $3, $4, $5, $6, $7,
-            $8, $9, $10,
-            $11, $12, $13
+            $1, $2, $3,
+            $4, $5, $6
         )
         RETURNING id, uuid_key;
     `, dao.GetDBTable(ctx, "wardes_profile"))
@@ -38,10 +36,8 @@ func (d *wardes_profilePostgresqlSQLDAO) InsertWardesProfile(
 
     var model repository.WardesProfileModel
     err = stmt.QueryRow(
-        dtoIn.NexchiefAccountID.Int64, dtoIn.UserID.Int64, dtoIn.Username.String, dtoIn.PersonalName.String, 
-        dtoIn.Gender.String, dtoIn.Phone.String, dtoIn.Email.String,
-        dtoIn.CreatedAt.Time, ctx.Limitation.UserID, ctx.AuthAccessTokenModel.ClientID,
-        dtoIn.UpdatedAt.Time, ctx.Limitation.UserID, ctx.AuthAccessTokenModel.ClientID,
+        dtoIn.CreatedAt.Time, ctx.Limitation.ServiceUserID, ctx.AuthAccessTokenModel.ClientID,
+        dtoIn.UpdatedAt.Time, ctx.Limitation.ServiceUserID, ctx.AuthAccessTokenModel.ClientID,
     ).Scan(&model.ID, &model.UUIDKey)
     
     return model, err

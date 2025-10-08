@@ -1,6 +1,51 @@
 {
     "valid_search": {
-        "wardes_profile": [],
+        "wardes_profile": [
+            {
+                "functions": [
+                    "GetListWardesProfile",
+                    "CountListWardesProfile"
+                ],
+                "attributes": [
+                    {
+                        "field": "id",
+                        "type": "number",
+                        "operator": "equal, greater, less",
+                        "description": "Wardes profile ID"
+                    },
+                    {
+                        "field": "username",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "Wardes username"
+                    },
+                    {
+                        "field": "personal_name",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "Wardes personal name"
+                    },
+                    {
+                        "field": "gender",
+                        "type": "enum",
+                        "operator": "equal",
+                        "description": "Wardes gender"
+                    },
+                    {
+                        "field": "phone",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "Wardes phone number"
+                    },
+                    {
+                        "field": "email",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "Wardes email address"
+                    }
+                ]
+            }
+        ],
         "wardes_profile_image": []
     },
     "repository": {
@@ -8,6 +53,23 @@
             {
                 "name": "WardesProfileModel",
                 "description": "same as wardes_profile table in database"
+            },
+            {
+                "name": "ListWardesProfileModel",
+                "attribute": [
+                    {
+                        "name": "wardes_profile",
+                        "type": "repository.WardesProfileModel"
+                    },
+                    {
+                        "name": "wardes_profile_image",
+                        "type": "repository.WardesProfileImageModel"
+                    },
+                    {
+                        "name": "user",
+                        "type": "repository.UserModel"
+                    }
+                ]
             }
         ],
         "wardes_profile_image": [
@@ -27,13 +89,6 @@
                     "table": "wardes_profile",
                     "return": "repository.WardesProfileModel, error",
                     "attribute": [
-                        "nexchief_account_id",
-                        "user_id",
-                        "username",
-                        "personal_name",
-                        "gender",
-                        "phone",
-                        "email",
                         "created_at",
                         "created_by",
                         "created_client",
@@ -41,7 +96,74 @@
                         "updated_by",
                         "updated_client"
                     ],
-                    "description": "Insert new wardes profile data"
+                    "description": "Insert new wardes profile data into database"
+                },
+                {
+                    "name": "UpdateWardesProfile",
+                    "param": "context, tx, repository.WardesProfileModel",
+                    "table": "wardes_profile",
+                    "return": "error",
+                    "attribute": [
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "Update existing wardes profile data in database"
+                },
+                {
+                    "name": "DeleteWardesProfile",
+                    "param": "context, tx, repository.WardesProfileModel",
+                    "table": "wardes_profile",
+                    "return": "error",
+                    "attribute": [
+                        "id"
+                    ],
+                    "description": "Delete wardes profile data from database"
+                },
+                {
+                    "name": "GetWardesProfile",
+                    "param": "context, string",
+                    "table": "wardes_profile",
+                    "return": "repository.WardesProfileModel, error",
+                    "attribute": [
+                        "uuid_key",
+                        "created_by",
+                        "created_client",
+                        "created_at",
+                        "updated_by",
+                        "updated_client",
+                        "updated_at"
+                    ],
+                    "description": "Get single wardes profile data by ID"
+                },
+                {
+                    "name": "GetListWardesProfile",
+                    "param": "context, in.GetListRequest, []model.SearchParam",
+                    "table": "wardes_profile wp, left join wardes_profile_image wpi, left join user u",
+                    "return": "[]interface{}, error",
+                    "attribute": [
+                        "wp.id",
+                        "wp.username",
+                        "wp.personal_name",
+                        "wp.gender",
+                        "wp.phone",
+                        "wp.email",
+                        "wpi.path_image",
+                        "wpi.id",
+                        "u.id",
+                        "u.client_id"
+                    ],
+                    "description": "Get list of wardes profile data with joins to wardes_profile_image and user tables"
+                },
+                {
+                    "name": "CountListWardesProfile",
+                    "param": "context, in.GetListRequest, []model.SearchParam",
+                    "table": "wardes_profile",
+                    "return": "int, error",
+                    "attribute": [
+                        "count(id)"
+                    ],
+                    "description": "Count total wardes profile records based on search criteria"
                 }
             ]
         },

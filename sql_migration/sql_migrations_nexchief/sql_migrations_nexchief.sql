@@ -185,4 +185,21 @@ CREATE TABLE "wardes_profile_image" (
 
 ALTER TABLE "wardes_profile" ADD CONSTRAINT "uq_wardes_profile_username" UNIQUE (username);
 ALTER TABLE "wardes_profile" ADD CONSTRAINT "uq_wardes_profile_nik" UNIQUE (nik);
+
+ALTER TABLE "user" ADD CONSTRAINT "fk_user_auth_user_id" FOREIGN KEY (auth_user_id) REFERENCES "user"(id);
+ALTER TABLE "user" ADD CONSTRAINT "fk_user_person_profile_id" FOREIGN KEY (person_profile_id) REFERENCES "person_profile"(id);
+ALTER TABLE "wardes_profile" ADD CONSTRAINT "fk_wardes_profile_nexchief_account_id" FOREIGN KEY (nexchief_account_id) REFERENCES "user"(id);
+ALTER TABLE "wardes_profile" ADD CONSTRAINT "fk_wardes_profile_user_id" FOREIGN KEY (user_id) REFERENCES "user"(id);
+ALTER TABLE "wardes_profile" ADD CONSTRAINT "fk_wardes_profile_company_profile_id" FOREIGN KEY (company_profile_id) REFERENCES "wardes_profile"(id);
+ALTER TABLE "person_profile" ADD CONSTRAINT "fk_person_profile_title_id" FOREIGN KEY (title_id) REFERENCES "parameter"(id);
+ALTER TABLE "person_profile" ADD CONSTRAINT "fk_person_profile_country_id" FOREIGN KEY (country_id) REFERENCES "parameter"(id);
+ALTER TABLE "person_profile" ADD CONSTRAINT "fk_person_profile_province_id" FOREIGN KEY (province_id) REFERENCES "parameter"(id);
+ALTER TABLE "person_profile" ADD CONSTRAINT "fk_person_profile_district_id" FOREIGN KEY (district_id) REFERENCES "parameter"(id);
+ALTER TABLE "person_profile" ADD CONSTRAINT "fk_person_profile_sub_district_id" FOREIGN KEY (sub_district_id) REFERENCES "parameter"(id);
+ALTER TABLE "person_profile" ADD CONSTRAINT "fk_person_profile_urban_village_id" FOREIGN KEY (urban_village_id) REFERENCES "parameter"(id);
+ALTER TABLE "person_profile" ADD CONSTRAINT "fk_person_profile_island_id" FOREIGN KEY (island_id) REFERENCES "parameter"(id);
+ALTER TABLE "person_profile" ADD CONSTRAINT "fk_person_profile_postal_code_id" FOREIGN KEY (postal_code_id) REFERENCES "parameter"(id);
+ALTER TABLE "parameter" ADD CONSTRAINT "fk_parameter_parameter_group_id" FOREIGN KEY (parameter_group_id) REFERENCES "parameter"(id);
+ALTER TABLE "wardes_profile_image" ADD CONSTRAINT "fk_wardes_profile_image_nexchief_account_id" FOREIGN KEY (nexchief_account_id) REFERENCES "user"(id);
+ALTER TABLE "wardes_profile_image" ADD CONSTRAINT "fk_wardes_profile_image_wardes_profile_id" FOREIGN KEY (wardes_profile_id) REFERENCES "wardes_profile"(id);
 -- +migrate StatementEnd

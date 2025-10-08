@@ -34,8 +34,7 @@ func (d *wardes_profilePostgresqlSQLDAO) GetDataByUniqueData(
     `, dao.GetDBTable(ctx, "wardes_profile"))
 
     args := []interface{}{
-        dtoIn.Username.String,
-        dtoIn.NIK.String,
+        dtoIn.Username.String, dtoIn.NIK.String,
     }
 
     if ctx.Limitation.UserID != 0 {
@@ -71,4 +70,5 @@ func (d *wardes_profilePostgresqlSQLDAO) GetDataByUniqueData(
     err = nil
     //No Unique Constraint on the database, return empty result
     return
+
 }
