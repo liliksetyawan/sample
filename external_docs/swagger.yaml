@@ -32,7 +32,6 @@ paths:
           schema:
             type: string
             example: "request id"
-
       responses:
         '200':
           description: Success insert user to auth
@@ -151,15 +150,18 @@ paths:
         content:
           multipart/form-data:
             schema:
-              type: object
-              properties:
-                file:
-                  type: string
-                  format: binary
-                data:
-                  type: string
-                  example: { "username": "test", "password": "test", "first_name": "name", "email": "test@gmail.com" }
-
+              $ref: '#/components/schemas/UserUploadMultipart'
+            encoding:
+              data:
+                contentType: application/json
+              photo:
+                contentType: image/*
+            examples:
+              formSample:
+                summary: Submit JSON in `data` and an image in `photo`
+                value:
+                  data: { "name": "test", "age": 10, "job": "student" }
+                  photo: (binary image file)
       parameters:
         - in: header
           name: Authorization
@@ -171,7 +173,6 @@ paths:
           schema:
             type: string
             example: "request id"
-
       responses:
         '200':
           description: Success insert user to auth
@@ -327,3 +328,14 @@ components:
           enum: [ERROR]
         payload:
           $ref: '#/components/schemas/ErrorPayload'
+
+    UserUploadMultipart:
+      type: object
+      required: [ data, photo ]       # make photo optional? remove it from this list
+      properties:
+        data:
+          $ref: '#/components/schemas/UserAuthRequest'
+        photo:
+          type: string
+          format: binary
+          description: JPEG/PNG image file for the person
