@@ -1,0 +1,209 @@
+```go
+***filename: wardes_profile/type.go
+package wardes_profile
+                                                                                                            
+
+import (
+    "github.com/nexsoft-git/nexcommon/context"
+    "database/sql"
+    "nexsoft.co.id/example/repository"
+)
+
+type WardesProfileDAO interface {
+    
+    InsertWardesProfile(
+        ctx *context.ContextModel,
+        tx *sql.Tx,
+        dtoIn repository.WardesProfileModel,
+    ) (
+        repository.WardesProfileModel, 
+        error, 
+    )
+    
+    GetDataByUniqueData(
+        ctx *context.ContextModel,
+        dtoIn repository.WardesProfileModel,
+    )(
+        result repository.WardesProfileModel,
+        err error,
+    )
+
+    GetWardesProfileForUpdate(
+        ctx *context.ContextModel,
+        tx *sql.Tx,
+        uuid_key string,
+    ) (
+        repository.WardesProfileModel,
+        error,
+    )
+
+}
+
+***filename: wardes_profile/postgresql.go
+package wardes_profile
+
+import (
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/dao"
+)
+
+type wardes_profilePostgresqlSQLDAO struct {
+    dao.GetListDataDAO
+    db *sql.DB
+}
+
+func NewWardesProfilePostgresqlSQLDAO(
+    db *sql.DB,
+) WardesProfileDAO {
+    return &wardes_profilePostgresqlSQLDAO{
+        GetListDataDAO: dao.GetListDataDAO{
+            DB: db,
+        },
+        db: db,
+    }
+}
+
+***filename: wardes_profile/insert_wardes_profile.go
+package wardes_profile
+
+import (
+    //you allowed to add new import and delete the unused import from this section for imported package on file insert_wardes_profile.go every file will containing 1 function
+    "fmt"
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: Insert new wardes profile data
+func (d *wardes_profilePostgresqlSQLDAO) InsertWardesProfile(
+     ctx *context.ContextModel,
+     tx *sql.Tx,
+     dtoIn repository.WardesProfileModel,
+) (
+     repository.WardesProfileModel, 
+     error, 
+) {
+    //TODO Implement the DAO function here
+    // @Affected Field: nexchief_account_id, user_id, username, personal_name, gender, phone, email, created_at, created_by, created_client, updated_at, updated_by, updated_client
+    // @Affected Table: dao.GetDBTable(ctx, "wardes_profile") 
+}
+
+***filename: wardes_profile/get_data_by_unique_data.go
+package wardes_profile
+
+import (
+    "fmt"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: Check is data is exist before inserting/updating
+func (d *wardes_profilePostgresqlSQLDAO) GetDataByUniqueData(
+      ctx *context.ContextModel,
+      dtoIn repository.WardesProfileModel,
+)(
+    result repository.WardesProfileModel,
+    err error,
+){
+    var isUqWardesProfileUsername, isUqWardesProfileNik bool
+
+    query := fmt.Sprintf(`
+    SELECT
+        id, 
+        ( username = $1 ) as unique_2,
+        ( nik = $2 ) as unique_3 
+    FROM %s
+    WHERE 
+        (username = $1) 
+        OR 
+        (nik = $2) 
+    `, dao.GetDBTable(ctx, "wardes_profile"))
+
+    args := []interface{}{
+        //TODO: Complete this line of code. add all of the param that queried. example : dtoIn.Name.String, dtoIn.Address.String
+    }
+
+    if ctx.Limitation.UserID != 0 {
+        query += " AND created_by = $3 "
+        args = args.append(ctx.Limitation.UserID)
+    }
+
+    query += " LIMIT 1 "
+
+    if err = d.db.QueryRow(query, args...).Scan(&result.ID, &isUqWardesProfileUsername, &isUqWardesProfileNik); err != nil && err != sql.ErrNoRows {
+        log.Error().
+            Err(err).
+            Caller().
+            Msg("Error Found When Processing Query")
+        return
+	}
+
+    if result.ID.Int64 != 0 {
+        var existValue []string
+        
+        if isUqWardesProfileUsername {
+            existValue = append(existValue, "[username]")
+        }
+        
+        if isUqWardesProfileNik {
+            existValue = append(existValue, "[nik]")
+        }
+        
+		err = commonError.ErrDataAlreadyUsed.Param(strings.Join(existValue, ", "))
+		return
+	}
+
+    err = nil
+    //No Unique Constraint on the database, return empty result
+    return
+
+}
+
+***filename: wardes_profile/get_wardes_profile_for_update.go
+package wardes_profile
+
+import (
+    "fmt"
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: Get Data from database for optimistic lock
+func (d *wardes_profilePostgresqlSQLDAO) GetWardesProfileForUpdate(
+    ctx *context.ContextModel,
+    tx *sql.Tx,
+    uuid_key string,
+) (
+    repository.WardesProfileModel,
+    error,
+) {
+    query := fmt.Sprintf(`
+        SELECT id, updated_at
+        FROM %s
+        WHERE uuid_key = $1
+    `, dao.GetDBTable(ctx, "wardes_profile"))
+
+    param = []interface{}{uuid_key}
+    if ctx.Limitation.UserID != 0 {
+        query += " AND created_by = $2 "
+        param = param.append(ctx.Limitation.UserID)
+    }
+
+    query += " FOR UPDATE "
+
+    stmt, err := tx.Prepare(query)
+    if err != nil {
+        return repository.WardesProfileModel{}, err
+    }
+
+    var model repository.WardesProfileModel
+    err = stmt.QueryRow(param...).Scan(&model.ID, &model.UpdatedAt)
+
+    return model, err
+}
+
+```

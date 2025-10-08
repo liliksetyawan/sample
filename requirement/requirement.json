@@ -1,0 +1,38 @@
+{
+    "valid_search": {
+        "wardes_profile": []
+    },
+    "repository": {
+        "wardes_profile": [{
+            "name": "WardesProfileModel",
+            "description": "same as wardes_profile table in database"
+        }]
+    },
+    "dao": {
+        "wardes_profile": {
+            "db": "postgresql",
+            "functions": [{
+                "name": "InsertWardesProfile",
+                "param": "context, tx, repository.WardesProfileModel",
+                "table": "wardes_profile",
+                "return": "repository.WardesProfileModel, error",
+                "attribute": [
+                    "nexchief_account_id",
+                    "user_id",
+                    "username",
+                    "personal_name",
+                    "gender",
+                    "phone",
+                    "email",
+                    "created_at",
+                    "created_by",
+                    "created_client",
+                    "updated_at",
+                    "updated_by",
+                    "updated_client"
+                ],
+                "description": "Insert new wardes profile data"
+            }]
+        }
+    }
+}
