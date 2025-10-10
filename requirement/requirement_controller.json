@@ -1,0 +1,510 @@
+{
+  "wardes_profile": {
+    "features": [
+      {
+        "name": "insertWardesProfile",
+        "url": "/v1/wardes_profile",
+        "type": "default",
+        "auth": "UserToken",
+        "method": "POST",
+        "menu": "insert",
+        "permission": "master.wardes_profile.wardes_profile:insert",
+        "activity_enabled": false,
+        "description": "Insert new wardes profile",
+        "internal_api": false
+      },
+      {
+        "name": "getWardesProfileList",
+        "url": "/v1/wardes_profile",
+        "type": "getlist",
+        "auth": "UserToken",
+        "method": "GET",
+        "menu": "list",
+        "permission": "master.wardes_profile.wardes_profile:view",
+        "activity_enabled": false,
+        "description": "Get list of wardes profiles",
+        "internal_api": false
+      },
+      {
+        "name": "getWardesProfileCount",
+        "url": "/v1/wardes_profile/count",
+        "type": "default",
+        "auth": "UserToken",
+        "method": "GET",
+        "menu": "count",
+        "permission": "master.wardes_profile.wardes_profile:view",
+        "activity_enabled": false,
+        "description": "Get count of wardes profiles",
+        "internal_api": false
+      }
+    ],
+    "dto": {
+      "in": {
+        "validator": [
+          ""
+        ],
+        "object": {
+          "name": "WardesProfileDTOIn",
+          "fields": {
+            "nexchief_account_id": {
+              "type": "int64",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 9223372036854775807
+            },
+            "user_id": {
+              "type": "int64",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 9223372036854775807
+            },
+            "username": {
+              "type": "string",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 255,
+              "regex": "username"
+            },
+            "personal_name": {
+              "type": "string",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 255,
+              "regex": "name",
+              "auto_fix": "title"
+            },
+            "gender": {
+              "type": "string",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 10,
+              "regex": "text_only"
+            },
+            "phone": {
+              "type": "string",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 8,
+              "max": 20,
+              "regex": "phone"
+            },
+            "email": {
+              "type": "string",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 5,
+              "max": 255,
+              "regex": "email",
+              "auto_fix": "lowercase"
+            },
+            "province_id": {
+              "type": "int64",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 9223372036854775807
+            },
+            "district_id": {
+              "type": "int64",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 9223372036854775807
+            },
+            "sub_district_id": {
+              "type": "int64",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 9223372036854775807
+            },
+            "urban_village_id": {
+              "type": "int64",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 9223372036854775807
+            },
+            "nik": {
+              "type": "string",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 16,
+              "max": 16,
+              "regex": "nik"
+            },
+            "age": {
+              "type": "string",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 3,
+              "regex": "numeric"
+            },
+            "hamlet": {
+              "type": "string",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 100,
+              "regex": "text_only"
+            },
+            "neighbour": {
+              "type": "string",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 100,
+              "regex": "text_only"
+            },
+            "village_family": {
+              "type": "string",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 100,
+              "regex": "text_only"
+            },
+            "village_population": {
+              "type": "string",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 100,
+              "regex": "text_only"
+            },
+            "building_location": {
+              "type": "string",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 100,
+              "regex": "text_only"
+            },
+            "building_ownership": {
+              "type": "string",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 100,
+              "regex": "text_only"
+            },
+            "building_type": {
+              "type": "string",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 100,
+              "regex": "text_only"
+            },
+            "building_form": {
+              "type": "string",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 100,
+              "regex": "text_only"
+            },
+            "building_width_first_floor": {
+              "type": "float64",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 0,
+              "max": 999999.99
+            },
+            "building_length_first_floor": {
+              "type": "float64",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 0,
+              "max": 999999.99
+            },
+            "building_height_first_floor": {
+              "type": "float64",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 0,
+              "max": 999999.99
+            },
+            "building_width_second_floor": {
+              "type": "float64",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 0,
+              "max": 999999.99
+            },
+            "building_length_second_floor": {
+              "type": "float64",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 0,
+              "max": 999999.99
+            },
+            "building_height_second_floor": {
+              "type": "float64",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 0,
+              "max": 999999.99
+            },
+            "parking_lot_width": {
+              "type": "float64",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 0,
+              "max": 999999.99
+            },
+            "parking_lot_length": {
+              "type": "float64",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 0,
+              "max": 999999.99
+            },
+            "village_internet_connection": {
+              "type": "string",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 100,
+              "regex": "text_only"
+            },
+            "investment_capital": {
+              "type": "string",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 100,
+              "regex": "text_only"
+            },
+            "investment_capital_source": {
+              "type": "string",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 100,
+              "regex": "text_only"
+            },
+            "ownership_status": {
+              "type": "string",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 100,
+              "regex": "text_only"
+            },
+            "ownership_fixed_asset": {
+              "type": "string",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 100,
+              "regex": "text_only"
+            },
+            "permission_cover": {
+              "type": "string",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 100,
+              "regex": "text_only"
+            },
+            "profile_completion_status": {
+              "type": "string",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 100,
+              "regex": "text_only"
+            },
+            "company_profile_id": {
+              "type": "int64",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 9223372036854775807
+            },
+            "code": {
+              "type": "string",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 50,
+              "regex": "alphanumeric"
+            },
+            "schema": {
+              "type": "string",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 100,
+              "regex": "text_only"
+            },
+            "status": {
+              "type": "string",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 50,
+              "regex": "text_only"
+            },
+            "active_date": {
+              "type": "time.Time",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "date_format": "default"
+            },
+            "resign_date": {
+              "type": "time.Time",
+              "required": "insert, update",
+              "empty_allowed": true,
+              "date_format": "default"
+            },
+            "is_nexwise": {
+              "type": "bool",
+              "required": "insert, update",
+              "empty_allowed": false
+            },
+            "deadline_date": {
+              "type": "time.Time",
+              "required": "insert, update",
+              "empty_allowed": true,
+              "date_format": "default"
+            },
+            "new_profile_approval_status": {
+              "type": "string",
+              "required": "insert, update",
+              "empty_allowed": false,
+              "min": 1,
+              "max": 50,
+              "regex": "text_only"
+            }
+          }
+        }
+      },
+      "out": [
+        {
+          "WardesProfileDTOOut": {
+            "id": "int64",
+            "uuid_key": "string",
+            "nexchief_account_id": "int64",
+            "user_id": "int64",
+            "username": "string",
+            "personal_name": "string",
+            "gender": "string",
+            "phone": "string",
+            "email": "string",
+            "province_id": "int64",
+            "district_id": "int64",
+            "sub_district_id": "int64",
+            "urban_village_id": "int64",
+            "nik": "string",
+            "age": "string",
+            "hamlet": "string",
+            "neighbour": "string",
+            "village_family": "string",
+            "village_population": "string",
+            "building_location": "string",
+            "building_ownership": "string",
+            "building_type": "string",
+            "building_form": "string",
+            "building_width_first_floor": "float64",
+            "building_length_first_floor": "float64",
+            "building_height_first_floor": "float64",
+            "building_width_second_floor": "float64",
+            "building_length_second_floor": "float64",
+            "building_height_second_floor": "float64",
+            "parking_lot_width": "float64",
+            "parking_lot_length": "float64",
+            "village_internet_connection": "string",
+            "investment_capital": "string",
+            "investment_capital_source": "string",
+            "ownership_status": "string",
+            "ownership_fixed_asset": "string",
+            "permission_cover": "string",
+            "profile_completion_status": "string",
+            "company_profile_id": "int64",
+            "code": "string",
+            "schema": "string",
+            "status": "string",
+            "active_date": "time",
+            "resign_date": "time",
+            "is_nexwise": "bool",
+            "deadline_date": "time",
+            "created_by": "int64",
+            "created_client": "string",
+            "created_at": "time",
+            "updated_by": "int64",
+            "updated_at": "time",
+            "updated_client": "string",
+            "deleted": "bool",
+            "new_profile_approval_status": "string"
+          }
+        },
+        {
+          "ListWardesProfileDTOOut": {
+            "id": "int64",
+            "uuid_key": "string",
+            "nexchief_account_id": "int64",
+            "user_id": "int64",
+            "username": "string",
+            "personal_name": "string",
+            "gender": "string",
+            "phone": "string",
+            "email": "string",
+            "province_id": "int64",
+            "district_id": "int64",
+            "sub_district_id": "int64",
+            "urban_village_id": "int64",
+            "nik": "string",
+            "age": "string",
+            "hamlet": "string",
+            "neighbour": "string",
+            "village_family": "string",
+            "village_population": "string",
+            "building_location": "string",
+            "building_ownership": "string",
+            "building_type": "string",
+            "building_form": "string",
+            "building_width_first_floor": "float64",
+            "building_length_first_floor": "float64",
+            "building_height_first_floor": "float64",
+            "building_width_second_floor": "float64",
+            "building_length_second_floor": "float64",
+            "building_height_second_floor": "float64",
+            "parking_lot_width": "float64",
+            "parking_lot_length": "float64",
+            "village_internet_connection": "string",
+            "investment_capital": "string",
+            "investment_capital_source": "string",
+            "ownership_status": "string",
+            "ownership_fixed_asset": "string",
+            "permission_cover": "string",
+            "profile_completion_status": "string",
+            "company_profile_id": "int64",
+            "code": "string",
+            "schema": "string",
+            "status": "string",
+            "active_date": "time",
+            "resign_date": "time",
+            "is_nexwise": "bool",
+            "deadline_date": "time",
+            "created_by": "int64",
+            "created_client": "string",
+            "created_at": "time",
+            "updated_by": "int64",
+            "updated_at": "time",
+            "updated_client": "string",
+            "deleted": "bool",
+            "new_profile_approval_status": "string"
+          }
+        }
+      ]
+    }
+  }
+}

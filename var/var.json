@@ -29,5 +29,6 @@
                 ]
             }
         ]
-    }
+    },
+    "kong_enabled": true
 }
