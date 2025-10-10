@@ -1,12 +1,12 @@
 -- +migrate Up
 -- +migrate StatementBegin
-CREATE SEQUENCE IF NOT EXISTS "user_pkey_seq";
-CREATE SEQUENCE IF NOT EXISTS "wardes_profile_pkey_seq";
-CREATE SEQUENCE IF NOT EXISTS "person_profile_pkey_seq";
-CREATE SEQUENCE IF NOT EXISTS "parameter_pkey_seq";
-CREATE SEQUENCE IF NOT EXISTS "wardes_profile_image_pkey_seq";
+CREATE SEQUENCE IF NOT EXISTS user_pkey_seq;
+CREATE SEQUENCE IF NOT EXISTS wardes_profile_pkey_seq;
+CREATE SEQUENCE IF NOT EXISTS person_profile_pkey_seq;
+CREATE SEQUENCE IF NOT EXISTS parameter_pkey_seq;
+CREATE SEQUENCE IF NOT EXISTS wardes_profile_image_pkey_seq;
 
-CREATE TABLE IF NOT EXISTS "user" (
+CREATE TABLE IF NOT EXISTS user (
     id BIGINT PRIMARY KEY DEFAULT nextval('user_pkey_seq'::regclass),
     uuid_key UUID DEFAULT public.uuid_generate_v4(),
     auth_user_id BIGINT,
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS "user" (
     deleted BOOLEAN DEFAULT false
 );
 
-CREATE TABLE IF NOT EXISTS "wardes_profile" (
+CREATE TABLE IF NOT EXISTS wardes_profile (
     id BIGINT PRIMARY KEY DEFAULT nextval('wardes_profile_pkey_seq'::regclass),
     uuid_key UUID DEFAULT public.uuid_generate_v4(),
     nexchief_account_id BIGINT,
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS "wardes_profile" (
     new_profile_approval_status VARCHAR(30)
 );
 
-CREATE TABLE IF NOT EXISTS "person_profile" (
+CREATE TABLE IF NOT EXISTS person_profile (
     id BIGINT PRIMARY KEY DEFAULT nextval('person_profile_pkey_seq'::regclass),
     uuid_key UUID DEFAULT public.uuid_generate_v4(),
     person_profile_id BIGINT,
@@ -140,7 +140,7 @@ CREATE TABLE IF NOT EXISTS "person_profile" (
     deleted BOOLEAN DEFAULT false
 );
 
-CREATE TABLE IF NOT EXISTS "parameter" (
+CREATE TABLE IF NOT EXISTS parameter (
     id BIGINT PRIMARY KEY DEFAULT nextval('parameter_pkey_seq'::regclass),
     uuid_key UUID DEFAULT public.uuid_generate_v4(),
     parameter_group_id BIGINT,
@@ -167,7 +167,7 @@ CREATE TABLE IF NOT EXISTS "parameter" (
     deleted BOOLEAN DEFAULT false
 );
 
-CREATE TABLE IF NOT EXISTS "wardes_profile_image" (
+CREATE TABLE IF NOT EXISTS wardes_profile_image (
     id BIGINT PRIMARY KEY DEFAULT nextval('wardes_profile_image_pkey_seq'::regclass),
     uuid_key UUID DEFAULT public.uuid_generate_v4(),
     nexchief_account_id BIGINT,
@@ -183,6 +183,6 @@ CREATE TABLE IF NOT EXISTS "wardes_profile_image" (
     deleted BOOLEAN NOT NULL DEFAULT FALSE
 );
 
-ALTER TABLE "wardes_profile" ADD CONSTRAINT "uq_wardes_profile_username" UNIQUE (username);
-ALTER TABLE "wardes_profile" ADD CONSTRAINT "uq_wardes_profile_nik" UNIQUE (nik);
+ALTER TABLE wardes_profile ADD CONSTRAINT uq_wardes_profile_username UNIQUE (username);
+ALTER TABLE wardes_profile ADD CONSTRAINT uq_wardes_profile_nik UNIQUE (nik);
 -- +migrate StatementEnd

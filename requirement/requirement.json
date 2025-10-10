@@ -1,38 +1,73 @@
 {
     "valid_search": {
-        "wardes_profile": []
+        "wardes_profile": [],
+        "wardes_profile_image": []
     },
     "repository": {
-        "wardes_profile": [{
-            "name": "WardesProfileModel",
-            "description": "same as wardes_profile table in database"
-        }]
+        "wardes_profile": [
+            {
+                "name": "WardesProfileModel",
+                "description": "same as wardes_profile table in database"
+            }
+        ],
+        "wardes_profile_image": [
+            {
+                "name": "WardesProfileImageModel",
+                "description": "same as wardes_profile_image table in database"
+            }
+        ]
     },
     "dao": {
         "wardes_profile": {
             "db": "postgresql",
-            "functions": [{
-                "name": "InsertWardesProfile",
-                "param": "context, tx, repository.WardesProfileModel",
-                "table": "wardes_profile",
-                "return": "repository.WardesProfileModel, error",
-                "attribute": [
-                    "nexchief_account_id",
-                    "user_id",
-                    "username",
-                    "personal_name",
-                    "gender",
-                    "phone",
-                    "email",
-                    "created_at",
-                    "created_by",
-                    "created_client",
-                    "updated_at",
-                    "updated_by",
-                    "updated_client"
-                ],
-                "description": "Insert a new wardes profile record"
-            }]
+            "functions": [
+                {
+                    "name": "InsertWardesProfile",
+                    "param": "context, tx, repository.WardesProfileModel",
+                    "table": "wardes_profile",
+                    "return": "repository.WardesProfileModel, error",
+                    "attribute": [
+                        "nexchief_account_id",
+                        "user_id",
+                        "username",
+                        "personal_name",
+                        "gender",
+                        "phone",
+                        "email",
+                        "created_at",
+                        "created_by",
+                        "created_client",
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "Insert a new wardes profile record"
+                }
+            ]
+        },
+        "wardes_profile_image": {
+            "functions": [
+                {
+                    "name": "InsertWardesProfileImage",
+                    "param": "context, tx, repository.WardesProfileImageModel",
+                    "table": "wardes_profile_image",
+                    "return": "repository.WardesProfileImageModel, error",
+                    "attribute": [
+                        "nexchief_account_id",
+                        "wardes_profile_id",
+                        "type",
+                        "path_image",
+                        "created_at",
+                        "created_by",
+                        "created_client",
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "Insert a new wardes profile image record"
+                }
+            ],
+            "db": "postgresql"
         }
     }
 }
