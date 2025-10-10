@@ -1,11 +1,13 @@
 ```go
 ***filename: wardes_profile/type.go
 package wardes_profile
-                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
 
 import (
     "github.com/nexsoft-git/nexcommon/context"
     "database/sql"
+    "github.com/nexsoft-git/nexcommon/dto/in"
+    "github.com/nexsoft-git/nexcommon/model"
     "nexsoft.co.id/example/repository"
 )
 
@@ -17,6 +19,47 @@ type WardesProfileDAO interface {
         dtoIn repository.WardesProfileModel,
     ) (
         repository.WardesProfileModel, 
+        error, 
+    )
+    
+    UpdateWardesProfile(
+        ctx *context.ContextModel,
+        tx *sql.Tx,
+        dtoIn repository.WardesProfileModel,
+    ) (
+        error, 
+    )
+    
+    DeleteWardesProfile(
+        ctx *context.ContextModel,
+        tx *sql.Tx,
+        dtoIn repository.WardesProfileModel,
+    ) (
+        error, 
+    )
+    
+    GetWardesProfile(
+        ctx *context.ContextModel,
+        uuid_key string,
+    ) (
+        error, 
+    )
+    
+    GetListWardesProfile(
+        ctx *context.ContextModel,
+        dtoIn in.GetListRequest,
+        searchParams []model.SearchParam,
+    ) (
+        []interface{}, 
+        error, 
+    )
+    
+    CountListWardesProfile(
+        ctx *context.ContextModel,
+        dtoIn in.GetListRequest,
+        searchParams []model.SearchParam,
+    ) (
+        int, 
         error, 
     )
     
@@ -75,7 +118,7 @@ import (
     "nexsoft.co.id/example/repository"
 )
 
-// Descriptions: Insert a new wardes profile record
+// Descriptions: Insert new wardes profile record
 func (d *wardes_profilePostgresqlSQLDAO) InsertWardesProfile(
      ctx *context.ContextModel,
      tx *sql.Tx,
@@ -85,7 +128,139 @@ func (d *wardes_profilePostgresqlSQLDAO) InsertWardesProfile(
      error, 
 ) {
     //TODO Implement the DAO function here
-    // @Affected Field: nexchief_account_id, user_id, username, personal_name, gender, phone, email, created_at, created_by, created_client, updated_at, updated_by, updated_client
+    // @Affected Field: created_at, created_by, created_client, updated_at, updated_by, updated_client
+    // @Affected Table: dao.GetDBTable(ctx, "wardes_profile") 
+}
+
+***filename: wardes_profile/update_wardes_profile.go
+package wardes_profile
+
+import (
+    //you allowed to add new import and delete the unused import from this section for imported package on file update_wardes_profile.go every file will containing 1 function
+    "fmt"
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: Update existing wardes profile record
+func (d *wardes_profilePostgresqlSQLDAO) UpdateWardesProfile(
+     ctx *context.ContextModel,
+     tx *sql.Tx,
+     dtoIn repository.WardesProfileModel,
+) (
+     error, 
+) {
+    //TODO Implement the DAO function here
+    // @Affected Field: updated_at, updated_by, updated_client
+    // @Affected Table: dao.GetDBTable(ctx, "wardes_profile") 
+}
+
+***filename: wardes_profile/delete_wardes_profile.go
+package wardes_profile
+
+import (
+    //you allowed to add new import and delete the unused import from this section for imported package on file delete_wardes_profile.go every file will containing 1 function
+    "fmt"
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: Delete wardes profile record
+func (d *wardes_profilePostgresqlSQLDAO) DeleteWardesProfile(
+     ctx *context.ContextModel,
+     tx *sql.Tx,
+     dtoIn repository.WardesProfileModel,
+) (
+     error, 
+) {
+    //TODO Implement the DAO function here
+    // @Affected Field: id
+    // @Affected Table: dao.GetDBTable(ctx, "wardes_profile") 
+}
+
+***filename: wardes_profile/get_wardes_profile.go
+package wardes_profile
+
+import (
+    //you allowed to add new import and delete the unused import from this section for imported package on file get_wardes_profile.go every file will containing 1 function
+    "fmt"
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: Get single wardes profile record by ID
+func (d *wardes_profilePostgresqlSQLDAO) GetWardesProfile(
+     ctx *context.ContextModel,
+     uuid_key string,
+) (
+     error, 
+) {
+    //TODO Implement the DAO function here
+    // @Affected Field: uuid_key, created_by, created_client, created_at, updated_by, updated_client, updated_at
+    // @Affected Table: dao.GetDBTable(ctx, "wardes_profile") 
+}
+
+***filename: wardes_profile/get_list_wardes_profile.go
+package wardes_profile
+
+import (
+    //you allowed to add new import and delete the unused import from this section for imported package on file get_list_wardes_profile.go every file will containing 1 function
+    "fmt"
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/model"
+    "github.com/nexsoft-git/nexcommon/dto/in"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: Get a list of wardes profile records with pagination and search
+func (d *wardes_profilePostgresqlSQLDAO) GetListWardesProfile(
+     ctx *context.ContextModel,
+     dtoIn in.GetListRequest,
+     searchParams []model.SearchParam,
+) (
+     []interface{}, 
+     error, 
+) {
+    //TODO Implement the DAO function here
+    // @Affected Field: wp.id, wp.uuid_key, wp.nexchief_account_id, wp.user_id, wp.username, wp.personal_name, wp.gender, wp.phone, wp.email, wp.province_id, wp.district_id, wp.sub_district_id, wp.urban_village_id, wp.nik, wp.age, wp.hamlet, wp.neighbour, wp.village_family, wp.village_population, wp.building_location, wp.building_ownership, wp.building_type, wp.building_form, wp.building_width_first_floor, wp.building_length_first_floor, wp.building_height_first_floor, wp.building_width_second_floor, wp.building_length_second_floor, wp.building_height_second_floor, wp.parking_lot_width, wp.parking_lot_length, wp.village_internet_connection, wp.investment_capital, wp.investment_capital_source, wp.ownership_status, wp.ownership_fixed_asset, wp.permission_cover, wp.profile_completion_status, wp.company_profile_id, wp.code, wp.schema, wp.status, wp.active_date, wp.resign_date, wp.is_nexwise, wp.deadline_date, wp.created_by, wp.created_client, wp.created_at, wp.updated_by, wp.updated_at, wp.updated_client, wp.deleted, wp.new_profile_approval_status, wpi.id, wpi.uuid_key, wpi.nexchief_account_id, wpi.wardes_profile_id, wpi.type, wpi.path_image, wpi.created_by, wpi.created_client, wpi.created_at, wpi.updated_by, wpi.updated_at, wpi.updated_client, wpi.deleted, u.id, u.uuid_key, u.auth_user_id, u.person_profile_id, u.client_id, u.user_code, u.username, u.last_token, u.signature_key, u.ip_whitelist, u.device, u.level, u.locale, u.additional_info, u.alias, u.is_user_nex_acc, u.mobile_access, u.website_access, u.wdi_portal_access, u.domain_nd6, u.username_nd6, u.password_nd6, u.domain_nexvin, u.username_nexvin, u.password_nexvin, u.created_by, u.created_client, u.created_at, u.updated_by, u.updated_at, u.updated_client, u.deleted
+    // @Affected Table: dao.GetDBTable(ctx, "wardes_profile") wp, LEFT JOIN dao.GetDBTable(ctx, "wardes_profile_image") wpi, LEFT JOIN dao.GetDBTable(ctx, "user") u
+    // @Valid Search:
+    // - wp.username : wardes profile username
+}
+
+***filename: wardes_profile/count_list_wardes_profile.go
+package wardes_profile
+
+import (
+    //you allowed to add new import and delete the unused import from this section for imported package on file count_list_wardes_profile.go every file will containing 1 function
+    "fmt"
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/model"
+    "github.com/nexsoft-git/nexcommon/dto/in"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: Count total wardes profile records for pagination
+func (d *wardes_profilePostgresqlSQLDAO) CountListWardesProfile(
+     ctx *context.ContextModel,
+     dtoIn in.GetListRequest,
+     searchParams []model.SearchParam,
+) (
+     int, 
+     error, 
+) {
+    //TODO Implement the DAO function here
+    // @Affected Field: count(id)
     // @Affected Table: dao.GetDBTable(ctx, "wardes_profile") 
 }
 
