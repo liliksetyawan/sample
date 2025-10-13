@@ -28,6 +28,56 @@
                         ""
                     ]
                 }
+            },
+            {
+                "name": "GetWardesProfileList",
+                "url": "/v1/wardes_profile",
+                "menu": "list",
+                "permission": "master.wardes_profile.wardes_profile:view",
+                "descriptions": "Get list of wardes profiles",
+                "audit_enabled": false,
+                "type": "getlist",
+                "dto_in": "default",
+                "dto_out": "WardesProfileDTOOut",
+                "functionality": [
+                    "undefined"
+                ],
+                "utility": {
+                    "email": [
+                        ""
+                    ],
+                    "azure": [
+                        ""
+                    ],
+                    "api_connector": [
+                        ""
+                    ]
+                }
+            },
+            {
+                "name": "GetWardesProfileCount",
+                "url": "/v1/wardes_profile/count",
+                "menu": "count",
+                "permission": "master.wardes_profile.wardes_profile:view",
+                "descriptions": "Get count of wardes profiles",
+                "audit_enabled": false,
+                "type": "default",
+                "dto_in": "default",
+                "dto_out": "WardesProfileDTOOut",
+                "functionality": [
+                    "undefined"
+                ],
+                "utility": {
+                    "email": [
+                        ""
+                    ],
+                    "azure": [
+                        ""
+                    ],
+                    "api_connector": [
+                        ""
+                    ]
+                }
             }
         ],
         "scope": [
@@ -45,10 +95,10 @@
             100
         ],
         "needs": [
+            "wardes_profile_imageDAO",
             "bundles",
-            "userDAO",
             "wardes_profileDAO",
-            "wardes_profile_imageDAO"
+            "userDAO"
         ]
     }
 }

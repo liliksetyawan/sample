@@ -21,6 +21,26 @@ type WardesProfileService interface {
         err error,
     )
     
+    GetWardesProfileList(
+        ctx *context.ContextModel,
+        searchParam []model.SearchParam,
+        dto in.GetListRequest,
+    ) (
+        header map[string]string,
+        output interface{},
+        err error,
+    )
+    
+    GetWardesProfileCount(
+        ctx *context.ContextModel,
+        param model.URLParam,
+        dto interface{},
+    ) (
+        header map[string]string,
+        output interface{},
+        err error,
+    )
+    
     GetDTO() interface{}
     GetListScope() []string
     GetListValidLimit() []int
@@ -39,16 +59,16 @@ import (
     "github.com/nexsoft-git/nexcommon/services"
     "github.com/nexsoft-git/nexcommon/bundles"
     "nexsoft.co.id/example/dto/in"
-    userDAO "nexsoft.co.id/example/dao/user"
-    wardes_profileDAO "nexsoft.co.id/example/dao/wardes_profile"
-    wardes_profile_imageDAO "nexsoft.co.id/example/dao/wardes_profile_image"
+    WardesProfileImageDAO "nexsoft.co.id/example/dao/wardes_profile_image"
+    WardesProfileDAO "nexsoft.co.id/example/dao/wardes_profile"
+    UserDAO "nexsoft.co.id/example/dao/user"
 )
 
 func NewWardesProfileService(
-    bundles bundles.Bundles,
-    userDAO userDAO.UserDAO,
-    wardes_profileDAO wardes_profileDAO.WardesProfileDAO,
     wardes_profile_imageDAO wardes_profile_imageDAO.WardesProfileImageDAO,
+    bundles bundles.Bundles,
+    wardes_profileDAO wardes_profileDAO.WardesProfileDAO,
+    userDAO userDAO.UserDAO,
 ) WardesProfileService {
 
     operator := make(services.DefaultOperators)
@@ -59,10 +79,10 @@ func NewWardesProfileService(
     }
 
     service := &wardes_profileService{ 
-        bundles: bundles,
-        userDAO: userDAO,
-        wardes_profileDAO: wardes_profileDAO,
         wardes_profile_imageDAO: wardes_profile_imageDAO,
+        bundles: bundles,
+        wardes_profileDAO: wardes_profileDAO,
+        userDAO: userDAO,
         searchOperator: operator,
     }
 
@@ -70,10 +90,10 @@ func NewWardesProfileService(
 }
 
 type wardes_profileService struct { 
-    bundles bundles.Bundles
-    userDAO userDAO.UserDAO
-    wardes_profileDAO wardes_profileDAO.WardesProfileDAO
     wardes_profile_imageDAO wardes_profile_imageDAO.WardesProfileImageDAO
+    bundles bundles.Bundles
+    wardes_profileDAO wardes_profileDAO.WardesProfileDAO
+    userDAO userDAO.UserDAO
     searchOperator services.DefaultOperators
 }
 
@@ -174,7 +194,92 @@ func (s *wardes_profileService) doInsertWardesProfile (
 	return
 
 }
+***filename: wardes_profile/get_wardes_profile_list.go
+package wardes_profile
+
+import (
+    "github.com/nexsoft-git/nexcommon/model"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dto/in"
+    "github.com/nexsoft-git/nexcommon/services"
+    "nexsoft.co.id/example/repository"
+    out2 "github.com/nexsoft-git/nexcommon/dto/out"
+    // TODO: Add other import package if necessary. Delete this line of TODO if you not adding other import package
+)
+
+func (s *wardes_profileService) GetWardesProfileList(
+    ctx *context.ContextModel,
+    searchParam []model.SearchParam,
+    dto in.GetListRequest,
+) (
+    header map[string]string,
+    output interface{},
+    err error,
+) {
+
+    // TODO: Implement the getlist function logic here
+    // @Descriptions:
+        /*
+            - undefined
+        */
+    // @Method Type: getlist
+
+    result := //TODO: ***set the result of function here or delete this declaration when the result is nil
+    output = out2.DefaultResponsePayloadMessage{
+		Status: out2.DefaultResponsePayloadStatus{
+			Code:    "OK",
+			Message: s.bundles.ReadMessageBundle("wardes_profile", "SUCCESS_GET_WARDES_PROFILE_LIST_MESSAGE", ctx.AuthAccessTokenModel.Locale, nil),
+		},
+		Data: result,
+	}
+
+	return
+
+}
+***filename: wardes_profile/get_wardes_profile_count.go
+package wardes_profile
+
+import (
+    "github.com/nexsoft-git/nexcommon/model"
+    "github.com/nexsoft-git/nexcommon/context"
+    "nexsoft.co.id/example/dto/out"
+    "nexsoft.co.id/example/repository"
+    out2 "github.com/nexsoft-git/nexcommon/dto/out"
+    // TODO: Add other import package if necessary. Delete this line of TODO if you not adding other import package
+)
+
+func (s *wardes_profileService) GetWardesProfileCount(
+    ctx *context.ContextModel,
+    param model.URLParam,
+    dto interface{},
+) (
+    header map[string]string,
+    output interface{},
+    err error,
+) {
+    
+
+    // TODO: Implement the default function logic here
+    // @Descriptions:
+        /*
+        - undefined*/
+    // @Audit Enabled: False
+    // @DTO Type: default
+    // @Method Type: default
+
+    result := //TODO: ***set the result of function here
+    output = out2.DefaultResponsePayloadMessage{
+		Status: out2.DefaultResponsePayloadStatus{
+			Code:    "OK",
+			Message: s.bundles.ReadMessageBundle("wardes_profile", "SUCCESS_GET_WARDES_PROFILE_COUNT_MESSAGE", ctx.AuthAccessTokenModel.Locale, nil),
+		},
+		Data: result,
+	}
+
+	return
+
+}
 
 ```
-***List DAO : user, wardes_profile, wardes_profile_image
-***List i18n : SUCCESS_INSERT_WARDES_PROFILE_MESSAGE
+***List DAO : wardes_profile_image, wardes_profile, user
+***List i18n : SUCCESS_INSERT_WARDES_PROFILE_MESSAGE, SUCCESS_GET_WARDES_PROFILE_LIST_MESSAGE, SUCCESS_GET_WARDES_PROFILE_COUNT_MESSAGE

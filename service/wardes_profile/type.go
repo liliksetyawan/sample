@@ -19,6 +19,26 @@ type WardesProfileService interface {
         err error,
     )
     
+    GetWardesProfileList(
+        ctx *context.ContextModel,
+        searchParam []model.SearchParam,
+        dto in.GetListRequest,
+    ) (
+        header map[string]string,
+        output interface{},
+        err error,
+    )
+    
+    GetWardesProfileCount(
+        ctx *context.ContextModel,
+        param model.URLParam,
+        dto interface{},
+    ) (
+        header map[string]string,
+        output interface{},
+        err error,
+    )
+    
     GetDTO() interface{}
     GetListScope() []string
     GetListValidLimit() []int
