@@ -17,7 +17,52 @@
         ],
         "wardes_profile_image": [],
         "user": [],
-        "person_profile": []
+        "person_profile": [
+            {
+                "functions": [
+                    "GetListPersonProfile",
+                    "CountListPersonProfile"
+                ],
+                "attributes": [
+                    {
+                        "field": "person_profile_id",
+                        "type": "number",
+                        "operator": "equal, greater, greater_equal, less, less_equal",
+                        "description": "Unique identifier for person profile"
+                    },
+                    {
+                        "field": "title_id",
+                        "type": "number",
+                        "operator": "equal, greater, greater_equal, less, less_equal",
+                        "description": "Identifier for title"
+                    },
+                    {
+                        "field": "title_name",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "Name of the title"
+                    },
+                    {
+                        "field": "first_name",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "First name of the person"
+                    },
+                    {
+                        "field": "last_name",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "Last name of the person"
+                    },
+                    {
+                        "field": "sex",
+                        "type": "char",
+                        "operator": "equal, like",
+                        "description": "Gender of the person"
+                    }
+                ]
+            }
+        ]
     },
     "repository": {
         "wardes_profile": [
@@ -310,6 +355,31 @@
                         "updated_client"
                     ],
                     "description": "Insert a new person profile record"
+                },
+                {
+                    "name": "GetListPersonProfile",
+                    "param": "context, in.GetListRequest, []model.SearchParam",
+                    "table": "person_profile",
+                    "return": "[]interface{}, error",
+                    "attribute": [
+                        "person_profile_id",
+                        "title_id",
+                        "title_name",
+                        "first_name",
+                        "last_name",
+                        "sex"
+                    ],
+                    "description": "Get list of person profiles with pagination and search capabilities"
+                },
+                {
+                    "name": "CountListPersonProfile",
+                    "param": "context, in.GetListRequest, []model.SearchParam",
+                    "table": "person_profile",
+                    "return": "int, error",
+                    "attribute": [
+                        "count(id)"
+                    ],
+                    "description": "Count total person profiles with search capabilities"
                 }
             ],
             "db": "postgresql"

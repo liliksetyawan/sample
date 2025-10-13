@@ -1,15 +1,35 @@
 ```go
 ***filename: person_profile/type.go
 package person_profile
-                                                                                                            
+                                                                                                                                                                                                                                                                                            
 
 import (
     "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dto/in"
+    "github.com/nexsoft-git/nexcommon/model"
     "database/sql"
     "nexsoft.co.id/example/repository"
 )
 
 type PersonProfileDAO interface {
+    
+    GetListPersonProfile(
+        ctx *context.ContextModel,
+        dtoIn in.GetListRequest,
+        searchParams []model.SearchParam,
+    ) (
+        []interface{}, 
+        error, 
+    )
+    
+    CountListPersonProfile(
+        ctx *context.ContextModel,
+        dtoIn in.GetListRequest,
+        searchParams []model.SearchParam,
+    ) (
+        int, 
+        error, 
+    )
     
     InsertPersonProfile(
         ctx *context.ContextModel,
@@ -61,6 +81,76 @@ func NewPersonProfilePostgresqlSQLDAO(
         },
         db: db,
     }
+}
+
+***filename: person_profile/get_list_person_profile.go
+package person_profile
+
+import (
+    //you allowed to add new import and delete the unused import from this section for imported package on file get_list_person_profile.go every file will containing 1 function
+    "fmt"
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/model"
+    "github.com/nexsoft-git/nexcommon/dto/in"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: Get list of person profiles with pagination and search capabilities
+func (d *person_profilePostgresqlSQLDAO) GetListPersonProfile(
+     ctx *context.ContextModel,
+     dtoIn in.GetListRequest,
+     searchParams []model.SearchParam,
+) (
+     []interface{}, 
+     error, 
+) {
+    //TODO Implement the DAO function here
+    // @Affected Field: person_profile_id, title_id, title_name, first_name, last_name, sex
+    // @Affected Table: dao.GetDBTable(ctx, "person_profile") 
+    // @Valid Search:
+    // - person_profile_id : Unique identifier for person profile
+    // - title_id : Identifier for title
+    // - title_name : Name of the title
+    // - first_name : First name of the person
+    // - last_name : Last name of the person
+    // - sex : Gender of the person
+}
+
+***filename: person_profile/count_list_person_profile.go
+package person_profile
+
+import (
+    //you allowed to add new import and delete the unused import from this section for imported package on file count_list_person_profile.go every file will containing 1 function
+    "fmt"
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/model"
+    "github.com/nexsoft-git/nexcommon/dto/in"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: Count total person profiles with search capabilities
+func (d *person_profilePostgresqlSQLDAO) CountListPersonProfile(
+     ctx *context.ContextModel,
+     dtoIn in.GetListRequest,
+     searchParams []model.SearchParam,
+) (
+     int, 
+     error, 
+) {
+    //TODO Implement the DAO function here
+    // @Affected Field: count(id)
+    // @Affected Table: dao.GetDBTable(ctx, "person_profile") 
+    // @Valid Search:
+    // - person_profile_id : Unique identifier for person profile
+    // - title_id : Identifier for title
+    // - title_name : Name of the title
+    // - first_name : First name of the person
+    // - last_name : Last name of the person
+    // - sex : Gender of the person
 }
 
 ***filename: person_profile/insert_person_profile.go

@@ -2,8 +2,8 @@
 package person_profile
 
 import (
-    "fmt"
     "database/sql"
+    "fmt"
     "github.com/nexsoft-git/nexcommon/context"
     "github.com/nexsoft-git/nexcommon/dao"
     "nexsoft.co.id/example/repository"
@@ -24,10 +24,10 @@ func (d *person_profilePostgresqlSQLDAO) GetPersonProfileForUpdate(
         WHERE uuid_key = $1
     `, dao.GetDBTable(ctx, "person_profile"))
 
-    param := []interface{}{uuid_key}
+    params := []interface{}{uuid_key}
     if ctx.Limitation.UserID != 0 {
         query += " AND created_by = $2 "
-        param = append(param, ctx.Limitation.UserID)
+        params = append(params, ctx.Limitation.UserID)
     }
 
     query += " FOR UPDATE "
@@ -38,7 +38,7 @@ func (d *person_profilePostgresqlSQLDAO) GetPersonProfileForUpdate(
     }
 
     var model repository.PersonProfileModel
-    err = stmt.QueryRow(param...).Scan(&model.ID, &model.UpdatedAt)
+    err = stmt.QueryRow(params...).Scan(&model.ID, &model.UpdatedAt)
 
     return model, err
 }
