@@ -95,10 +95,10 @@
             100
         ],
         "needs": [
-            "bundles",
             "userDAO",
-            "wardes_profileDAO",
-            "wardes_profile_imageDAO"
+            "wardes_profile_imageDAO",
+            "bundles",
+            "wardes_profileDAO"
         ]
     }
 }
