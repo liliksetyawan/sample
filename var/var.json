@@ -14,51 +14,6 @@
         "wardes_profile_image": "nexchief"
     },
     "valid_search": {
-        "person_profile": [
-            {
-                "functions": [
-                    "GetListPersonProfile",
-                    "CountListPersonProfile"
-                ],
-                "attributes": [
-                    {
-                        "field": "person_profile_id",
-                        "type": "number",
-                        "operator": "equal, greater, greater_equal, less, less_equal",
-                        "description": "Unique identifier for person profile"
-                    },
-                    {
-                        "field": "title_id",
-                        "type": "number",
-                        "operator": "equal, greater, greater_equal, less, less_equal",
-                        "description": "Identifier for title"
-                    },
-                    {
-                        "field": "title_name",
-                        "type": "char",
-                        "operator": "equal, like",
-                        "description": "Name of the title"
-                    },
-                    {
-                        "field": "first_name",
-                        "type": "char",
-                        "operator": "equal, like",
-                        "description": "First name of the person"
-                    },
-                    {
-                        "field": "last_name",
-                        "type": "char",
-                        "operator": "equal, like",
-                        "description": "Last name of the person"
-                    },
-                    {
-                        "field": "sex",
-                        "type": "char",
-                        "operator": "equal, like",
-                        "description": "Gender of the person"
-                    }
-                ]
-            }
-        ]
+        "wardes_profile": []
     }
 }

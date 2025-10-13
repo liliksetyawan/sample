@@ -281,6 +281,16 @@
                         "count(id)"
                     ],
                     "description": "Count total wardes profile records for pagination"
+                },
+                {
+                    "name": "UpdateWardesProfileStatus",
+                    "param": "context, tx, repository.WardesProfileModel",
+                    "table": "wardes_profile",
+                    "return": "error",
+                    "attribute": [
+                        "status"
+                    ],
+                    "description": "Update wardes profile status"
                 }
             ]
         },

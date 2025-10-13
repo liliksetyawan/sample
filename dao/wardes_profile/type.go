@@ -1,5 +1,5 @@
 package wardes_profile
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 
 import (
     "github.com/nexsoft-git/nexcommon/context"
@@ -10,6 +10,14 @@ import (
 )
 
 type WardesProfileDAO interface {
+    
+    UpdateWardesProfileStatus(
+        ctx *context.ContextModel,
+        tx *sql.Tx,
+        dtoIn repository.WardesProfileModel,
+    ) (
+        error, 
+    )
     
     InsertWardesProfile(
         ctx *context.ContextModel,

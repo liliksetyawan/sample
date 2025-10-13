@@ -33,11 +33,11 @@ CREATE TABLE IF NOT EXISTS "user" (
     username_nexvin VARCHAR(255),
     password_nexvin VARCHAR(255),
     created_by BIGINT DEFAULT 0,
-    created_client VARCHAR(50),
+    created_client VARCHAR(256),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_by BIGINT,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_client VARCHAR(50),
+    updated_client VARCHAR(256),
     deleted BOOLEAN DEFAULT false
 );
 
@@ -83,16 +83,16 @@ CREATE TABLE IF NOT EXISTS "wardes_profile" (
     company_profile_id BIGINT,
     code VARCHAR(38),
     schema VARCHAR(256),
-    status VARCHAR(256) DEFAULT 'A',
+    status record_status DEFAULT 'A',
     active_date DATE,
     resign_date DATE,
     is_nexwise BOOLEAN DEFAULT FALSE,
     deadline_date DATE,
-    created_by BIGINT NOT NULL,
+    created_by BIGINT NOT NULL DEFAULT 0,
     created_client VARCHAR(256) NOT NULL,
-    created_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_by BIGINT NOT NULL,
-    updated_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_client VARCHAR(256) NOT NULL,
     deleted BOOLEAN NOT NULL DEFAULT FALSE,
     new_profile_approval_status VARCHAR(30)
@@ -134,7 +134,7 @@ CREATE TABLE IF NOT EXISTS "person_profile" (
     created_client VARCHAR(256),
     updated_client VARCHAR(256),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    created_by BIGINT,
+    created_by BIGINT DEFAULT 0,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_by BIGINT,
     deleted BOOLEAN DEFAULT false
@@ -161,7 +161,7 @@ CREATE TABLE IF NOT EXISTS "parameter" (
     created_client VARCHAR(256),
     updated_client VARCHAR(256),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    created_by BIGINT,
+    created_by BIGINT DEFAULT 0,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_by BIGINT,
     deleted BOOLEAN DEFAULT false
@@ -174,11 +174,11 @@ CREATE TABLE IF NOT EXISTS "wardes_profile_image" (
     wardes_profile_id BIGINT,
     type CHAR(1),
     path_image VARCHAR(256),
-    created_by BIGINT NOT NULL,
+    created_by BIGINT NOT NULL DEFAULT 0,
     created_client VARCHAR(256) NOT NULL,
-    created_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_by BIGINT NOT NULL,
-    updated_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_client VARCHAR(256) NOT NULL,
     deleted BOOLEAN NOT NULL DEFAULT FALSE
 );

@@ -1,7 +1,7 @@
 ```go
 ***filename: wardes_profile/type.go
 package wardes_profile
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 
 import (
     "github.com/nexsoft-git/nexcommon/context"
@@ -12,6 +12,14 @@ import (
 )
 
 type WardesProfileDAO interface {
+    
+    UpdateWardesProfileStatus(
+        ctx *context.ContextModel,
+        tx *sql.Tx,
+        dtoIn repository.WardesProfileModel,
+    ) (
+        error, 
+    )
     
     InsertWardesProfile(
         ctx *context.ContextModel,
@@ -104,6 +112,31 @@ func NewWardesProfilePostgresqlSQLDAO(
         },
         db: db,
     }
+}
+
+***filename: wardes_profile/update_wardes_profile_status.go
+package wardes_profile
+
+import (
+    //you allowed to add new import and delete the unused import from this section for imported package on file update_wardes_profile_status.go every file will containing 1 function
+    "fmt"
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: Update wardes profile status
+func (d *wardes_profilePostgresqlSQLDAO) UpdateWardesProfileStatus(
+     ctx *context.ContextModel,
+     tx *sql.Tx,
+     dtoIn repository.WardesProfileModel,
+) (
+     error, 
+) {
+    //TODO Implement the DAO function here
+    // @Affected Field: status
+    // @Affected Table: dao.GetDBTable(ctx, "wardes_profile") 
 }
 
 ***filename: wardes_profile/insert_wardes_profile.go
