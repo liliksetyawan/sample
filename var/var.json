@@ -15,5 +15,6 @@
     },
     "valid_search": {
         "wardes_profile": []
-    }
+    },
+    "kong_enabled": true
 }

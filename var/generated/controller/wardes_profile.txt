@@ -1,4 +1,3 @@
-```
 Endpoint:
 1. wardes_profile:
     - Features:
@@ -31,6 +30,16 @@ Endpoint:
             - Permission: master.wardes_profile.wardes_profile:view
             - ActivityEnabled: false
             - Description: Get count of wardes profiles
+            - InternalAPI: false
+        -> Name: updateWardesProfile
+            - URL: /v1/wardes_profile/{uuid_key}
+            - Type: default
+            - Auth: UserToken
+            - Method: PUT
+            - Menu: update
+            - Permission: master.wardes_profile.wardes_profile:update
+            - ActivityEnabled: false
+            - Description: Update existing wardes profile
             - InternalAPI: false
     - DTO:
         -> In:
@@ -409,6 +418,11 @@ Endpoint:
                             - Enum: undefined
                             - AutoFix: undefined
                             - Reserved: ["undefined"]
+                        -> updated_at:
+                            - Type: time.Time
+                            - Required: [update]
+                            - EmptyAllowed: false
+                            - DateFormat: default
         -> Out:
             - WardesProfileDTOOut:
                 -> id: int64
@@ -535,20 +549,3 @@ Endpoint:
             -> lowercase: <default>
             -> username: <default>
             -> additional_info: <default>
-            -> phone: <default>
-            -> email: <default>
-            -> country_code: <default>
-            -> alphanumeric: <default>
-            -> text_only: <default>
-            -> name: <default>
-        - DateFormat:
-            -> default: <default>
-            -> date_only: <default>
-            -> duration: <default>
-        - Enum:
-            -> record_status: A, N, P
-            -> sharing_permission: edit, view
-            -> boolean_permission: Y, N
-        - AutoFix:
-            -> uppercase: <default>
-            -> lowercase

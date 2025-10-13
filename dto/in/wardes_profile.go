@@ -51,4 +51,5 @@ type WardesProfileDTOIn struct {
    IsNexwise    bool `json:"is_nexwise" required:"insert,update"`
    DeadlineDate    time.Time `json:"deadline_date" required:"insert,update"`
    NewProfileApprovalStatus    string `json:"new_profile_approval_status" required:"insert,update" min:"1" max:"50" regex:"text_only"`
+   UpdatedAt    time.Time `json:"updated_at" required:"update"`
 }
