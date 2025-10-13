@@ -83,7 +83,7 @@ CREATE TABLE "wardes_profile" (
     company_profile_id BIGINT,
     code VARCHAR(38),
     schema VARCHAR(256),
-    status record_status DEFAULT 'A',
+    status VARCHAR(256) DEFAULT 'A',
     active_date DATE,
     resign_date DATE,
     is_nexwise BOOLEAN DEFAULT FALSE,

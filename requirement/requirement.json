@@ -16,7 +16,8 @@
             }
         ],
         "wardes_profile_image": [],
-        "user": []
+        "user": [],
+        "person_profile": []
     },
     "repository": {
         "wardes_profile": [
@@ -52,6 +53,12 @@
             {
                 "name": "UserModel",
                 "description": "same as user table in database"
+            }
+        ],
+        "person_profile": [
+            {
+                "name": "PersonProfileModel",
+                "description": "same as person_profile table in database"
             }
         ]
     },
@@ -276,6 +283,33 @@
                         "updated_client"
                     ],
                     "description": "Insert a new user record"
+                }
+            ],
+            "db": "postgresql"
+        },
+        "person_profile": {
+            "functions": [
+                {
+                    "name": "InsertPersonProfile",
+                    "param": "context, tx, repository.PersonProfileModel",
+                    "table": "person_profile",
+                    "return": "repository.PersonProfileModel, error",
+                    "attribute": [
+                        "person_profile_id",
+                        "title_id",
+                        "title_name",
+                        "first_name",
+                        "last_name",
+                        "sex",
+                        "nik",
+                        "created_at",
+                        "created_by",
+                        "created_client",
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "Insert a new person profile record"
                 }
             ],
             "db": "postgresql"
