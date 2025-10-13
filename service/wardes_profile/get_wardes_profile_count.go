@@ -18,11 +18,8 @@ func (s *wardes_profileService) GetWardesProfileCount(
     output interface{},
     err error,
 ) {
-
-    var (
-        dbResult int
-        result   out.InitiateGetListData
-    )
+    
+    var dbResult int
 
     dbResult, err = s.wardesProfileDAO.GetCountWardesProfile(ctx, dto)
     if err != nil {
@@ -33,7 +30,7 @@ func (s *wardes_profileService) GetWardesProfileCount(
         return
     }
 
-    result = services.ToInitiateGetListData(s)
+    result := services.ToInitiateGetListData(s)
     result.CountData = dbResult
 
     output = out2.DefaultResponsePayloadMessage{
@@ -45,4 +42,5 @@ func (s *wardes_profileService) GetWardesProfileCount(
     }
 
     return
+
 }

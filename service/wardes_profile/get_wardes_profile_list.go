@@ -5,9 +5,9 @@ import (
     "github.com/nexsoft-git/nexcommon/context"
     "github.com/nexsoft-git/nexcommon/dto/in"
     "github.com/nexsoft-git/nexcommon/services"
-    "nexsoft.co.id/example/dto/out"
     "nexsoft.co.id/example/repository"
     out2 "github.com/nexsoft-git/nexcommon/dto/out"
+    "nexsoft.co.id/example/dto/out"
     "github.com/nexsoft-git/nexlogger/log"
 )
 
@@ -21,10 +21,8 @@ func (s *wardes_profileService) GetWardesProfileList(
     err error,
 ) {
 
-    var (
-        dbResult []repository.WardesProfileModel
-        result   []out.ListWardesProfileDTOOut
-    )
+    var dbResult []repository.WardesProfileModel
+    var result []out.ListWardesProfileDTOOut
 
     dbResult, err = s.wardesProfileDAO.GetListWardesProfile(ctx, dto, searchParam)
     if err != nil {
@@ -104,4 +102,5 @@ func (s *wardes_profileService) GetWardesProfileList(
     }
 
     return
+
 }

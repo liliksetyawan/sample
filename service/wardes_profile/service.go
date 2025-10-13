@@ -5,16 +5,16 @@ import (
     "github.com/nexsoft-git/nexcommon/services"
     "github.com/nexsoft-git/nexcommon/bundles"
     "nexsoft.co.id/example/dto/in"
-    WardesProfileImageDAO "nexsoft.co.id/example/dao/wardes_profile_image"
-    WardesProfileDAO "nexsoft.co.id/example/dao/wardes_profile"
-    UserDAO "nexsoft.co.id/example/dao/user"
+    userDAO "nexsoft.co.id/example/dao/user"
+    wardesProfileDAO "nexsoft.co.id/example/dao/wardes_profile"
+    wardesProfileImageDAO "nexsoft.co.id/example/dao/wardes_profile_image"
 )
 
 func NewWardesProfileService(
-    wardes_profile_imageDAO wardes_profile_imageDAO.WardesProfileImageDAO,
     bundles bundles.Bundles,
-    wardes_profileDAO wardes_profileDAO.WardesProfileDAO,
-    userDAO userDAO.UserDAO,
+    userdao userDAO.UserDAO,
+    wardesProfiledao wardesProfileDAO.WardesProfileDAO,
+    wardesProfileImagedao wardesProfileImageDAO.WardesProfileImageDAO,
 ) WardesProfileService {
 
     operator := make(services.DefaultOperators)
@@ -25,10 +25,10 @@ func NewWardesProfileService(
     }
 
     service := &wardes_profileService{ 
-        wardes_profile_imageDAO: wardes_profile_imageDAO,
         bundles: bundles,
-        wardes_profileDAO: wardes_profileDAO,
         userDAO: userDAO,
+        wardes_profileDAO: wardes_profileDAO,
+        wardes_profile_imageDAO: wardes_profile_imageDAO,
         searchOperator: operator,
     }
 
@@ -36,10 +36,10 @@ func NewWardesProfileService(
 }
 
 type wardes_profileService struct { 
-    wardes_profile_imageDAO wardes_profile_imageDAO.WardesProfileImageDAO
     bundles bundles.Bundles
-    wardes_profileDAO wardes_profileDAO.WardesProfileDAO
     userDAO userDAO.UserDAO
+    wardes_profileDAO wardes_profileDAO.WardesProfileDAO
+    wardes_profile_imageDAO wardes_profile_imageDAO.WardesProfileImageDAO
     searchOperator services.DefaultOperators
 }
 
