@@ -41,6 +41,16 @@ Endpoint:
             - ActivityEnabled: false
             - Description: Update existing wardes profile
             - InternalAPI: false
+        -> Name: updateStatusWardesProfile
+            - URL: /v1/wardes_profile/{uuid_key}/status
+            - Type: default
+            - Auth: UserToken
+            - Method: PUT
+            - Menu: update
+            - Permission: master.wardes_profile.wardes_profile:update
+            - ActivityEnabled: false
+            - Description: Update status of wardes profile
+            - InternalAPI: false
     - DTO:
         -> In:
             - Validator:
@@ -423,6 +433,23 @@ Endpoint:
                             - Required: [update]
                             - EmptyAllowed: false
                             - DateFormat: default
+                -> UpdateStatusWardesProfileDTOIn:
+                    - Fields:
+                        -> status:
+                            - Type: string
+                            - Required: [update]
+                            - EmptyAllowed: false
+                            - Min: 1
+                            - Max: 50
+                            - Regex: text_only
+                            - Enum: undefined
+                            - AutoFix: undefined
+                            - Reserved: ["undefined"]
+                        -> updated_at:
+                            - Type: time.Time
+                            - Required: [update]
+                            - EmptyAllowed: false
+                            - DateFormat: default
         -> Out:
             - WardesProfileDTOOut:
                 -> id: int64
@@ -520,32 +547,4 @@ Endpoint:
                 -> profile_completion_status: string
                 -> company_profile_id: int64
                 -> code: string
-                -> schema: string
-                -> status: string
-                -> active_date: time
-                -> resign_date: time
-                -> is_nexwise: bool
-                -> deadline_date: time
-                -> created_by: int64
-                -> created_client: string
-                -> created_at: time
-                -> updated_by: int64
-                -> updated_at: time
-                -> updated_client: string
-                -> deleted: bool
-                -> new_profile_approval_status: string
-    - Configuration:
-        - Regex:
-            -> directory_name: <default>
-            -> data_scope: <default>
-            -> profile_name: <default>
-            -> permission: <default>
-            -> numeric: <default>
-            -> lowercase_number: <default>
-            -> fax: <default>
-            -> nik: <default>
-            -> npwp: <default>
-            -> uppercase: <default>
-            -> lowercase: <default>
-            -> username: <default>
-            -> additional_info: <default>
+                -> schema

@@ -39,6 +39,16 @@ type WardesProfileService interface {
         err error,
     )
     
+    UpdateWardesProfile(
+        ctx *context.ContextModel,
+        param model.URLParam,
+        dto interface{},
+    ) (
+        header map[string]string,
+        output interface{},
+        err error,
+    )
+    
     GetDTO() interface{}
     GetListScope() []string
     GetListValidLimit() []int

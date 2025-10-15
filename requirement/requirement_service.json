@@ -78,6 +78,32 @@
                         ""
                     ]
                 }
+            },
+            {
+                "name": "UpdateWardesProfile",
+                "url": "/v1/wardes_profile/{uuid_key}",
+                "menu": "update",
+                "permission": "master.wardes_profile.wardes_profile:update",
+                "descriptions": "Update existing wardes profile",
+                "audit_enabled": true,
+                "type": "default",
+                "dto_in": "default",
+                "dto_out": "WardesProfileDTOOut",
+                "functionality": [
+                    "Check if wardes profile exists using wardes_profileDAO.GetWardesProfile",
+                    "If wardes profile exists, update wardes profile status using wardes_profileDAO.UpdateWardesProfileStatus"
+                ],
+                "utility": {
+                    "email": [
+                        ""
+                    ],
+                    "azure": [
+                        ""
+                    ],
+                    "api_connector": [
+                        ""
+                    ]
+                }
             }
         ],
         "scope": [
@@ -96,8 +122,8 @@
         ],
         "needs": [
             "userDAO",
-            "wardes_profile_imageDAO",
             "bundles",
+            "wardes_profile_imageDAO",
             "wardes_profileDAO"
         ]
     }
