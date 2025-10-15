@@ -1,0 +1,6 @@
+{
+  "SUCCESS_UPDATE_WARDES_PROFILE_MESSAGE": "Berhasil memperbarui profil wardes",
+  "SUCCESS_INSERT_WARDES_PROFILE_MESSAGE": "Berhasil menambahkan profil wardes",
+  "SUCCESS_GET_WARDES_PROFILE_LIST_MESSAGE": "Berhasil mengambil daftar profil wardes",
+  "SUCCESS_GET_WARDES_PROFILE_COUNT_MESSAGE": "Berhasil mengambil jumlah profil wardes"
+}
