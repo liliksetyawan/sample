@@ -1,0 +1,8 @@
+{
+    "remove_unactive_wardes_profile": {
+        "functionality": [
+            "remove wardes profile that have status unactive"
+        ],
+        "needs": []
+    }
+}
