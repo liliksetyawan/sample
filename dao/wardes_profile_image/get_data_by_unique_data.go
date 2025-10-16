@@ -16,9 +16,7 @@ func (d *wardes_profile_imagePostgresqlSQLDAO) GetDataByUniqueData(
     result repository.WardesProfileImageModel,
     err error,
 ){
-    
     //No Unique Constraint on the database, return empty result
-    return
-
+    return repository.WardesProfileImageModel{}, nil
 }
 

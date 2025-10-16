@@ -528,7 +528,7 @@
         },
         "is_temporary": {
           "name": "is_temporary",
-          "data_type": "boolean <<NOT NULL, DEFAULT FALSE>>",
+          "data_type": "char(1)",
           "relationships": ""
         }
       },

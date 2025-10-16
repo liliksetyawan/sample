@@ -18,5 +18,5 @@ type WardesProfileImageModel struct {
 	UpdatedAt         sql.NullTime
 	UpdatedClient     sql.NullString
 	Deleted           sql.NullBool
-	IsTemporary       sql.NullBool
+	IsTemporary       sql.NullString
 }

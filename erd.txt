@@ -112,7 +112,7 @@ package "nexchief" {
             updated_at          : timestamp <<NOT NULL>>
             updated_client      : varchar(256) <<NOT NULL>>
             deleted             : boolean <<NOT NULL, DEFAULT FALSE>>
-            is_temporary        : boolean <<NOT NULL, DEFAULT FALSE>>
+            is_temporary        : char(1)
     }
 
      entity "person_profile" {

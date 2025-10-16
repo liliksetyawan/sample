@@ -22,14 +22,12 @@ func (d *wardes_profile_imagePostgresqlSQLDAO) InsertWardesProfileImageWithTempo
         INSERT INTO %s (
             nexchief_account_id, wardes_profile_id, type, path_image, is_temporary,
             created_at, created_by, created_client,
-            updated_at, updated_by, updated_client,
-            uuid_key
+            updated_at, updated_by, updated_client
         )
         VALUES (
             $1, $2, $3, $4, $5,
             $6, $7, $8,
-            $9, $10, $11,
-            $12
+            $9, $10, $11
         )
         RETURNING id, uuid_key;
     `, dao.GetDBTable(ctx, "wardes_profile_image"))
@@ -41,10 +39,9 @@ func (d *wardes_profile_imagePostgresqlSQLDAO) InsertWardesProfileImageWithTempo
 
     var model repository.WardesProfileImageModel
     err = stmt.QueryRow(
-        dtoIn.NexchiefAccountID.Int64, dtoIn.WardesProfileID.Int64, dtoIn.Type.String, dtoIn.PathImage.String, dtoIn.IsTemporary.Bool,
+        dtoIn.NexchiefAccountID.Int64, dtoIn.WardesProfileID.Int64, dtoIn.Type.String, dtoIn.PathImage.String, dtoIn.IsTemporary.String,
         dtoIn.CreatedAt.Time, ctx.Limitation.ServiceUserID, ctx.AuthAccessTokenModel.ClientID,
         dtoIn.UpdatedAt.Time, ctx.Limitation.ServiceUserID, ctx.AuthAccessTokenModel.ClientID,
-        dtoIn.UUIDKey.String,
     ).Scan(&model.ID, &model.UUIDKey)
     
     return model, err
