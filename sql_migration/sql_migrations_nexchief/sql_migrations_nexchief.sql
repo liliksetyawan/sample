@@ -6,7 +6,7 @@ CREATE SEQUENCE IF NOT EXISTS "person_profile_pkey_seq";
 CREATE SEQUENCE IF NOT EXISTS "parameter_pkey_seq";
 CREATE SEQUENCE IF NOT EXISTS "wardes_profile_image_pkey_seq";
 
-CREATE TABLE IF NOT EXISTS "user" (
+CREATE TABLE "user" (
     id BIGINT PRIMARY KEY DEFAULT nextval('user_pkey_seq'::regclass),
     uuid_key UUID DEFAULT public.uuid_generate_v4(),
     auth_user_id BIGINT,
@@ -33,15 +33,15 @@ CREATE TABLE IF NOT EXISTS "user" (
     username_nexvin VARCHAR(255),
     password_nexvin VARCHAR(255),
     created_by BIGINT DEFAULT 0,
-    created_client VARCHAR(256),
+    created_client VARCHAR(50),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_by BIGINT,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_client VARCHAR(256),
+    updated_client VARCHAR(50),
     deleted BOOLEAN DEFAULT false
 );
 
-CREATE TABLE IF NOT EXISTS "wardes_profile" (
+CREATE TABLE "wardes_profile" (
     id BIGINT PRIMARY KEY DEFAULT nextval('wardes_profile_pkey_seq'::regclass),
     uuid_key UUID DEFAULT public.uuid_generate_v4(),
     nexchief_account_id BIGINT,
@@ -83,22 +83,22 @@ CREATE TABLE IF NOT EXISTS "wardes_profile" (
     company_profile_id BIGINT,
     code VARCHAR(38),
     schema VARCHAR(256),
-    status record_status DEFAULT 'A',
+    status VARCHAR(50) DEFAULT 'A',
     active_date DATE,
     resign_date DATE,
     is_nexwise BOOLEAN DEFAULT FALSE,
     deadline_date DATE,
-    created_by BIGINT NOT NULL DEFAULT 0,
+    created_by BIGINT NOT NULL,
     created_client VARCHAR(256) NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP NOT NULL,
     updated_by BIGINT NOT NULL,
-    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL,
     updated_client VARCHAR(256) NOT NULL,
     deleted BOOLEAN NOT NULL DEFAULT FALSE,
     new_profile_approval_status VARCHAR(30)
 );
 
-CREATE TABLE IF NOT EXISTS "person_profile" (
+CREATE TABLE "person_profile" (
     id BIGINT PRIMARY KEY DEFAULT nextval('person_profile_pkey_seq'::regclass),
     uuid_key UUID DEFAULT public.uuid_generate_v4(),
     person_profile_id BIGINT,
@@ -131,16 +131,16 @@ CREATE TABLE IF NOT EXISTS "person_profile" (
     email VARCHAR(100),
     photo TEXT,
     last_sync TIMESTAMP,
-    created_client VARCHAR(256),
-    updated_client VARCHAR(256),
+    created_client VARCHAR(50),
+    updated_client VARCHAR(50),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    created_by BIGINT DEFAULT 0,
+    created_by BIGINT,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_by BIGINT,
     deleted BOOLEAN DEFAULT false
 );
 
-CREATE TABLE IF NOT EXISTS "parameter" (
+CREATE TABLE "parameter" (
     id BIGINT PRIMARY KEY DEFAULT nextval('parameter_pkey_seq'::regclass),
     uuid_key UUID DEFAULT public.uuid_generate_v4(),
     parameter_group_id BIGINT,
@@ -158,29 +158,30 @@ CREATE TABLE IF NOT EXISTS "parameter" (
     select_list_name VARCHAR(255),
     description VARCHAR(200),
     parameter_id BIGINT,
-    created_client VARCHAR(256),
-    updated_client VARCHAR(256),
+    created_client VARCHAR(50),
+    updated_client VARCHAR(50),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    created_by BIGINT DEFAULT 0,
+    created_by BIGINT,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_by BIGINT,
     deleted BOOLEAN DEFAULT false
 );
 
-CREATE TABLE IF NOT EXISTS "wardes_profile_image" (
+CREATE TABLE "wardes_profile_image" (
     id BIGINT PRIMARY KEY DEFAULT nextval('wardes_profile_image_pkey_seq'::regclass),
     uuid_key UUID DEFAULT public.uuid_generate_v4(),
     nexchief_account_id BIGINT,
     wardes_profile_id BIGINT,
     type CHAR(1),
     path_image VARCHAR(256),
-    created_by BIGINT NOT NULL DEFAULT 0,
+    created_by BIGINT NOT NULL,
     created_client VARCHAR(256) NOT NULL,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP NOT NULL,
     updated_by BIGINT NOT NULL,
-    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL,
     updated_client VARCHAR(256) NOT NULL,
-    deleted BOOLEAN NOT NULL DEFAULT FALSE
+    deleted BOOLEAN NOT NULL DEFAULT FALSE,
+    is_temporary BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 ALTER TABLE "wardes_profile" ADD CONSTRAINT "uq_wardes_profile_username" UNIQUE (username);

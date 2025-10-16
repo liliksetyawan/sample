@@ -314,6 +314,20 @@
                         "updated_client"
                     ],
                     "description": "Insert a new wardes profile image record"
+                },
+                {
+                    "name": "InsertWardesProfileImageWithTemporary",
+                    "param": "context, tx, repository.WardesProfileImageModel",
+                    "table": "wardes_profile_image",
+                    "return": "repository.WardesProfileImageModel, error",
+                    "attribute": [
+                        "nexchief_account_id",
+                        "wardes_profile_id",
+                        "type",
+                        "path_image",
+                        "is_temporary"
+                    ],
+                    "description": "Insert a new wardes_profile_image record with temporary flag"
                 }
             ],
             "db": "postgresql"

@@ -525,6 +525,11 @@
           "name": "deleted",
           "data_type": "boolean <<NOT NULL, DEFAULT FALSE>>",
           "relationships": ""
+        },
+        "is_temporary": {
+          "name": "is_temporary",
+          "data_type": "boolean <<NOT NULL, DEFAULT FALSE>>",
+          "relationships": ""
         }
       },
       "unique_constraints": [],

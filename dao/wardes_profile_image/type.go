@@ -1,4 +1,5 @@
 package wardes_profile_image
+                                                                                                                                                                                
 
 import (
     "github.com/nexsoft-git/nexcommon/context"
@@ -7,6 +8,15 @@ import (
 )
 
 type WardesProfileImageDAO interface {
+    
+    InsertWardesProfileImageWithTemporary(
+        ctx *context.ContextModel,
+        tx *sql.Tx,
+        dtoIn repository.WardesProfileImageModel,
+    ) (
+        repository.WardesProfileImageModel, 
+        error, 
+    )
     
     InsertWardesProfileImage(
         ctx *context.ContextModel,
@@ -35,3 +45,4 @@ type WardesProfileImageDAO interface {
     )
 
 }
+
