@@ -62,14 +62,14 @@ package "nexchief" {
         building_ownership           : varchar(256)
         building_type                : varchar(256)
         building_form                : varchar(256)
-        building_width_first_floor   : float8
-        building_length_first_floor  : float8
-        building_height_first_floor  : float8
-        building_width_second_floor  : float8
-        building_length_second_floor : float8
-        building_height_second_floor : float8
-        parking_lot_width            : float8
-        parking_lot_length           : float8
+        building_width_first_floor   : double precision
+        building_length_first_floor  : double precision
+        building_height_first_floor  : double precision
+        building_width_second_floor  : double precision
+        building_length_second_floor : double precision
+        building_height_second_floor : double precision
+        parking_lot_width            : double precision
+        parking_lot_length           : double precision
         village_internet_connection  : varchar(256)
         investment_capital           : text
         investment_capital_source    : varchar(256)

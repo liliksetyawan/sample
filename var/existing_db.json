@@ -300,42 +300,42 @@
         },
         "building_width_first_floor": {
           "name": "building_width_first_floor",
-          "data_type": "float8",
+          "data_type": "double precision",
           "relationships": ""
         },
         "building_length_first_floor": {
           "name": "building_length_first_floor",
-          "data_type": "float8",
+          "data_type": "double precision",
           "relationships": ""
         },
         "building_height_first_floor": {
           "name": "building_height_first_floor",
-          "data_type": "float8",
+          "data_type": "double precision",
           "relationships": ""
         },
         "building_width_second_floor": {
           "name": "building_width_second_floor",
-          "data_type": "float8",
+          "data_type": "double precision",
           "relationships": ""
         },
         "building_length_second_floor": {
           "name": "building_length_second_floor",
-          "data_type": "float8",
+          "data_type": "double precision",
           "relationships": ""
         },
         "building_height_second_floor": {
           "name": "building_height_second_floor",
-          "data_type": "float8",
+          "data_type": "double precision",
           "relationships": ""
         },
         "parking_lot_width": {
           "name": "parking_lot_width",
-          "data_type": "float8",
+          "data_type": "double precision",
           "relationships": ""
         },
         "parking_lot_length": {
           "name": "parking_lot_length",
-          "data_type": "float8",
+          "data_type": "double precision",
           "relationships": ""
         },
         "village_internet_connection": {

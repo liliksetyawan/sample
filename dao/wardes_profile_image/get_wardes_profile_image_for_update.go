@@ -24,10 +24,10 @@ func (d *wardes_profile_imagePostgresqlSQLDAO) GetWardesProfileImageForUpdate(
         WHERE uuid_key = $1
     `, dao.GetDBTable(ctx, "wardes_profile_image"))
 
-    param := []interface{}{uuid_key}
+    params := []interface{}{uuid_key}
     if ctx.Limitation.UserID != 0 {
         query += " AND created_by = $2 "
-        param = append(param, ctx.Limitation.UserID)
+        params = append(params, ctx.Limitation.UserID)
     }
 
     query += " FOR UPDATE "
@@ -38,7 +38,7 @@ func (d *wardes_profile_imagePostgresqlSQLDAO) GetWardesProfileImageForUpdate(
     }
 
     var model repository.WardesProfileImageModel
-    err = stmt.QueryRow(param...).Scan(&model.ID, &model.UpdatedAt)
+    err = stmt.QueryRow(params...).Scan(&model.ID, &model.UpdatedAt)
 
     return model, err
 }
