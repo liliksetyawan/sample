@@ -29,6 +29,36 @@
                         ""
                     ]
                 }
+            },
+            {
+                "name": "GetWardesProfileList",
+                "url": "/v1/wardes_profile",
+                "menu": "list",
+                "permission": "master.wardes.wardes_profile:view",
+                "descriptions": "Retrieve a list of wardes_profile records with summary fields for listing.",
+                "audit_enabled": false,
+                "type": "getlist",
+                "dto_in": "default",
+                "dto_out": "ListWardesProfileDTOOut",
+                "functionality": [
+                    "Parse and validate request DTO (List/filter/order/limit/pagination) from input",
+                    "Build DAO query params (filters, order_by, limit, offset) based on DTO",
+                    "Call wardes_profileDAO.GetListWardesProfile(ctx, queryParams)",
+                    "Handle DAO errors and map to service-level errors",
+                    "Transform DAO result set into ListWardesProfileDTOOut format",
+                    "Return ListWardesProfileDTOOut with metadata (total, limit, offset)"
+                ],
+                "utility": {
+                    "email": [
+                        ""
+                    ],
+                    "azure": [
+                        ""
+                    ],
+                    "api_connector": [
+                        ""
+                    ]
+                }
             }
         ],
         "scope": [
@@ -46,8 +76,9 @@
             100
         ],
         "needs": [
-            "bundles",
-            "wardes_profileDAO"
+            "audit_helper",
+            "wardes_profileDAO",
+            "bundles"
         ]
     }
 }

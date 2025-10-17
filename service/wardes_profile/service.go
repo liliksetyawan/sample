@@ -9,8 +9,9 @@ import (
 )
 
 func NewWardesProfileService(
-    bundles bundles.Bundles,
+    auditHelper interface{},
     wardesProfileDAO wardesProfileDAO.WardesProfileDAO,
+    bundles bundles.Bundles,
 ) WardesProfileService {
 
     operator := make(services.DefaultOperators)
@@ -21,8 +22,9 @@ func NewWardesProfileService(
     }
 
     service := &wardes_profileService{ 
-        bundles: bundles,
+        auditHelper: audit_helper,
         wardesProfileDAO: wardesProfileDAO,
+        bundles: bundles,
         searchOperator: operator,
     }
 
@@ -30,8 +32,9 @@ func NewWardesProfileService(
 }
 
 type wardes_profileService struct { 
-    bundles bundles.Bundles
+    auditHelper interface{}
     wardesProfileDAO wardesProfileDAO.WardesProfileDAO
+    bundles bundles.Bundles
     searchOperator services.DefaultOperators
 }
 

@@ -21,6 +21,16 @@ type WardesProfileService interface {
         err error,
     )
     
+    GetWardesProfileList(
+        ctx *context.ContextModel,
+        searchParam []model.SearchParam,
+        dto in.GetListRequest,
+    ) (
+        header map[string]string,
+        output interface{},
+        err error,
+    )
+    
     GetDTO() interface{}
     GetListScope() []string
     GetListValidLimit() []int
@@ -43,8 +53,9 @@ import (
 )
 
 func NewWardesProfileService(
-    bundles bundles.Bundles,
+    auditHelper interface{},
     wardesProfileDAO wardesProfileDAO.WardesProfileDAO,
+    bundles bundles.Bundles,
 ) WardesProfileService {
 
     operator := make(services.DefaultOperators)
@@ -55,8 +66,9 @@ func NewWardesProfileService(
     }
 
     service := &wardes_profileService{ 
-        bundles: bundles,
+        auditHelper: audit_helper,
         wardesProfileDAO: wardesProfileDAO,
+        bundles: bundles,
         searchOperator: operator,
     }
 
@@ -64,8 +76,9 @@ func NewWardesProfileService(
 }
 
 type wardes_profileService struct { 
-    bundles bundles.Bundles
+    auditHelper interface{}
     wardesProfileDAO wardesProfileDAO.WardesProfileDAO
+    bundles bundles.Bundles
     searchOperator services.DefaultOperators
 }
 
@@ -167,7 +180,54 @@ func (s *wardes_profileService) doInsertWardesProfile (
 	return
 
 }
+***filename: wardes_profile/get_wardes_profile_list.go
+package wardes_profile
+
+import (
+    "github.com/nexsoft-git/nexcommon/model"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dto/in"
+    "github.com/nexsoft-git/nexcommon/services"
+    "nexsoft.co.id/example/repository"
+    out2 "github.com/nexsoft-git/nexcommon/dto/out"
+    // TODO: Add other import package if necessary. Delete this line of TODO if you not adding other import package
+)
+
+func (s *wardes_profileService) GetWardesProfileList(
+    ctx *context.ContextModel,
+    searchParam []model.SearchParam,
+    dto in.GetListRequest,
+) (
+    header map[string]string,
+    output interface{},
+    err error,
+) {
+
+    // TODO: Implement the getlist function logic here
+    // @Descriptions:
+        /*
+            - Parse and validate request DTO (List/filter/order/limit/pagination) from input
+            - Build DAO query params (filters, order_by, limit, offset) based on DTO
+            - Call wardes_profileDAO.GetListWardesProfile(ctx, queryParams)
+            - Handle DAO errors and map to service-level errors
+            - Transform DAO result set into ListWardesProfileDTOOut format
+            - Return ListWardesProfileDTOOut with metadata (total, limit, offset)
+        */
+    // @Method Type: getlist
+
+    result := //TODO: ***set the result of function here or delete this declaration when the result is nil
+    output = out2.DefaultResponsePayloadMessage{
+		Status: out2.DefaultResponsePayloadStatus{
+			Code:    "OK",
+			Message: s.bundles.ReadMessageBundle("wardes_profile", "SUCCESS_GET_WARDES_PROFILE_LIST_MESSAGE", ctx.AuthAccessTokenModel.Locale, nil),
+		},
+		Data: result,
+	}
+
+	return
+
+}
 
 ```
 ***List DAO : wardes_profile
-***List i18n : SUCCESS_INSERT_WARDES_PROFILE_MESSAGE
+***List i18n : SUCCESS_INSERT_WARDES_PROFILE_MESSAGE, SUCCESS_GET_WARDES_PROFILE_LIST_MESSAGE
