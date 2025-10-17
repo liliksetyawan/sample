@@ -60,3 +60,18 @@ type WardesProfileDTOOut struct {
   Deleted    bool   `json:"deleted"`
   NewProfileApprovalStatus    string   `json:"new_profile_approval_status"`
 }
+
+type ListWardesProfileDTOOut struct {
+  ID    int64   `json:"id"`
+  Username    string   `json:"username"`
+  PersonalName    string   `json:"personal_name"`
+  Gender    string   `json:"gender"`
+  Phone    string   `json:"phone"`
+  Email    string   `json:"email"`
+  WardesProfileID    int64   `json:"wardes_profile_id"`
+  Type    string   `json:"type"`
+  PathImage    string   `json:"path_image"`
+  UserID    int64   `json:"user_id"`
+  AuthUserID    int64   `json:"auth_user_id"`
+  ClientID    int64   `json:"client_id"`
+}

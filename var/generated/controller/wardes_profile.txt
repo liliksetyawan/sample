@@ -1,3 +1,5 @@
+Your final answer must be the great and the most complete as possible, it must be outcome described.
+
 Endpoint:
 1. wardes_profile:
     - Features:
@@ -10,6 +12,26 @@ Endpoint:
             - Permission: master.wardes.wardes_profile:insert
             - ActivityEnabled: False
             - Description: Insert a new wardes_profile record into the system.
+            - InternalAPI: False
+        -> Name: getWardesProfileList
+            - URL: /v1/wardes_profile
+            - Type: getlist
+            - Auth: UserToken
+            - Method: GET
+            - Menu: list
+            - Permission: master.wardes.wardes_profile:view
+            - ActivityEnabled: False
+            - Description: Retrieve a list of wardes_profile records with summary fields for listing.
+            - InternalAPI: False
+        -> Name: countWardesProfile
+            - URL: /v1/wardes_profile/count
+            - Type: default
+            - Auth: UserToken
+            - Method: GET
+            - Menu: count
+            - Permission: master.wardes.wardes_profile:view
+            - ActivityEnabled: False
+            - Description: Return the count of wardes_profile records for pagination purposes.
             - InternalAPI: False
     - DTO:
         -> In:
@@ -398,6 +420,10 @@ Endpoint:
                             - Enum: "undefined"
                             - AutoFix: "undefined"
                             - Reserved: ["undefined"]
+                -> ListWardesProfileDTOIn:
+                    - Fields:
+                        # For list endpoint input, no mandatory fields are required per list rules.
+                        # Kept intentionally empty to allow optional pagination/filter params if needed.
         -> Out:
             - WardesProfileDTOOut:
                 -> id: int64
@@ -454,6 +480,19 @@ Endpoint:
                 -> updated_client: string
                 -> deleted: bool
                 -> new_profile_approval_status: string
+            - ListWardesProfileDTOOut:
+                -> id: int64
+                -> username: string
+                -> personal_name: string
+                -> gender: string
+                -> phone: string
+                -> email: string
+                -> wardes_profile_id: int64
+                -> type: string
+                -> path_image: string
+                -> user_id: int64
+                -> auth_user_id: int64
+                -> client_id: int64
     - Configuration:
         - Regex:
             -> directory_name: <default>
