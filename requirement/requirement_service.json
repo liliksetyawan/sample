@@ -1,0 +1,53 @@
+{
+    "wardes_profile": {
+        "features": [
+            {
+                "name": "InsertWardesProfile",
+                "url": "/v1/wardes_profile",
+                "menu": "insert",
+                "permission": "master.wardes.wardes_profile:insert",
+                "descriptions": "Insert a new wardes_profile record into the system.",
+                "audit_enabled": true,
+                "type": "default",
+                "dto_in": "default",
+                "dto_out": "WardesProfileDTOOut",
+                "functionality": [
+                    "Validate incoming DTO for required fields and proper formats; if invalid return validation error.",
+                    "Map DTO to wardes_profile entity structure for insertion.",
+                    "Call wardes_profileDAO.InsertWardesProfile(ctx, entityToInsert) to persist the new wardes_profile into table wardes_profile.",
+                    "Map inserted entity/result to WardesProfileDTOOut and return success response.",
+                    "Handle and return any DAO or internal errors with appropriate error codes/messages."
+                ],
+                "utility": {
+                    "email": [
+                        ""
+                    ],
+                    "azure": [
+                        ""
+                    ],
+                    "api_connector": [
+                        ""
+                    ]
+                }
+            }
+        ],
+        "scope": [
+            "read",
+            "write"
+        ],
+        "order": [
+            "id"
+        ],
+        "limit": [
+            10,
+            20,
+            30,
+            50,
+            100
+        ],
+        "needs": [
+            "bundles",
+            "wardes_profileDAO"
+        ]
+    }
+}

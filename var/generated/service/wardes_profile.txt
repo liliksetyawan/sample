@@ -1,0 +1,173 @@
+```go 
+***filename: wardes_profile/type.go
+package wardes_profile
+
+import (
+	"github.com/nexsoft-git/nexcommon/context"
+	"github.com/nexsoft-git/nexcommon/dto/in"
+	"github.com/nexsoft-git/nexcommon/model"
+	"github.com/nexsoft-git/nexcommon/services"
+)
+
+type WardesProfileService interface {
+    
+    InsertWardesProfile(
+        ctx *context.ContextModel,
+        param model.URLParam,
+        dto interface{},
+    ) (
+        header map[string]string,
+        output interface{},
+        err error,
+    )
+    
+    GetDTO() interface{}
+    GetListScope() []string
+    GetListValidLimit() []int
+    GetListValidOrderBy() []string
+    GetListValidSearch() []string
+    GetDefaultOperator() services.DefaultOperators
+    GetMultipartDTO() interface{}
+}
+***SPLIT**HERE***
+
+***filename: wardes_profile/service.go
+package wardes_profile
+
+import (
+    "github.com/nexsoft-git/nexcommon/model"
+    "github.com/nexsoft-git/nexcommon/services"
+    "github.com/nexsoft-git/nexcommon/bundles"
+    "nexsoft.co.id/example/dto/in"
+    wardesProfileDAO "nexsoft.co.id/example/dao/wardes_profile"
+)
+
+func NewWardesProfileService(
+    bundles bundles.Bundles,
+    wardesProfileDAO wardesProfileDAO.WardesProfileDAO,
+) WardesProfileService {
+
+    operator := make(services.DefaultOperators)
+
+    operator["wp.username"] = model.DefaultOperator{
+        DataType: "char",
+        Operator: []string{ "lk", "eq", "in" },
+    }
+
+    service := &wardes_profileService{ 
+        bundles: bundles,
+        wardesProfileDAO: wardesProfileDAO,
+        searchOperator: operator,
+    }
+
+    return service
+}
+
+type wardes_profileService struct { 
+    bundles bundles.Bundles
+    wardesProfileDAO wardesProfileDAO.WardesProfileDAO
+    searchOperator services.DefaultOperators
+}
+
+func (s *wardes_profileService) GetDTO() interface{} {
+    return &in.WardesProfileDTOIn{}
+}
+
+func (s *wardes_profileService) GetMultipartDTO() interface{} {
+    return nil
+}
+
+func (s *wardes_profileService) GetListScope() []string {
+    return []string{ "read", "write" }
+}
+
+func (s *wardes_profileService) parseDTO(dtoIn interface{}) *in.WardesProfileDTOIn {
+    return dtoIn.(*in.WardesProfileDTOIn)
+}
+
+func (s *wardes_profileService) GetListValidLimit() []int {
+    return []int{ 10, 20, 30, 50, 100 }
+}
+
+func (s *wardes_profileService) GetListValidOrderBy() []string {
+    return []string{ "id" }
+}
+
+func (s *wardes_profileService) GetListValidSearch() []string {
+    return s.searchOperator.GetListValidSearch()
+}
+
+func (s *wardes_profileService) GetDefaultOperator() services.DefaultOperators {
+    return s.searchOperator
+}
+***SPLIT**HERE***
+***filename: wardes_profile/insert_wardes_profile.go
+package wardes_profile
+
+import (
+    "github.com/nexsoft-git/nexcommon/model"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/services/audit_helper"
+    "nexsoft.co.id/example/dto/out"
+    "nexsoft.co.id/example/repository"
+    out2 "github.com/nexsoft-git/nexcommon/dto/out"
+    // TODO: Add other import package if necessary. Delete this line of TODO if you not adding other import package
+)
+
+func (s *wardes_profileService) InsertWardesProfile(
+    ctx *context.ContextModel,
+    param model.URLParam,
+    dto interface{},
+) (
+    header map[string]string,
+    output interface{},
+    err error,
+) {
+    audit, err := s.auditHelper.InitAuditService(ctx, dto, s.doInsertWardesProfile)
+	if err != nil {
+		return
+	}
+
+	output, err = audit.CompletedAuditData()
+	return
+}
+
+func (s *wardes_profileService) doInsertWardesProfile (
+	ctx *context.ContextModel,
+	tx *sql.Tx,
+	dto interface{},
+	timeNow time.Time,
+) (
+	output interface{},
+	audit []audit_helper.AuditSystemModel,
+	err error,
+) { 
+
+    // TODO: Implement the default function logic here
+    // @Descriptions:
+        /*
+        - Validate incoming DTO for required fields and proper formats; if invalid return validation error.
+        - Map DTO to wardes_profile entity structure for insertion.
+        - Call wardes_profileDAO.InsertWardesProfile(ctx, entityToInsert) to persist the new wardes_profile into table wardes_profile.
+        - Map inserted entity/result to WardesProfileDTOOut and return success response.
+        - Handle and return any DAO or internal errors with appropriate error codes/messages.*/
+    // @Audit Enabled: True
+    // @DTO Type: default
+    // @Method Type: default
+
+    result := //TODO: ***set the result of function here
+    output = out2.DefaultResponsePayloadMessage{
+		Status: out2.DefaultResponsePayloadStatus{
+			Code:    "OK",
+			Message: s.bundles.ReadMessageBundle("wardes_profile", "SUCCESS_INSERT_WARDES_PROFILE_MESSAGE", ctx.AuthAccessTokenModel.Locale, nil),
+		},
+		Data: result,
+	}
+
+	return
+
+}
+
+```
+***List DAO : wardes_profile
+***List i18n : SUCCESS_INSERT_WARDES_PROFILE_MESSAGE
