@@ -1,38 +1,94 @@
 {
     "valid_search": {
-        "wardes_profile": []
+        "wardes_profile": [
+            {
+                "functions": [
+                    "GetListWardesProfile"
+                ],
+                "attributes": [
+                    {
+                        "field": "wp.username",
+                        "type": "char",
+                        "operator": "lk, eq, in",
+                        "description": "username of the wardes_profile"
+                    }
+                ]
+            }
+        ]
     },
     "repository": {
-        "wardes_profile": [{
-            "name": "WardesProfileModel",
-            "description": "same as wardes_profile table in database"
-        }]
+        "wardes_profile": [
+            {
+                "name": "WardesProfileModel",
+                "description": "same as wardes_profile table in database"
+            },
+            {
+                "name": "GetListWardesProfileModel",
+                "attribute": [
+                    {
+                        "name": "wardes_profile",
+                        "type": "repository.WardesProfileModel"
+                    },
+                    {
+                        "name": "wardes_profile_image",
+                        "type": "repository.WardesProfileImageModel"
+                    },
+                    {
+                        "name": "user",
+                        "type": "repository.UserModel"
+                    }
+                ]
+            }
+        ]
     },
     "dao": {
         "wardes_profile": {
             "db": "postgresql",
-            "functions": [{
-                "name": "InsertWardesProfile",
-                "param": "context, tx, repository.WardesProfileModel",
-                "table": "wardes_profile",
-                "return": "repository.WardesProfileModel, error",
-                "attribute": [
-                    "nexchief_account_id",
-                    "user_id",
-                    "username",
-                    "personal_name",
-                    "gender",
-                    "phone",
-                    "email",
-                    "created_at",
-                    "created_by",
-                    "created_client",
-                    "updated_at",
-                    "updated_by",
-                    "updated_client"
-                ],
-                "description": "Insert wardes_profile record into database"
-            }]
+            "functions": [
+                {
+                    "name": "InsertWardesProfile",
+                    "param": "context, tx, repository.WardesProfileModel",
+                    "table": "wardes_profile",
+                    "return": "repository.WardesProfileModel, error",
+                    "attribute": [
+                        "nexchief_account_id",
+                        "user_id",
+                        "username",
+                        "personal_name",
+                        "gender",
+                        "phone",
+                        "email",
+                        "created_at",
+                        "created_by",
+                        "created_client",
+                        "updated_at",
+                        "updated_by",
+                        "updated_client"
+                    ],
+                    "description": "Insert wardes_profile record into database"
+                },
+                {
+                    "name": "GetListWardesProfile",
+                    "param": "context, in.GetListRequest, []model.SearchParam",
+                    "table": "wardes_profile wp, LEFT JOIN wardes_profile_image wpi, LEFT JOIN user u",
+                    "return": "[]interface{}, error",
+                    "attribute": [
+                        "wp.id",
+                        "wp.username",
+                        "wp.personal_name",
+                        "wp.gender",
+                        "wp.phone",
+                        "wp.email",
+                        "wpi.id",
+                        "wpi.type",
+                        "wpi.path_image",
+                        "u.id",
+                        "u.auth_user_id",
+                        "u.client_id"
+                    ],
+                    "description": "Get list of wardes_profile records"
+                }
+            ]
         }
     }
 }
