@@ -14,7 +14,8 @@
                     }
                 ]
             }
-        ]
+        ],
+        "wardes_profile_image": []
     },
     "repository": {
         "wardes_profile": [
@@ -38,6 +39,12 @@
                         "type": "repository.UserModel"
                     }
                 ]
+            }
+        ],
+        "wardes_profile_image": [
+            {
+                "name": "WardesProfileImageModel",
+                "description": "same as wardes_profile_image table in database"
             }
         ]
     },
@@ -89,6 +96,34 @@
                     "description": "Get list of wardes_profile records"
                 }
             ]
+        },
+        "wardes_profile_image": {
+            "functions": [
+                {
+                    "name": "InsertWardesProfileImage",
+                    "param": "context, tx, repository.WardesProfileImageModel",
+                    "table": "wardes_profile_image",
+                    "return": "repository.WardesProfileImageModel, error",
+                    "attribute": [
+                        "id",
+                        "uuid_key",
+                        "nexchief_account_id",
+                        "wardes_profile_id",
+                        "type",
+                        "path_image",
+                        "created_by",
+                        "created_client",
+                        "created_at",
+                        "updated_by",
+                        "updated_at",
+                        "updated_client",
+                        "deleted",
+                        "is_temporary"
+                    ],
+                    "description": "Insert a new wardes_profile_image record into database"
+                }
+            ],
+            "db": "postgresql"
         }
     }
 }

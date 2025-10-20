@@ -14,21 +14,7 @@
         "wardes_profile_image": "nexchief"
     },
     "valid_search": {
-        "wardes_profile": [
-            {
-                "functions": [
-                    "GetListWardesProfile"
-                ],
-                "attributes": [
-                    {
-                        "field": "wp.username",
-                        "type": "char",
-                        "operator": "lk, eq, in",
-                        "description": "username of the wardes_profile"
-                    }
-                ]
-            }
-        ]
+        "wardes_profile_image": []
     },
     "kong_enabled": true
 }

@@ -1,0 +1,47 @@
+package wardes_profile_image
+
+import (
+    "fmt"
+    "database/sql"
+    "github.com/nexsoft-git/nexcommon/context"
+    "github.com/nexsoft-git/nexcommon/dao"
+    "nexsoft.co.id/example/repository"
+)
+
+// Descriptions: Insert a new wardes_profile_image record into database
+func (d *wardes_profile_imagePostgresqlSQLDAO) InsertWardesProfileImage(
+     ctx *context.ContextModel,
+     tx *sql.Tx,
+     dtoIn repository.WardesProfileImageModel,
+) (
+     repository.WardesProfileImageModel, 
+     error, 
+) {
+    query := fmt.Sprintf(`
+        INSERT INTO %s (
+            uuid_key, nexchief_account_id, wardes_profile_id, type, path_image,
+            created_by, created_client, created_at,
+            updated_by, updated_at, updated_client, deleted, is_temporary
+        )
+        VALUES (
+            $1, $2, $3, $4, $5,
+            $6, $7, $8,
+            $9, $10, $11, $12, $13
+        )
+        RETURNING id, uuid_key;
+    `, dao.GetDBTable(ctx, "wardes_profile_image"))
+
+    stmt, err := tx.Prepare(query)
+    if err != nil {
+        return repository.WardesProfileImageModel{}, err
+    }
+
+    var model repository.WardesProfileImageModel
+    err = stmt.QueryRow(
+        dtoIn.UUIDKey.String, dtoIn.NexchiefAccountID.Int64, dtoIn.WardesProfileID.Int64, dtoIn.Type.String, dtoIn.PathImage.String,
+        ctx.Limitation.ServiceUserID, ctx.AuthAccessTokenModel.ClientID, dtoIn.CreatedAt.Time,
+        ctx.Limitation.ServiceUserID, dtoIn.UpdatedAt.Time, ctx.AuthAccessTokenModel.ClientID, dtoIn.Deleted.Bool, dtoIn.IsTemporary.String,
+    ).Scan(&model.ID, &model.UUIDKey)
+    
+    return model, err
+}

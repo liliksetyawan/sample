@@ -1,12 +1,12 @@
 -- +migrate Up
 -- +migrate StatementBegin
-CREATE SEQUENCE IF NOT EXISTS "user_pkey_seq";
-CREATE SEQUENCE IF NOT EXISTS "wardes_profile_pkey_seq";
-CREATE SEQUENCE IF NOT EXISTS "person_profile_pkey_seq";
-CREATE SEQUENCE IF NOT EXISTS "parameter_pkey_seq";
-CREATE SEQUENCE IF NOT EXISTS "wardes_profile_image_pkey_seq";
+CREATE SEQUENCE IF NOT EXISTS user_pkey_seq;
+CREATE SEQUENCE IF NOT EXISTS wardes_profile_pkey_seq;
+CREATE SEQUENCE IF NOT EXISTS person_profile_pkey_seq;
+CREATE SEQUENCE IF NOT EXISTS parameter_pkey_seq;
+CREATE SEQUENCE IF NOT EXISTS wardes_profile_image_pkey_seq;
 
-CREATE TABLE IF NOT EXISTS "user" (
+CREATE TABLE user (
     id BIGINT PRIMARY KEY DEFAULT nextval('user_pkey_seq'::regclass),
     uuid_key UUID DEFAULT public.uuid_generate_v4(),
     auth_user_id BIGINT,
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS "user" (
     deleted BOOLEAN DEFAULT false
 );
 
-CREATE TABLE IF NOT EXISTS "wardes_profile" (
+CREATE TABLE wardes_profile (
     id BIGINT PRIMARY KEY DEFAULT nextval('wardes_profile_pkey_seq'::regclass),
     uuid_key UUID DEFAULT public.uuid_generate_v4(),
     nexchief_account_id BIGINT,
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS "wardes_profile" (
     company_profile_id BIGINT,
     code VARCHAR(38),
     schema VARCHAR(256),
-    status VARCHAR(50) DEFAULT 'A',
+    status record_status DEFAULT 'A',
     active_date DATE,
     resign_date DATE,
     is_nexwise BOOLEAN DEFAULT FALSE,
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS "wardes_profile" (
     new_profile_approval_status VARCHAR(30)
 );
 
-CREATE TABLE IF NOT EXISTS "person_profile" (
+CREATE TABLE person_profile (
     id BIGINT PRIMARY KEY DEFAULT nextval('person_profile_pkey_seq'::regclass),
     uuid_key UUID DEFAULT public.uuid_generate_v4(),
     person_profile_id BIGINT,
@@ -140,19 +140,19 @@ CREATE TABLE IF NOT EXISTS "person_profile" (
     deleted BOOLEAN DEFAULT false
 );
 
-CREATE TABLE IF NOT EXISTS "parameter" (
+CREATE TABLE parameter (
     id BIGINT PRIMARY KEY DEFAULT nextval('parameter_pkey_seq'::regclass),
     uuid_key UUID DEFAULT public.uuid_generate_v4(),
     parameter_group_id BIGINT,
     name VARCHAR(200),
     name_en VARCHAR(200),
     code VARCHAR(50),
-    sequence INTEGER,
-    level SMALLINT,
+    sequence INT4,
+    level INT2,
     type CHAR(1),
-    length SMALLINT,
-    min_val INTEGER,
-    max_val INTEGER,
+    length INT2,
+    min_val INT4,
+    max_val INT4,
     default_val TEXT,
     select_list_value VARCHAR(256),
     select_list_name VARCHAR(255),
@@ -167,7 +167,7 @@ CREATE TABLE IF NOT EXISTS "parameter" (
     deleted BOOLEAN DEFAULT false
 );
 
-CREATE TABLE IF NOT EXISTS "wardes_profile_image" (
+CREATE TABLE wardes_profile_image (
     id BIGINT PRIMARY KEY DEFAULT nextval('wardes_profile_image_pkey_seq'::regclass),
     uuid_key UUID DEFAULT public.uuid_generate_v4(),
     nexchief_account_id BIGINT,
@@ -184,23 +184,6 @@ CREATE TABLE IF NOT EXISTS "wardes_profile_image" (
     is_temporary CHAR(1)
 );
 
-ALTER TABLE "wardes_profile" ADD CONSTRAINT "uq_wardes_profile_username" UNIQUE (username);
-ALTER TABLE "wardes_profile" ADD CONSTRAINT "uq_wardes_profile_nik" UNIQUE (nik);
-
-ALTER TABLE "user" ADD CONSTRAINT "fk_user_auth_user_id" FOREIGN KEY (auth_user_id) REFERENCES "user"(id);
-ALTER TABLE "user" ADD CONSTRAINT "fk_user_person_profile_id" FOREIGN KEY (person_profile_id) REFERENCES "person_profile"(id);
-ALTER TABLE "wardes_profile" ADD CONSTRAINT "fk_wardes_profile_nexchief_account_id" FOREIGN KEY (nexchief_account_id) REFERENCES "user"(id);
-ALTER TABLE "wardes_profile" ADD CONSTRAINT "fk_wardes_profile_user_id" FOREIGN KEY (user_id) REFERENCES "user"(id);
-ALTER TABLE "wardes_profile" ADD CONSTRAINT "fk_wardes_profile_company_profile_id" FOREIGN KEY (company_profile_id) REFERENCES "person_profile"(id);
-ALTER TABLE "person_profile" ADD CONSTRAINT "fk_person_profile_title_id" FOREIGN KEY (title_id) REFERENCES "parameter"(id);
-ALTER TABLE "person_profile" ADD CONSTRAINT "fk_person_profile_country_id" FOREIGN KEY (country_id) REFERENCES "parameter"(id);
-ALTER TABLE "person_profile" ADD CONSTRAINT "fk_person_profile_province_id" FOREIGN KEY (province_id) REFERENCES "parameter"(id);
-ALTER TABLE "person_profile" ADD CONSTRAINT "fk_person_profile_district_id" FOREIGN KEY (district_id) REFERENCES "parameter"(id);
-ALTER TABLE "person_profile" ADD CONSTRAINT "fk_person_profile_sub_district_id" FOREIGN KEY (sub_district_id) REFERENCES "parameter"(id);
-ALTER TABLE "person_profile" ADD CONSTRAINT "fk_person_profile_urban_village_id" FOREIGN KEY (urban_village_id) REFERENCES "parameter"(id);
-ALTER TABLE "person_profile" ADD CONSTRAINT "fk_person_profile_island_id" FOREIGN KEY (island_id) REFERENCES "parameter"(id);
-ALTER TABLE "person_profile" ADD CONSTRAINT "fk_person_profile_postal_code_id" FOREIGN KEY (postal_code_id) REFERENCES "parameter"(id);
-ALTER TABLE "parameter" ADD CONSTRAINT "fk_parameter_parameter_group_id" FOREIGN KEY (parameter_group_id) REFERENCES "parameter"(id);
-ALTER TABLE "wardes_profile_image" ADD CONSTRAINT "fk_wardes_profile_image_nexchief_account_id" FOREIGN KEY (nexchief_account_id) REFERENCES "user"(id);
-ALTER TABLE "wardes_profile_image" ADD CONSTRAINT "fk_wardes_profile_image_wardes_profile_id" FOREIGN KEY (wardes_profile_id) REFERENCES "wardes_profile"(id);
+ALTER TABLE wardes_profile ADD CONSTRAINT uq_wardes_profile_username UNIQUE (username);
+ALTER TABLE wardes_profile ADD CONSTRAINT uq_wardes_profile_nik UNIQUE (nik);
 -- +migrate StatementEnd
